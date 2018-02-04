@@ -148,8 +148,7 @@ public class MainApp extends Application {
      * @param e the exception that occur
      */
     public static void log(Exception e) {
-        StringBuilder log = new StringBuilder();
-        log.append("\n ------------ LOG ------------- \n");
+        StringBuilder log = new StringBuilder("\n\n");
 
         if (e instanceof IOException)
             log.append("IO Exception \n");

@@ -60,26 +60,6 @@ public class Expenses implements Initializable, State {
         return isShowing;
     }
 
-    /**
-     * Method for opening views based on the buttons name
-     * The name will be converted to the normal (/fxml/..) director path.
-     *
-     * @param e event location
-     */
-    @FXML
-    private void openView(Event e){
-        //generate the link
-        String source = "/fxml/";
-        String button = ((JFXButton)e.getSource()).getText();
-        String link = source + button.substring(0, 1).toUpperCase() + button.substring(1).toLowerCase() + ".fxml";
-
-        try {
-            MainApp.openView(link);
-        } catch(Exception exception){
-            MainApp.log(exception);
-        }
-    }
-
 
 
 

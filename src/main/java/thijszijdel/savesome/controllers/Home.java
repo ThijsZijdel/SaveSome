@@ -58,15 +58,23 @@ public class Home implements Initializable, State {
         isShowing = true;
         instance = this;
 
+
+        // Test the categories              //temp.
         CategoryConnection category = new CategoryConnection();
         ArrayList<Category> mainCategoryList = category.getMainCategoryList();
         for (Category cat : mainCategoryList){
             System.out.println(cat.getName()+" "+cat.getDescription());
         }
 
+
+
+        
         initializeBalance();
     }
 
+    /**
+     * Set the balance displays on the header
+     */
     private void initializeBalance() {
         BalanceConnection balanceC = new BalanceConnection();
         balance.getChildren().addAll(balanceC.getAllBalanceDisplays());
@@ -94,48 +102,27 @@ public class Home implements Initializable, State {
         String button = ((JFXButton)e.getSource()).getText();
         String fileName = button.substring(0, 1).toUpperCase() + button.substring(1).toLowerCase();
 
-        //fileName
-
         //generate the link to the fxml view
         StringBuilder linkBuilder = new StringBuilder("/fxml/"); //source
         linkBuilder.append( fileName + ".fxml" ); //file
 
-
-
         try {
             setScene(linkBuilder.toString());
-            MainApp.openView(linkBuilder.toString());
+            //MainApp.openView(linkBuilder.toString());
         } catch(Exception exception){
             MainApp.log(exception);
         }
     }
 
-
+    /**
+     * Set the center view on the home page
+     *
+     * @param view that will be set on it
+     * @throws IOException handling fxml files
+     */
     public void setScene(String view) throws IOException {
-        //parent from MainApp
-        Parent fxmlView;
-
-//        if (language.equals("dutch")) {
-//            ResourceBundle bundle = ResourceBundle.getBundle("resources.Bundle", new Locale("nl"));
-//            fxmlView = FXMLLoader.load(MainApp.class.getResource(view), bundle);
-//
-//        } else {
-//            ResourceBundle bundle = ResourceBundle.getBundle("resources.Bundle");
-        fxmlView = FXMLLoader.load(MainApp.class.getResource(view));
-//
-//        }
-        //scene zetten ( in Center van BorderPane )
-        //fxmlView.
-
-
-
-
-
+        Parent fxmlView = FXMLLoader.load(MainApp.class.getResource(view));
         mainView.setCenter(fxmlView);
-
-
-
-
     }
 
 
