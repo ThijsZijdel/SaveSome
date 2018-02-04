@@ -22,7 +22,7 @@ import java.util.ResourceBundle;
 public class Home implements Initializable, State {
 
 
-    private static boolean isShowing = false;
+    private boolean isShowing = false;
 
     //Create one instance of this class
     private static Home instance = null;
@@ -91,6 +91,13 @@ public class Home implements Initializable, State {
     }
 
     /**
+     * Sets the home screen and sets the isShowing state
+     */
+    public void setHomeState(boolean state){
+        this.isShowing = state;
+    }
+
+    /**
      * Method for opening views based on the buttons name
      * The name will be converted to the normal (/fxml/..) director path.
      *
@@ -106,11 +113,17 @@ public class Home implements Initializable, State {
         StringBuilder linkBuilder = new StringBuilder("/fxml/"); //source
         linkBuilder.append( fileName + ".fxml" ); //file
 
-        try {
-            setScene(linkBuilder.toString());
-            //MainApp.openView(linkBuilder.toString());
-        } catch(Exception exception){
-            MainApp.log(exception);
+        if (fileName.equals("Home") && isShowing()) {
+            System.out.println("trueee <<<<");
+        } else {
+            System.out.println(" else <<<<<");
+
+            try {
+                setScene(linkBuilder.toString());
+                //MainApp.openView(linkBuilder.toString());
+            } catch (Exception exception) {
+                MainApp.log(exception);
+            }
         }
     }
 

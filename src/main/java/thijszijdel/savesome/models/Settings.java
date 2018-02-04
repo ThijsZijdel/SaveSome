@@ -12,6 +12,9 @@ public class Settings {
 
     private final String alertColor ="#e84118";
 
+
+    private final String textColor ="#ffffff";
+
     private  Theme theme;
 
     /**
@@ -25,5 +28,13 @@ public class Settings {
 
     public String getBackground(){
         return bgColorLightL;
+    }
+
+    public String getAlertColor(){
+        return alertColor;
+    }
+
+    public String getTextColor() {
+        return textColor;
     }
 }

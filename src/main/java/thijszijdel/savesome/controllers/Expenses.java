@@ -1,9 +1,12 @@
 package thijszijdel.savesome.controllers;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXListView;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
+import javafx.scene.control.SelectionMode;
 import thijszijdel.savesome.MainApp;
 import thijszijdel.savesome.interfaces.State;
 
@@ -17,6 +20,9 @@ public class Expenses implements Initializable, State {
 
     //Create one instance of this class
     private static Expenses instance = null;
+
+
+    @FXML JFXListView expensesList;
 
     /**
      * Getter for the instance of this class
@@ -48,6 +54,32 @@ public class Expenses implements Initializable, State {
 
 
         isShowing = true;
+
+
+        initializeExpensesList();
+    }
+
+    private void initializeExpensesList() {
+
+
+
+        for (int i = 0; i < 100; i++) {
+            Label lbl = new Label("dummy data "+i);
+//            ListCell cell = new ListCell();
+//            cell.autosize();
+//            cell.
+
+//            try {
+//                lbl.setGraphic(new ImageView(new Image(new FileInputStream("/img/Icon.png"))));
+//            } catch (FileNotFoundException ex) {
+//                Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+
+            expensesList.getItems().add(lbl);
+        }
+
+        expensesList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        expensesList.setExpanded(Boolean.TRUE);
     }
 
     /**

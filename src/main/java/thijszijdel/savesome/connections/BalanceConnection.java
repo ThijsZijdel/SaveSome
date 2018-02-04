@@ -5,6 +5,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import thijszijdel.savesome.MainApp;
 import thijszijdel.savesome.models.Balance;
 
 import java.util.ArrayList;
@@ -58,7 +59,6 @@ public class BalanceConnection implements Connection{
             displays.add(display(balance));
         }
 
-
         return displays;
     }
 
@@ -75,10 +75,14 @@ public class BalanceConnection implements Connection{
 
         Label amount = new Label();
         Label name = new Label();
-        amount.setTextFill(Color.web("#FFF"));
-        name.setTextFill(Color.web("#FFF"));
         amount.setStyle("-fx-font-size: 15px");
         name.setStyle("-fx-font-size: 10px");
+        name.setTextFill(Color.web(MainApp.config.getTextColor()));
+
+        if (balance.isNegative())
+            amount.setTextFill(Color.web(MainApp.config.getAlertColor()));
+        else
+            amount.setTextFill(Color.web(MainApp.config.getTextColor()));
 
 
         name.setText(balance.getName());
