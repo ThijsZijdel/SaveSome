@@ -1,5 +1,6 @@
 package thijszijdel.savesome.connections;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
@@ -14,23 +15,63 @@ public class BalanceConnection implements Connection{
     private ArrayList<Balance> balances = new ArrayList<>();
 
 
+    /**
+     * Constructor for the balance connection
+     */
     public BalanceConnection(){
-        this.balances = calculateBalances();
+        this.balances = getBalances();
 
         if (this.balances != null && !this.balances.isEmpty())
             this.balanceDisplays = generateBalanceDisplays();
     }
 
-    private ArrayList<Balance> calculateBalances() {
+    /**
+     * Get all the balances based on the expenses / tabel
+     *
+     * @return array of balances
+     */
+    private ArrayList<Balance> getBalances() {
+        ArrayList<Balance> balances = new ArrayList<>();
 
-        return null;
+
+        //dummy data, this will be calculated (or/and stored)
+        Balance ing = new Balance("B32", "ING", 2344.50, "Main account");
+        Balance abn = new Balance("AB3", "ABN", -145.70, "Sub account");
+        Balance lok = new Balance("LO1", "LOK", 2245.70, "Savings account");
+
+        balances.add(ing);
+        balances.add(abn);
+        balances.add(lok);
+
+        return balances;
     }
 
+    /**
+     * Generate the balance displays
+     *
+     * @return array of balance vBoxes
+     */
     private ArrayList<VBox> generateBalanceDisplays() {
         ArrayList<VBox> displays = new ArrayList<>();
 
+        for (Balance balance : balances){
+            displays.add(display(balance));
+        }
+
+
+        return displays;
+    }
+
+    /**
+     * method for generating a vBox balance display
+     *
+     * @param balance that will be converted and set
+     * @return VBox of the right balance display
+     */
+    private VBox display(Balance balance) {
         VBox display = new VBox();
         display.alignmentProperty().set(Pos.CENTER);
+        display.setPadding( new Insets(2, 12, 2 , 12));
 
         Label amount = new Label();
         Label name = new Label();
@@ -40,18 +81,13 @@ public class BalanceConnection implements Connection{
         name.setStyle("-fx-font-size: 10px");
 
 
-        for (Balance balance : balances){
-
-            name.setText(balance.getName());
-            amount.setText(balance.getDisplayAmount());
-
-            display.getChildren().addAll(amount, name);
-
-            displays.add(display);
-        }
+        name.setText(balance.getName());
+        amount.setText(balance.getDisplayAmount());
 
 
-        return displays;
+        display.getChildren().addAll(amount, name);
+
+        return display;
     }
 
     public ArrayList<VBox> getAllBalanceDisplays() {

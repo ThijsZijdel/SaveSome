@@ -68,7 +68,7 @@ public class Home implements Initializable, State {
 
 
 
-        
+
         initializeBalance();
     }
 
