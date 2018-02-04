@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXColorPicker?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane prefHeight="444.0" prefWidth="397.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="thijszijdel.savesome.controllers.Input">
+   <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="82.16421508789062" minWidth="10.0" prefWidth="15.724273681640625" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="250.0" minWidth="150.0" prefWidth="200.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="71.16421508789062" minWidth="10.0" prefWidth="26.865814208984375" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="250.0" minWidth="150.0" prefWidth="200.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="54.746307373046875" minWidth="10.0" prefWidth="31.351104736328125" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints maxHeight="50.0" minHeight="25.0" prefHeight="35.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="168.3069019317627" minHeight="50.0" prefHeight="82.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="168.3069019317627" minHeight="50.0" prefHeight="85.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="220.0" minHeight="10.0" prefHeight="201.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+   </rowConstraints>
+   <children>
+      <Pane fx:id="background" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="5" GridPane.rowSpan="5">
+         <children>
+            <JFXColorPicker layoutX="57.0" layoutY="227.0" />
+         </children>
+      </Pane>
+      <JFXTextField fx:id="amount" focusColor="#00a8ff" labelFloat="true" maxHeight="35.0" maxWidth="250.0" minHeight="25.0" minWidth="150.0" prefHeight="30.0" prefWidth="200.0" promptText="Amount" unFocusColor="#0097e6" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <JFXCheckBox checkedColor="#00a8ff" prefHeight="50.0" prefWidth="120.0" text="Already Paid" unCheckedColor="#0097e6" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+         <children>
+            <JFXComboBox fx:id="mainCategory" focusColor="#00a8ff" labelFloat="true" maxHeight="35.0" maxWidth="250.0" minHeight="25.0" minWidth="75.0" prefHeight="30.0" prefWidth="200.0" promptText="Main" style="-fx-text-fill: #fff;" unFocusColor="#0097e6" />
+            <JFXButton prefHeight="42.0" prefWidth="62.0" ripplerFill="#00a8ff" style="-fx-background-color: #eee; -fx-stroke: #0097e6#0097e6; -fx-stroke-width: 1;" text="+" textFill="#0097e6" />
+         </children>
+      </HBox>
+      <JFXComboBox fx:id="subCategory" focusColor="#00a8ff" labelFloat="true" maxHeight="35.0" maxWidth="250.0" minHeight="25.0" minWidth="75.0" prefHeight="30.0" prefWidth="200.0" promptText="Sub" style="-fx-text-fill: #fff;" unFocusColor="#0097e6" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+   </children>
+</GridPane>
