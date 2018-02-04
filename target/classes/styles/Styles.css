@@ -1,0 +1,14 @@
+.button {
+    -fx-font-weight: bold;
+}
+
+
+
+.jfx-combo-box {
+    /*-fx-background-color:  PINK;*/
+}
+
+jfx-combo-box label {
+    /*-fx-background-color:  WHITE;*/
+    -fx-text-fill: #fff;
+}
