@@ -10,7 +10,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import thijszijdel.savesome.constants.Theme;
 import thijszijdel.savesome.controllers.Expenses;
-import thijszijdel.savesome.controllers.Home;
+import thijszijdel.savesome.controllers.Main;
 import thijszijdel.savesome.database.JDBC;
 import thijszijdel.savesome.models.Settings;
 
@@ -46,7 +46,7 @@ public class MainApp extends Application {
      */
     @Override
     public void start(Stage stage) throws Exception {
-        root = FXMLLoader.load(getClass().getResource("/fxml/Home.fxml"));
+        root = FXMLLoader.load(getClass().getResource("/fxml/Main.fxml"));
         
         mainScene = new Scene(root);
         mainScene.getStylesheets().add("/styles/Styles.css");
@@ -87,7 +87,7 @@ public class MainApp extends Application {
     }
 
 
-    private Home controllerHome = Home.getInstance();
+    private Main controllerHome = Main.getInstance();
     private Expenses controllerExpenses = Expenses.getInstance();
 
 

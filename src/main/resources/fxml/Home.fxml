@@ -1,63 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.ToolBar?>
-<?import javafx.scene.control.Tooltip?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.FlowPane?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="708.0" minWidth="600.0" prefHeight="441.0" prefWidth="961.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="thijszijdel.savesome.controllers.Home">
-   <children>
-      <GridPane minWidth="600.0" prefHeight="442.0" prefWidth="961.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="1000.0" minWidth="10.0" prefWidth="301.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="1000.0" minWidth="10.0" prefWidth="299.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="45.0" minHeight="45.0" prefHeight="45.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="383.48766708374023" minHeight="10.0" prefHeight="224.80144119262695" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="383.48766708374023" minHeight="10.0" prefHeight="118.15200805664062" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="383.48766708374023" minHeight="10.0" prefHeight="65.34799194335938" vgrow="SOMETIMES" />
-         </rowConstraints>
-         <children>
-            <ToolBar maxHeight="40.0" minHeight="40.0" minWidth="600.0" prefHeight="40.0" prefWidth="966.0" style="-fx-background-color: #2f3640;" GridPane.columnSpan="2">
-              <items>
-                  <JFXButton fx:id="btnHome" defaultButton="true" onAction="#openView" prefHeight="18.0" prefWidth="56.0" ripplerFill="#00aeff" style="-fx-background-color: #353b48;" text="home" textFill="WHITE">
-                     <tooltip>
-                        <Tooltip text="Main application page" />
-                     </tooltip>
-                  </JFXButton>
-                  <JFXButton fx:id="btnExpenses" onAction="#openView" ripplerFill="#00aeff" style="-fx-background-color: #353b48;" text="expenses" textFill="WHITE" />
-                  <JFXButton fx:id="btnIncome" onAction="#openView" ripplerFill="#00a8ff" style="-fx-background-color: #353b48;" text="incomes" textFill="WHITE" />
-                  <JFXButton fx:id="btnAnalytics" onAction="#openView" ripplerFill="#00a8ff" style="-fx-background-color: #353b48;" text="analytics" textFill="WHITE" />
-                  <JFXButton fx:id="btnSettings" onAction="#openView" ripplerFill="#00a8ff" style="-fx-background-color: #353b48;" text="settings" textFill="#aeaeae" />
-              </items>
-            </ToolBar>
-            <Text fill="#00a8ff" strokeType="OUTSIDE" strokeWidth="0.0" text="SaveSome" wrappingWidth="135.21875" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
-               <font>
-                  <Font name="System Bold" size="23.0" />
-               </font>
-            </Text>
-            <BorderPane fx:id="mainView" prefHeight="327.0" prefWidth="961.0" GridPane.columnSpan="2" GridPane.rowIndex="2" GridPane.rowSpan="2" />
-            <FlowPane alignment="CENTER_RIGHT" columnHalignment="CENTER" prefHeight="17.0" prefWidth="961.0" style="-fx-background-color: #353b48;" GridPane.columnSpan="2" GridPane.rowIndex="1">
-               <children>
-                  <HBox fx:id="balance" alignment="CENTER" prefHeight="30.0" prefWidth="386.0">
-                     <FlowPane.margin>
-                        <Insets right="20.0" />
-                     </FlowPane.margin>
-                  </HBox>
-               </children>
-            </FlowPane>
-         </children>
-      </GridPane>
-   </children>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="thijszijdel.savesome.controllers.Home"
+            prefHeight="400.0" prefWidth="600.0">
+
 </AnchorPane>
