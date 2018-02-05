@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -25,8 +26,8 @@
             <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="45.0" minHeight="45.0" prefHeight="45.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="383.48766708374023" minHeight="10.0" prefHeight="224.80144119262695" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="383.48766708374023" minHeight="10.0" prefHeight="118.15200805664062" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="383.48766708374023" minHeight="10.0" prefHeight="65.34799194335938" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="900.0" minHeight="10.0" prefHeight="118.15200805664062" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
             <ToolBar maxHeight="40.0" minHeight="40.0" minWidth="600.0" prefHeight="40.0" prefWidth="966.0" style="-fx-background-color: #2f3640;" GridPane.columnSpan="2">
@@ -51,6 +52,16 @@
             <FlowPane alignment="CENTER_RIGHT" columnHalignment="CENTER" prefHeight="17.0" prefWidth="961.0" style="-fx-background-color: #353b48;" GridPane.columnSpan="2" GridPane.rowIndex="1">
                <children>
                   <HBox fx:id="balance" alignment="CENTER" prefHeight="30.0" prefWidth="386.0">
+                     <FlowPane.margin>
+                        <Insets right="20.0" />
+                     </FlowPane.margin>
+                  </HBox>
+               </children>
+            </FlowPane>
+            <FlowPane alignment="CENTER_RIGHT" columnHalignment="CENTER" prefHeight="17.0" prefWidth="961.0" style="-fx-background-color: #d0d0d0;" GridPane.columnSpan="2" GridPane.rowIndex="4">
+               <children>
+                  <Label text="Label" />
+                  <HBox fx:id="balance1" alignment="CENTER" prefHeight="30.0" prefWidth="386.0">
                      <FlowPane.margin>
                         <Insets right="20.0" />
                      </FlowPane.margin>
