@@ -10,6 +10,7 @@ import javafx.scene.control.SelectionMode;
 import thijszijdel.savesome.MainApp;
 import thijszijdel.savesome.interfaces.State;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -54,6 +55,9 @@ public class Expenses implements Initializable, State {
 
 
         isShowing = true;
+
+
+        MainApp.openView("/FXML/Input.fxml");
 
 
         initializeExpensesList();

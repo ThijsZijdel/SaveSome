@@ -97,22 +97,25 @@ public class MainApp extends Application {
      * @param viewLink the link to the fxml file
      * @throws IOException opening new stages
      */
-    public static void openView(String viewLink) throws IOException {
+    public static void openView(String viewLink) {
+        try {
+            if (isShowing(viewLink)) {
+                Parent fxmlView = FXMLLoader.load(MainApp.class.getResource(viewLink));
 
-        if (isShowing(viewLink)) {
-            Parent fxmlView = FXMLLoader.load(MainApp.class.getResource(viewLink));
-
-            Scene scene = new Scene(fxmlView);
-            scene.getStylesheets().add("/styles/Styles.css");
-
-
-            Stage stage = new Stage();
+                Scene scene = new Scene(fxmlView);
+                scene.getStylesheets().add("/styles/Styles.css");
 
 
-            stage.setTitle("Money Saver");
-            stage.setScene(scene);
-            stage.show();
+                Stage stage = new Stage();
 
+
+                stage.setTitle("Money Saver");
+                stage.setScene(scene);
+                stage.show();
+
+            }
+        } catch (IOException e) {
+            log(e);
         }
     }
 
