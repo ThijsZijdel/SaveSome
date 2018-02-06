@@ -1,17 +1,22 @@
 package thijszijdel.savesome.controllers;
 
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import thijszijdel.savesome.MainApp;
+import thijszijdel.savesome.connections.CategoryConnection;
 import thijszijdel.savesome.interfaces.State;
+import thijszijdel.savesome.models.SubCategory;
 
-import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class Expenses implements Initializable, State {
@@ -61,30 +66,53 @@ public class Expenses implements Initializable, State {
 
 
         initializeExpensesList();
+
     }
 
     private void initializeExpensesList() {
 
+        CategoryConnection categoryC = new CategoryConnection();
+
+        ArrayList<SubCategory> subCategories = categoryC.getSubCategoryList();
+
+        for (SubCategory category : subCategories) {
+
+            Label name = new Label(category.getName());
+            Label desc = new Label(category.getDescription());
+            ImageView imgView = new ImageView(category.getIcon());
+
+            imgView.maxHeight(25);
+            imgView.setFitHeight(25);
+
+            imgView.maxWidth(25);
+            imgView.setFitWidth(25);
 
 
-        for (int i = 0; i < 100; i++) {
-            Label lbl = new Label("dummy data "+i);
-//            ListCell cell = new ListCell();
-//            cell.autosize();
-//            cell.
 
-//            try {
-//                lbl.setGraphic(new ImageView(new Image(new FileInputStream("/img/Icon.png"))));
-//            } catch (FileNotFoundException ex) {
-//                Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
-//            }
+            HBox box = new HBox(imgView, new VBox(name, desc));
+            HBox.setHgrow(expensesList, Priority.ALWAYS);
 
-            expensesList.getItems().add(lbl);
+            expensesList.getItems().add(box);
+
         }
 
+
+
+
+//             expensesList.getSelectionModel().selectedItemProperty().addListener(
+//                new ChangeListener<String>() {
+//                    public void changed(ObservableValue<? extends String> ov,
+//                                        String old_val, String new_val) {
+//                        label.setText(new_val);
+//                        label.setTextFill(Color.web(new_val));
+//                    }
+//              });
         expensesList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         expensesList.setExpanded(Boolean.TRUE);
     }
+
+
+
 
     /**
      * Check if the home view is showing
