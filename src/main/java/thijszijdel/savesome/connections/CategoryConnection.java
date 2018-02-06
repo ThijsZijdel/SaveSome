@@ -1,10 +1,18 @@
 package thijszijdel.savesome.connections;
 
+import javafx.scene.image.Image;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import thijszijdel.savesome.MainApp;
 import thijszijdel.savesome.database.data.CategoryData;
 import thijszijdel.savesome.models.Category;
 import thijszijdel.savesome.models.SubCategory;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -71,4 +79,38 @@ public class CategoryConnection implements Connection{
     public ArrayList<SubCategory> getSubCategoryList() {
         return this.subCategoryList;
     }
+
+    public void setImage(){
+
+
+        FileChooser chooser = new FileChooser();
+        chooser.setTitle("Open File");
+        File file = chooser.showOpenDialog(new Stage());
+
+        Image img = new Image(file.getAbsolutePath());
+
+
+
+
+//        Label name = new Label(category.getName());
+//        Label desc = new Label(category.getDescription());
+//        ImageView imgView = new ImageView(category.getIcon());
+//
+//        imgView.maxHeight(25);
+//        imgView.setFitHeight(25);
+//
+//        imgView.maxWidth(25);
+//        imgView.setFitWidth(25);
+//
+//
+//
+//        HBox box = new HBox(imgView, new VBox(name, desc));
+//        HBox.setHgrow(expensesList, Priority.ALWAYS);
+//
+//        expensesList.getItems().add(box);
+
+
+
+    }
+
 }

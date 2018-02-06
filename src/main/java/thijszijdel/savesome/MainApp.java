@@ -14,6 +14,7 @@ import thijszijdel.savesome.controllers.Main;
 import thijszijdel.savesome.database.JDBC;
 import thijszijdel.savesome.models.Settings;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -68,6 +69,8 @@ public class MainApp extends Application {
 //        Image logo = new Image("Images/logo.png");
 //        //Image applicationIcon = new Image(getClass().getResourceAsStream("Images/Logo.png"));
 //        stage.getIcons().add(logo);
+
+
 
     }
 
