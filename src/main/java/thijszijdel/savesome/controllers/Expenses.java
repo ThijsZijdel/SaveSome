@@ -12,7 +12,9 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import thijszijdel.savesome.MainApp;
 import thijszijdel.savesome.connections.CategoryConnection;
+import thijszijdel.savesome.connections.ExpenseConnection;
 import thijszijdel.savesome.interfaces.State;
+import thijszijdel.savesome.models.Expense;
 import thijszijdel.savesome.models.SubCategory;
 
 import java.net.URL;
@@ -71,25 +73,28 @@ public class Expenses implements Initializable, State {
 
     private void initializeExpensesList() {
 
-        CategoryConnection categoryC = new CategoryConnection();
+        ExpenseConnection expensesConnection = new ExpenseConnection();
 
-        ArrayList<SubCategory> subCategories = categoryC.getSubCategoryList();
+        ArrayList<Expense> expenses = expensesConnection.getExpensesList();
 
-        for (SubCategory category : subCategories) {
+        for (Expense expense : expenses) {
 
-            Label name = new Label(category.getName());
-            Label desc = new Label(category.getDescription());
-            ImageView imgView = new ImageView(category.getIcon());
+            Label name = new Label(expense.getName());
+            Label desc = new Label(expense.getDescription());
+//            //ImageView imgView = new ImageView(expense.getAmount());
+//
+//            imgView.maxHeight(25);
+//            imgView.setFitHeight(25);
+//
+//            imgView.maxWidth(25);
+//            imgView.setFitWidth(25);
 
-            imgView.maxHeight(25);
-            imgView.setFitHeight(25);
 
-            imgView.maxWidth(25);
-            imgView.setFitWidth(25);
+
+            HBox box = new HBox(expense.getAmount(), new VBox(name, desc, new HBox(new Label(expense.getDate().toString()), new Label(" "+expense.getTime().toString()) )));
 
 
 
-            HBox box = new HBox(imgView, new VBox(name, desc));
             HBox.setHgrow(expensesList, Priority.ALWAYS);
 
             expensesList.getItems().add(box);
