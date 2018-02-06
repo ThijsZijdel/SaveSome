@@ -2,10 +2,13 @@ package thijszijdel.savesome.controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -15,6 +18,9 @@ import java.util.ResourceBundle;
 public class Home implements Initializable {
 
     @FXML PieChart chart;
+
+    @FXML Label chartLabel;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
@@ -38,18 +44,17 @@ public class Home implements Initializable {
         chart.setAnimated(true);
         chart.setTitle("Categories");
         //chart.setData(datalist.chartProperty());
-
-
-
-
-
-
-
-
+        
     }
 
 
-
+    @FXML
+    private void getChartSelection(MouseEvent mouseevent ) {
+        for (final PieChart.Data data : chart.getData()) {
+            data.getNode().addEventHandler(MouseEvent.MOUSE_PRESSED,
+                e -> chartLabel.setText(String.valueOf(data.getPieValue()) + "%"));
+        }
+    }
 
 
 
