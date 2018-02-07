@@ -3,9 +3,8 @@
 <?import com.jfoenix.controls.JFXListView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="thijszijdel.savesome.controllers.Expenses">
    <children>
-      <JFXListView fx:id="expensesList" layoutX="27.0" prefHeight="400.0" prefWidth="248.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <JFXListView fx:id="expensesList" layoutX="27.0" prefHeight="400.0" prefWidth="332.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0" />
    </children>
 </AnchorPane>

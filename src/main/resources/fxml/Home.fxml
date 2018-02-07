@@ -30,7 +30,8 @@
               </rowConstraints>
                <children>
                   <PieChart fx:id="chart" onMouseClicked="#getChartSelection" prefHeight="179.0" prefWidth="225.0" title="chart" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1" />
-                  <Label fx:id="chartLabel" text="Label" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                  <Label fx:id="chartLabel" text="Label" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                  <AnchorPane fx:id="topLeft" prefHeight="200.0" prefWidth="200.0" GridPane.rowSpan="3" />
                </children>
             </GridPane>
          </children>

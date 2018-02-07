@@ -32,15 +32,15 @@
          <children>
             <ToolBar maxHeight="40.0" minHeight="40.0" minWidth="600.0" prefHeight="40.0" prefWidth="966.0" style="-fx-background-color: #2f3640;" GridPane.columnSpan="2">
               <items>
-                  <JFXButton fx:id="btnHome" defaultButton="true" onAction="#openView" prefHeight="18.0" prefWidth="56.0" ripplerFill="#00aeff" style="-fx-background-color: #353b48;" text="home" textFill="WHITE">
+                  <JFXButton fx:id="btnHome" defaultButton="true" onAction="#headerMainLink" prefHeight="18.0" prefWidth="56.0" ripplerFill="#00aeff" style="-fx-background-color: #353b48;" text="home" textFill="WHITE">
                      <tooltip>
                         <Tooltip text="Main application page" />
                      </tooltip>
                   </JFXButton>
-                  <JFXButton fx:id="btnExpenses" onAction="#openView" ripplerFill="#00aeff" style="-fx-background-color: #353b48;" text="expenses" textFill="WHITE" />
-                  <JFXButton fx:id="btnIncome" onAction="#openView" ripplerFill="#00a8ff" style="-fx-background-color: #353b48;" text="incomes" textFill="WHITE" />
-                  <JFXButton fx:id="btnAnalytics" onAction="#openView" ripplerFill="#00a8ff" style="-fx-background-color: #353b48;" text="analytics" textFill="WHITE" />
-                  <JFXButton fx:id="btnSettings" onAction="#openView" ripplerFill="#00a8ff" style="-fx-background-color: #353b48;" text="settings" textFill="#aeaeae" />
+                  <JFXButton fx:id="btnExpenses" onAction="#headerMainLink" ripplerFill="#00aeff" style="-fx-background-color: #353b48;" text="expenses" textFill="WHITE" />
+                  <JFXButton fx:id="btnIncome" onAction="#headerMainLink" ripplerFill="#00a8ff" style="-fx-background-color: #353b48;" text="incomes" textFill="WHITE" />
+                  <JFXButton fx:id="btnAnalytics" onAction="#headerMainLink" ripplerFill="#00a8ff" style="-fx-background-color: #353b48;" text="analytics" textFill="WHITE" />
+                  <JFXButton fx:id="btnSettings" onAction="#headerMainLink" ripplerFill="#00a8ff" style="-fx-background-color: #353b48;" text="settings" textFill="#aeaeae" />
               </items>
             </ToolBar>
             <Text fill="#00a8ff" strokeType="OUTSIDE" strokeWidth="0.0" text="SaveSome" wrappingWidth="135.21875" GridPane.columnIndex="1" GridPane.halignment="RIGHT">

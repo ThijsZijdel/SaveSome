@@ -19,15 +19,9 @@
             <artifactId>jfoenix</artifactId>
             <version>1.10.0</version>
         </dependency>
-        <dependency>
-            <groupId>com.thizzer.jtouchbar</groupId>
-            <artifactId>jtouchbar</artifactId>
-            <type>jar</type>
-        </dependency>
-        <!--https://github.com/Thizzer/JTouchBar-->
     </dependencies>
 
-    <name>MoneySaver</name>
+    <name>SaveSome</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -36,7 +30,7 @@
 
     <organization>
         <!-- Used as the 'Vendor' for JNLP generation -->
-        <name>Your Organisation</name>
+        <name>Thijs Zijdel</name>
     </organization>
 
     <build>

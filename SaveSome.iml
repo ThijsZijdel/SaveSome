@@ -12,6 +12,5 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Maven: mysql:mysql-connector-java:5.1.42" level="project" />
     <orderEntry type="library" name="Maven: com.jfoenix:jfoenix:1.10.0" level="project" />
-    <orderEntry type="library" name="Maven: com.thizzer.jtouchbar:jtouchbar:unknown" level="project" />
   </component>
 </module>
