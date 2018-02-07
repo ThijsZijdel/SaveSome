@@ -10,6 +10,7 @@ public class Expense {
     private double amount;
     private Date date;
     private Time time;
+    private boolean isNegative;
 
 
     public Expense(String expenseId, String name, String description, double amount, Date date, Time time) {
@@ -19,7 +20,14 @@ public class Expense {
         this.amount = amount;
         this.date = date;
         this.time = time;
+        this.isNegative = (amount < 0);
 
+    }
+    public String getDisplayAmount() {
+        if (isNegative)
+            return Double.toString(amount);
+        else
+            return "+ "+Double.toString(amount);
     }
 
     public String getName() {

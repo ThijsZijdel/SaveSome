@@ -91,7 +91,7 @@ public class Expenses implements Initializable, State {
 
 
 
-            HBox box = new HBox(expense.getAmount(), new VBox(name, desc, new HBox(new Label(expense.getDate().toString()), new Label(" "+expense.getTime().toString()) )));
+            HBox box = new HBox(new Label(expense.getDisplayAmount()), new VBox(name, desc, new HBox(new Label(expense.getDate().toString()), new Label(" "+expense.getTime().toString()) )));
 
 
 
