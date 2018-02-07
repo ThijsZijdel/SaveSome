@@ -1,5 +1,7 @@
 package thijszijdel.savesome.controllers;
 
+import com.jfoenix.controls.JFXCheckBox;
+import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -9,6 +11,7 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import thijszijdel.savesome.MainApp;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -21,18 +24,23 @@ public class Home implements Initializable {
 
     @FXML Label chartLabel;
 
+    /**
+     * Initializing method for the Home view
+     *
+     * @param url link
+     * @param rb  resources
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
         ObservableList<PieChart.Data> datalist = FXCollections.observableArrayList();
        // XYChart.Series<String, Number> datalist = new XYChart.Series<>();
 
-        String test = "jan";
-        String test2 = "feb";
-        datalist.add(new PieChart.Data(test, 99));
-        datalist.add(new PieChart.Data(test, 20));
-        datalist.add(new PieChart.Data(test2, 34));
-        datalist.add(new PieChart.Data(test2, 11));
+
+        datalist.add(new PieChart.Data("jan", 30));
+        datalist.add(new PieChart.Data("feb", 20));
+        datalist.add(new PieChart.Data("mar", 34));
+        datalist.add(new PieChart.Data("apr", 11));
 
 
         //chart.setData(datalist);
@@ -44,12 +52,18 @@ public class Home implements Initializable {
         chart.setAnimated(true);
         chart.setTitle("Categories");
         //chart.setData(datalist.chartProperty());
-        
+
+        MainApp.setAppMessage("Home screen is loaded.");
     }
 
 
+    /**
+     * Get the selection of the chart
+     *
+     * @param event when click chart piece
+     */
     @FXML
-    private void getChartSelection(MouseEvent mouseevent ) {
+    private void getChartSelection(MouseEvent event ) {
         for (final PieChart.Data data : chart.getData()) {
             data.getNode().addEventHandler(MouseEvent.MOUSE_PRESSED,
                 e -> chartLabel.setText(String.valueOf(data.getPieValue()) + "%"));

@@ -13,13 +13,14 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class CategoryConnection implements Connection{
 
-    private final CategoryData data = new CategoryData();
+    private CategoryData data = new CategoryData();
 
     private ArrayList<Category> mainCategoryList = new ArrayList<>();
     private ArrayList<SubCategory> subCategoryList = new ArrayList<>();
@@ -29,8 +30,8 @@ public class CategoryConnection implements Connection{
      */
     public CategoryConnection(){
         try {
-            mainCategoryList = convertToMainCatList();
-            subCategoryList = convertToSubCatList();
+            this.mainCategoryList = convertToMainCatList();
+            this.subCategoryList = convertToSubCatList();
         } catch (SQLException e){
             MainApp.log(e);
         }
@@ -80,6 +81,24 @@ public class CategoryConnection implements Connection{
         return this.subCategoryList;
     }
 
+    public ArrayList<String> getSubCategoryNameList() {
+        ArrayList<String> subCatNameList = new ArrayList<>();
+
+        for (SubCategory subCat : this.subCategoryList){
+            subCatNameList.add(subCat.getName());
+        }
+        return subCatNameList;
+    }
+
+    public ArrayList<String> getMainCategoryNameList() {
+        ArrayList<String> mainCatNameList = new ArrayList<>();
+
+        for (Category cat : this.mainCategoryList){
+            mainCatNameList.add(cat.getName());
+        }
+        return mainCatNameList;
+    }
+
     public void setImage(){
 
 
@@ -113,4 +132,15 @@ public class CategoryConnection implements Connection{
 
     }
 
+    @Override
+    public void refreshConnection() {
+        data.refreshData();
+
+        try {
+            this.mainCategoryList = convertToMainCatList();
+            this.subCategoryList = convertToSubCatList();
+        } catch (SQLException e){
+            MainApp.log(e);
+        }
+    }
 }

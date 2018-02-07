@@ -8,15 +8,16 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import thijszijdel.savesome.connections.*;
 import thijszijdel.savesome.constants.Theme;
 import thijszijdel.savesome.controllers.Expenses;
 import thijszijdel.savesome.controllers.Main;
 import thijszijdel.savesome.database.JDBC;
-import thijszijdel.savesome.models.Settings;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 /**
@@ -37,6 +38,12 @@ public class MainApp extends Application {
 
     private Parent root;
     private Scene mainScene;
+
+    private static Main controllerHome = Main.getInstance();
+    private static Expenses controllerExpenses = Expenses.getInstance();
+
+
+    public static long timeRate = 30000; //30sec
 
 
     /**
@@ -71,7 +78,7 @@ public class MainApp extends Application {
 //        stage.getIcons().add(logo);
 
 
-
+        startRefreshTimer();
     }
 
 
@@ -89,10 +96,58 @@ public class MainApp extends Application {
         return language;
     }
 
+    /**
+     * Refresh timer setup
+     */
+    private static void startRefreshTimer(){
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
 
-    private Main controllerHome = Main.getInstance();
-    private Expenses controllerExpenses = Expenses.getInstance();
+            @Override
+            public void run() {
+                refresh();
+            }
+        }, 0, MainApp.timeRate);
+    }
 
+    /**
+     * Actual refresh method
+     */
+    public static void refresh() {
+        System.out.println("- Automatic Refresh -");
+        getBalanceConnection().refreshConnection();
+        getCategoryConnection().refreshConnection();
+        getExpenseConnection().refreshConnection();
+        System.out.println("-                   -");
+    }
+
+    /**
+     * Method for setting the application message in the footer
+     *
+     * @param message the content /alert
+     */
+    public static void setAppMessage(String message){
+        Main.getInstance().setAppInfo(message);
+    }
+
+
+    /**
+     * Connection methods
+     */
+    private static BalanceConnection balanceConnection = new BalanceConnection();
+    public static BalanceConnection getBalanceConnection() {
+        return balanceConnection;
+    }
+
+    private static final CategoryConnection categoryConnection = new CategoryConnection();
+    public static CategoryConnection getCategoryConnection() {
+        return categoryConnection;
+    }
+
+    private static final ExpenseConnection expenseConnection = new ExpenseConnection();
+    public static ExpenseConnection getExpenseConnection() {
+        return expenseConnection;
+    }
 
     /**
      * For opening new stages / pop ups
@@ -122,6 +177,13 @@ public class MainApp extends Application {
         }
     }
 
+
+    /**
+     * Possible implementation for checking if a view is showing.
+     * @param viewLink
+     * @return
+     * @throws IOException
+     */
     private static boolean isShowing(String viewLink) throws IOException {
             return true;
 //        fxmlLoader.load(getClass().getResource(viewLink).openStream());
