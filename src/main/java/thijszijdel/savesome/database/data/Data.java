@@ -7,4 +7,5 @@ public interface Data {
 
     JDBC connection = MainApp.getConnection();
 
+    void refreshData();
 }

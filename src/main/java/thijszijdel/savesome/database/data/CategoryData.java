@@ -56,4 +56,14 @@ public class CategoryData implements Data {
     public ResultSet getSubCategoryResultSet() {
         return this.subCategoryResultSet;
     }
+
+    @Override
+    public void refreshData() {
+        try {
+            this.mainCategoryResultSet = getMainCategoryData();
+            this.subCategoryResultSet = getSubCategoryData();
+        } catch (SQLException e) {
+            MainApp.log(e);
+        }
+    }
 }

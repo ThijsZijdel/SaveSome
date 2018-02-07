@@ -33,4 +33,13 @@ public class ExpensesData implements Data{
     public ResultSet getExpensesResultSet() {
         return expensesResultSet;
     }
+
+    @Override
+    public void refreshData() {
+        try {
+            this.expensesResultSet = getExpensesData();
+        } catch (SQLException e) {
+            MainApp.log(e);
+        }
+    }
 }

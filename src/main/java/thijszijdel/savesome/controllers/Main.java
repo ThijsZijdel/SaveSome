@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import thijszijdel.savesome.MainApp;
@@ -14,6 +15,7 @@ import thijszijdel.savesome.connections.CategoryConnection;
 import thijszijdel.savesome.interfaces.State;
 import thijszijdel.savesome.models.Category;
 
+import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -29,6 +31,9 @@ public class Main implements Initializable, State {
 
     @FXML BorderPane mainView;
     @FXML HBox balance;
+
+    @FXML TextField appInfo;
+
     /**
      * Getter for the instance of this class
      *
@@ -64,13 +69,7 @@ public class Main implements Initializable, State {
             MainApp.log(e);
         }
 
-        // Test the categories              //temp.
-        CategoryConnection category = new CategoryConnection();
-        ArrayList<Category> mainCategoryList = category.getMainCategoryList();
-        for (Category cat : mainCategoryList){
-            System.out.println(cat.getName()+" "+cat.getDescription());
-        }
-
+        setAppInfo("TEST");
 
 
 
@@ -78,11 +77,21 @@ public class Main implements Initializable, State {
     }
 
     /**
+     * Set the app information alert message
+     * @param message
+     */
+    @FXML
+    public void setAppInfo(String message){
+        appInfo.clear();
+        appInfo.setText(message);
+    }
+
+
+    /**
      * Set the balance displays on the header
      */
-    private void initializeBalance() {
-        BalanceConnection balanceC = new BalanceConnection();
-        balance.getChildren().addAll(balanceC.getAllBalanceDisplays());
+    public void initializeBalance() {
+        balance.getChildren().addAll(MainApp.getBalanceConnection().getAllBalanceDisplays());
     }
 
     /**
@@ -130,6 +139,11 @@ public class Main implements Initializable, State {
                 MainApp.log(exception);
             }
         }
+    }
+
+    @FXML
+    private void refresh(Event e){
+        MainApp.refresh();
     }
 
     /**

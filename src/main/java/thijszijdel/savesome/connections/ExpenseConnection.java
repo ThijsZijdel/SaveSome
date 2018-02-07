@@ -53,4 +53,15 @@ public class ExpenseConnection implements Connection {
     public ArrayList<Expense> getExpensesList() {
         return expensesList;
     }
+
+    @Override
+    public void refreshConnection() {
+        data.refreshData();
+
+        try {
+            expensesList = convertToExpenses();
+        } catch (SQLException e){
+            MainApp.log(e);
+        }
+    }
 }
