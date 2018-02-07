@@ -6,14 +6,25 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import thijszijdel.savesome.MainApp;
+import thijszijdel.savesome.database.data.Data;
+import thijszijdel.savesome.database.data.ExpensesData;
 
+import java.io.IOException;
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -23,6 +34,8 @@ public class Home implements Initializable {
     @FXML PieChart chart;
 
     @FXML Label chartLabel;
+
+    @FXML AnchorPane topLeft;
 
     /**
      * Initializing method for the Home view
@@ -36,11 +49,37 @@ public class Home implements Initializable {
         ObservableList<PieChart.Data> datalist = FXCollections.observableArrayList();
        // XYChart.Series<String, Number> datalist = new XYChart.Series<>();
 
+        Data data = new ExpensesData();
 
-        datalist.add(new PieChart.Data("jan", 30));
-        datalist.add(new PieChart.Data("feb", 20));
-        datalist.add(new PieChart.Data("mar", 34));
-        datalist.add(new PieChart.Data("apr", 11));
+        try {
+            ResultSet results = data.connection.executeResultSetQuery("" +
+                    "SELECT sum(amount) AS amount, " +
+                    "SubCategory.name " +
+                        "FROM Expense " +
+                            "LEFT JOIN SubCategory " +
+                            "ON Expense.subCategoryFk = SubCategory.idSubCategory "+
+                        "GROUP BY SubCategory.name");
+
+
+
+            while (results.next()){
+                double amount = results.getDouble("amount");
+                String name = results.getString("SubCategory.name");
+
+
+                if (amount < 0)
+                    amount = amount * -1;
+
+                datalist.add(new PieChart.Data(name, amount));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+//        datalist.add(new PieChart.Data("jan", 30));
+//        datalist.add(new PieChart.Data("feb", 20));
+//        datalist.add(new PieChart.Data("mar", 34));
+//        datalist.add(new PieChart.Data("apr", 11));
 
 
         //chart.setData(datalist);
@@ -54,6 +93,39 @@ public class Home implements Initializable {
         //chart.setData(datalist.chartProperty());
 
         MainApp.setAppMessage("Home screen is loaded.");
+
+
+        //MainApp.openView("/FXML/Input.fxml");
+
+
+        setView("/FXML/Input.fxml");
+        //MainApp.getInstance().openView("/FXML/Input.fxml", MainApp.getInputStage());
+
+    }
+
+    private void setView(String viewLink) {
+        try {
+
+                Parent fxmlView = FXMLLoader.load(MainApp.class.getResource(viewLink));
+
+                Scene scene = new Scene(fxmlView);
+                scene.getStylesheets().add("/styles/Styles.css");
+
+
+               // Stage stage = new Stage();
+
+
+               // stage.setTitle("TEST");
+                //stage.setScene(scene);
+               // stage.show();
+
+            Node node;
+            node = (Node)fxmlView;
+
+            topLeft.getChildren().add(node);
+        } catch (IOException e) {
+            MainApp.log(e);
+        }
     }
 
 
