@@ -21,7 +21,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class Expenses implements Initializable, State {
+public class Expenses implements Initializable {
 
 
     private static boolean isShowing = false;
@@ -64,7 +64,7 @@ public class Expenses implements Initializable, State {
         isShowing = true;
 
 
-        MainApp.openView("/FXML/Input.fxml");
+        MainApp.getInstance().openView("/FXML/Input.fxml",  MainApp.getInputStage() );
 
 
         initializeExpensesList();
@@ -116,18 +116,6 @@ public class Expenses implements Initializable, State {
         expensesList.setExpanded(Boolean.TRUE);
     }
 
-
-
-
-    /**
-     * Check if the home view is showing
-     *
-     * @return state
-     */
-    @Override
-    public boolean isShowing(){
-        return isShowing;
-    }
 
 
 

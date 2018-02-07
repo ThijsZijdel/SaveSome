@@ -2,12 +2,16 @@ package thijszijdel.savesome.connections;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import thijszijdel.savesome.MainApp;
 import thijszijdel.savesome.database.data.BalanceData;
 import thijszijdel.savesome.models.Balance;
+
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -100,12 +104,16 @@ public class BalanceConnection implements Connection{
      * @return VBox of the right balance display
      */
     private VBox display(Balance balance) {
+        final String ID = String.valueOf(balance.getId());
         VBox display = new VBox();
+        display.setId(ID);
         display.alignmentProperty().set(Pos.CENTER);
         display.setPadding( new Insets(2, 12, 2 , 12));
 
         Label amount = new Label();
         Label name = new Label();
+        name.setId(ID);
+        amount.setId(ID);
         amount.setStyle("-fx-font-size: 15px");
         name.setStyle("-fx-font-size: 10px");
         name.setTextFill(Color.web(MainApp.config.getTextColor()));
@@ -119,6 +127,18 @@ public class BalanceConnection implements Connection{
         name.setText(balance.getName());
         amount.setText(balance.getDisplayAmount());
 
+        display.setOnMousePressed((MouseEvent event) -> {
+
+             if (event.isPrimaryButtonDown() && event.getClickCount() == 2) {
+                 Node item = ((Node) event.getTarget() ).getParent();
+
+
+                     System.out.println(item.getId());
+
+                     if (!item.getId().equals("balance"))
+                         MainApp.setAppMessage(balance.toString());
+             }
+         });
 
         display.getChildren().addAll(amount, name);
 

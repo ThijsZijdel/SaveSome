@@ -11,8 +11,11 @@ import javafx.stage.Stage;
 import thijszijdel.savesome.connections.*;
 import thijszijdel.savesome.constants.Theme;
 import thijszijdel.savesome.controllers.Expenses;
+import thijszijdel.savesome.controllers.Input;
 import thijszijdel.savesome.controllers.Main;
 import thijszijdel.savesome.database.JDBC;
+import thijszijdel.savesome.interfaces.State;
+import thijszijdel.savesome.models.Expense;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -27,13 +30,17 @@ public class MainApp extends Application {
 
     public static Settings config = new Settings(Theme.DARK);
 
-    private static JDBC DB;
-
     public static String language = "english";
 
     public static Stage mainStage;
 
     private static final JDBC database = new JDBC();
+
+    private static final Stage inputStage = new Stage();
+
+    public static Stage getInputStage() {
+        return inputStage;
+    }
 
 
     private Parent root;
@@ -43,8 +50,9 @@ public class MainApp extends Application {
     private static Expenses controllerExpenses = Expenses.getInstance();
 
 
-    public static long timeRate = 30000; //30sec
+    public static long timeRate = 120000; // 2min
 
+    public final static String APP_NAME = "Save Some";
 
     /**
      * Start method for the entire application
@@ -59,7 +67,7 @@ public class MainApp extends Application {
         mainScene = new Scene(root);
         mainScene.getStylesheets().add("/styles/Styles.css");
 
-        stage.setTitle("Save Some");
+        stage.setTitle(APP_NAME);
         stage.setScene(mainScene);
 
         Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
@@ -79,15 +87,14 @@ public class MainApp extends Application {
 
 
         startRefreshTimer();
+        instance = this;
     }
 
 
     /**
      * @return the connection to the declared database
      */
-    public static JDBC getConnection(){
-        return database;
-    }
+    public static JDBC getDbConnection(){ return database; }
 
     /**
      * @return the current language
@@ -155,59 +162,79 @@ public class MainApp extends Application {
      * @param viewLink the link to the fxml file
      * @throws IOException opening new stages
      */
-    public static void openView(String viewLink) {
+    public void openView(String viewLink, Stage stage) {
         try {
-            if (isShowing(viewLink)) {
-                Parent fxmlView = FXMLLoader.load(MainApp.class.getResource(viewLink));
-
-                Scene scene = new Scene(fxmlView);
-                scene.getStylesheets().add("/styles/Styles.css");
 
 
-                Stage stage = new Stage();
+
+                    Parent fxmlView = FXMLLoader.load(MainApp.class.getResource(viewLink));
+
+                    Scene scene = new Scene(fxmlView);
+                    scene.getStylesheets().add("/styles/Styles.css");
 
 
-                stage.setTitle("Money Saver");
-                stage.setScene(scene);
-                stage.show();
 
-            }
+
+                    stage.setTitle(APP_NAME);
+                    stage.setAlwaysOnTop(true);
+                    stage.setScene(scene);
+                    stage.show();
+
+
+
         } catch (IOException e) {
             log(e);
         }
     }
 
-
-    /**
-     * Possible implementation for checking if a view is showing.
-     * @param viewLink
-     * @return
-     * @throws IOException
-     */
-    private static boolean isShowing(String viewLink) throws IOException {
-            return true;
-//        fxmlLoader.load(getClass().getResource(viewLink).openStream());
-////
-////        System.out.println(p.getClass()+" < classe ");
-////        System.out.println(p.getChildren()+" < childs ");
-////        System.out.println(p.getId()+" < id ");
-////        System.out.println(fxmlLoader.getController()+" < controller !!");
-//        //System.out.println(fxmlLoader.getController() instanceof Home );
-//        //System.out.println(" < INSTANCE OF HOME  !!");
-//        //FooController fooController = (FooController) fxmlLoader.getController();
-//        if (fxmlLoader.getController() instanceof State){
-//            System.out.println("checking state ........");
-//            System.out.println(fxmlLoader.getController().toString());
+//    /**
+//     * Possible implementation for checking if a view is showing.
+//     * @param viewLink
+//     * @return
+//     * @throws IOException
+//     */
+//    private boolean isShowing(String viewLink) throws IOException {
 //
-//            System.out.println(((State) fxmlLoader.getController()).isShowing()+" is the state");
-//            return ((State) fxmlLoader.getController()).isShowing();
-//        } else {
-//            return false;
-//        }
+//
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource(viewLink));
+//        Parent root = loader.load();
+//
+//        //Expense d = loader.getController();
+//        Input c = loader.getController();
+//        //System.out.println(d +" < D");
+//        System.out.println(c +" < C");
+//
+//        //FXMLLoader loader = FXMLLoader
+//        //.load(MainApp.class.getResource(viewLink));
+//
+//        if (loader.getController() instanceof State)
+//            return ((State) loader.getController()).isShowing();
+//
+//
+//        System.out.println("not a instance of state!");
+//        return false;
+////        fxmlLoader.load(getClass().getResource(viewLink).openStream());
+//////
+//////        System.out.println(p.getClass()+" < classe ");
+//////        System.out.println(p.getChildren()+" < childs ");
+//////        System.out.println(p.getId()+" < id ");
+//////        System.out.println(fxmlLoader.getController()+" < controller !!");
+////        //System.out.println(fxmlLoader.getController() instanceof Home );
+////        //System.out.println(" < INSTANCE OF HOME  !!");
+////        //FooController fooController = (FooController) fxmlLoader.getController();
+////        if (fxmlLoader.getController() instanceof State){
+////            System.out.println("checking state ........");
+////            System.out.println(fxmlLoader.getController().toString());
+////
+////            System.out.println(((State) fxmlLoader.getController()).isShowing()+" is the state");
+////            return ((State) fxmlLoader.getController()).isShowing();
+////        } else {
+////            return false;
+////        }
+////
+////    }
 //
 //    }
-
-    }
 
 
     /**
@@ -237,6 +264,27 @@ public class MainApp extends Application {
         System.out.println(log.toString());
         e.printStackTrace();
 
+    }
+
+
+    //Create one instance of this class
+    private static MainApp instance = null;
+
+    /**
+     * Getter for the instance of this class
+     *
+     * @return this
+     */
+    public static MainApp getInstance() {
+        //check if the instance already is set
+        if (instance == null) {
+            synchronized(MainApp.class) {
+                if (instance == null) {
+                    instance = new MainApp();
+                }
+            }
+        }
+        return instance;
     }
 
     /**

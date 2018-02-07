@@ -10,21 +10,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import thijszijdel.savesome.MainApp;
-import thijszijdel.savesome.connections.BalanceConnection;
-import thijszijdel.savesome.connections.CategoryConnection;
-import thijszijdel.savesome.interfaces.State;
-import thijszijdel.savesome.models.Category;
 
-import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class Main implements Initializable, State {
+public class Main implements Initializable {
 
-
-    private boolean isShowing = false;
+    private String currentView;
 
     //Create one instance of this class
     private static Main instance = null;
@@ -33,23 +26,6 @@ public class Main implements Initializable, State {
     @FXML HBox balance;
 
     @FXML TextField appInfo;
-
-    /**
-     * Getter for the instance of this class
-     *
-     * @return this
-     */
-    public static Main getInstance() {
-        //check if the instance already is setted
-        if (instance == null) {
-            synchronized(Main.class) {
-                if (instance == null) {
-                    instance = new Main();
-                }
-            }
-        }
-        return instance;
-    }
 
 
     /**
@@ -60,21 +36,38 @@ public class Main implements Initializable, State {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        isShowing = true;
         instance = this;
 
         try {
-            setScene("/fxml/Home.fxml");
+            setMainScene("/fxml/Home.fxml");
         } catch (IOException e) {
             MainApp.log(e);
         }
 
-        setAppInfo("TEST");
 
 
 
         initializeBalance();
     }
+
+
+    /**
+     * Getter for the instance of this class
+     *
+     * @return this
+     */
+    public static Main getInstance() {
+        //check if the instance already is set
+        if (instance == null) {
+            synchronized(Main.class) {
+                if (instance == null) {
+                    instance = new Main();
+                }
+            }
+        }
+        return instance;
+    }
+
 
     /**
      * Set the app information alert message
@@ -91,36 +84,20 @@ public class Main implements Initializable, State {
      * Set the balance displays on the header
      */
     public void initializeBalance() {
+        balance.getChildren().clear();
         balance.getChildren().addAll(MainApp.getBalanceConnection().getAllBalanceDisplays());
     }
 
-    /**
-     * Check if the home view is shwoing
-     *
-     * @return state
-     */
-    @Override
-    public boolean isShowing(){
-        return isShowing;
-    }
-
-    /**
-     * Sets the home screen and sets the isShowing state
-     */
-    public void setHomeState(boolean state){
-        this.isShowing = state;
-    }
 
 
-    private String currentView;
     /**
-     * Method for opening views based on the buttons name
+     * Method for opening views based on the buttons name      (Navigation Bar!)
      * The name will be converted to the normal (/fxml/..) director path.
      *
      * @param e event location
      */
     @FXML
-    private void openView(Event e){
+    private void headerMainLink(Event e){
         //get the assets
         String button = ((JFXButton)e.getSource()).getText();
         String fileName = button.substring(0, 1).toUpperCase() + button.substring(1).toLowerCase();
@@ -132,19 +109,15 @@ public class Main implements Initializable, State {
         if (!fileName.equals(currentView)){
 
             try {
-                setScene(linkBuilder.toString());
+                setMainScene(linkBuilder.toString());
                 currentView = fileName;
-                //MainApp.openView(linkBuilder.toString());
             } catch (Exception exception) {
                 MainApp.log(exception);
             }
         }
     }
 
-    @FXML
-    private void refresh(Event e){
-        MainApp.refresh();
-    }
+
 
     /**
      * Set the center view on the home page
@@ -152,12 +125,16 @@ public class Main implements Initializable, State {
      * @param view that will be set on it
      * @throws IOException handling fxml files
      */
-    public void setScene(String view) throws IOException {
-        Parent fxmlView = FXMLLoader.load(MainApp.class.getResource(view));
+    public void setMainScene(String view) throws IOException {
+        Parent fxmlView = FXMLLoader.load(Main.class.getResource(view));
         mainView.setCenter(fxmlView);
     }
 
 
-
+    @FXML
+    private void refresh(Event e){
+        MainApp.refresh();
+        MainApp.setAppMessage("Balances are reloaded.");
+    }
 
 }

@@ -8,13 +8,16 @@ import javafx.scene.layout.Pane;
 import thijszijdel.savesome.MainApp;
 import thijszijdel.savesome.connections.BalanceConnection;
 import thijszijdel.savesome.connections.CategoryConnection;
+import thijszijdel.savesome.interfaces.State;
 
 
 import java.net.URL;
 import java.sql.Time;
 import java.util.ResourceBundle;
 
-public class Input implements Initializable {
+public class Input implements Initializable, State {
+
+    private boolean isShowing = false;
 
     @FXML Pane background;
 
@@ -34,7 +37,6 @@ public class Input implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         CategoryConnection categories = new CategoryConnection();
         BalanceConnection balances = new BalanceConnection();
-
 
 
         System.out.println("input");
@@ -69,6 +71,10 @@ public class Input implements Initializable {
 //        //balance.setValue(balances.balanceComboBoxItem(preferredBalance));
 
         MainApp.setAppMessage("Input screen is loaded.");
+
+        balance.setValue(balances.getBalanceComboBoxList().get(0));
+
+        setShowing(true);
     }
 
     /**
@@ -112,5 +118,15 @@ public class Input implements Initializable {
             timeValue = Time.valueOf(time.getValue());
             System.out.println(timeValue);
 
+    }
+
+    @Override
+    public boolean isShowing() {
+        return isShowing;
+    }
+
+    @Override
+    public void setShowing(boolean state){
+        this.isShowing = state;
     }
 }
