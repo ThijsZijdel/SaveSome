@@ -6,46 +6,77 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import thijszijdel.savesome.MainApp;
+import thijszijdel.savesome.database.data.BalanceData;
 import thijszijdel.savesome.models.Balance;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class BalanceConnection implements Connection{
 
+    private final BalanceData data = new BalanceData();
     private ArrayList<VBox> balanceDisplays = new ArrayList<>();
     private ArrayList<Balance> balances = new ArrayList<>();
 
-
+    private final String SPACING = "     ";
     /**
      * Constructor for the balance connection
      */
     public BalanceConnection(){
-        this.balances = getBalances();
+        try {
+            this.balances = convertToBalance();
+        } catch (SQLException e) {
+            MainApp.log(e);
+        }
 
         if (this.balances != null && !this.balances.isEmpty())
             this.balanceDisplays = generateBalanceDisplays();
     }
 
-    /**
-     * Get all the balances based on the expenses / tabel
-     *
-     * @return array of balances
-     */
-    private ArrayList<Balance> getBalances() {
-        ArrayList<Balance> balances = new ArrayList<>();
+    private ArrayList<Balance> convertToBalance() throws SQLException {
+        ArrayList<Balance> list = new ArrayList<>();
+
+        ResultSet resultSet = data.getBalanceResultSet();
+
+        while ( resultSet.next() ){
+            int id = resultSet.getInt("idBalance");
+            String name = resultSet.getString("name");
+            String description = resultSet.getString("description");
+            String type = resultSet.getString("type");
+            double amount = resultSet.getDouble("amount");
+            int bankFk = resultSet.getInt("bankFk");
+
+            list.add(new Balance(id, name, description, type, amount, bankFk));
+        }
 
 
-        //dummy data, this will be calculated (or/and stored)
-        Balance ing = new Balance("B32", "ING", 2344.50, "Main account");
-        Balance abn = new Balance("AB3", "ABN", -145.70, "Sub account");
-        Balance lok = new Balance("LO1", "LOK", 2245.70, "Savings account");
-
-        balances.add(ing);
-        balances.add(abn);
-        balances.add(lok);
-
-        return balances;
+        return list;
     }
+
+//    public ArrayList<String> getBalanceNameList() {
+//        ArrayList<String> balanceNameList = new ArrayList<>();
+//
+//        for (Balance balance : this.balances){
+//            balanceNameList.add(balance.getName());
+//        }
+//        return balanceNameList;
+//    }
+
+    public ArrayList<String> getBalanceComboBoxList() {
+        ArrayList<String> balanceComboBoxList = new ArrayList<>();
+
+        for (Balance balance : this.balances){
+            balanceComboBoxList.add(balanceComboBoxItem(balance));
+        }
+        return balanceComboBoxList;
+    }
+
+    public String balanceComboBoxItem(Balance balance){
+        return balance.getName()+SPACING+balance.getDisplayAmount();
+    }
+
+
 
     /**
      * Generate the balance displays
@@ -99,7 +130,17 @@ public class BalanceConnection implements Connection{
     }
 
 
+    @Override
+    public void refreshConnection() {
+        data.refreshData();
+        
+        try {
+            this.balances = convertToBalance();
+        } catch (SQLException e) {
+            MainApp.log(e);
+        }
 
-
-
+        if (this.balances != null && !this.balances.isEmpty())
+            this.balanceDisplays = generateBalanceDisplays();
+    }
 }
