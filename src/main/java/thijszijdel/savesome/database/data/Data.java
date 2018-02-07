@@ -5,6 +5,7 @@ import thijszijdel.savesome.database.JDBC;
 
 public interface Data {
 
-    JDBC connection = MainApp.getConnection();
+    JDBC connection = MainApp.getDbConnection();
 
+    void refreshData();
 }

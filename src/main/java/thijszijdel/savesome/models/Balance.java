@@ -1,20 +1,26 @@
 package thijszijdel.savesome.models;
 
 public class Balance {
-    private String id;
+    private int id, bankFk;
     private String name;
-    private Float amount;
+    private String type;
+    private Double amount;
     private String description;
     private boolean isNegative;
 
-    public Balance(String id, String name, Float amount, String description){
+    public Balance(String id, String name, Double amount, String description){
+
+    }
+
+    public Balance(int id, String name, String description, String type, double amount, int bankFk) {
         this.id = id;
         this.name = name;
         this.amount = amount;
         this.description = description;
         this.isNegative = (amount < 0);
     }
-    public String getId() {
+
+    public int getId() {
         return id;
     }
 
@@ -22,7 +28,7 @@ public class Balance {
         return name;
     }
 
-    public Float getAmount() {
+    public Double getAmount() {
         return amount;
     }
 
@@ -37,9 +43,9 @@ public class Balance {
 
     public String getDisplayAmount() {
         if (isNegative)
-            return "- "+Float.toString(amount);
+            return Double.toString(amount);
         else
-            return "+ "+Float.toString(amount);
+            return "+ "+Double.toString(amount);
     }
 
     @Override
