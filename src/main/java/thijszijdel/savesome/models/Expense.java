@@ -1,5 +1,7 @@
 package thijszijdel.savesome.models;
 
+import thijszijdel.savesome.MainApp;
+
 import java.sql.Date;
 import java.sql.Time;
 
@@ -11,16 +13,24 @@ public class Expense {
     private Date date;
     private Time time;
     private boolean isNegative;
+    private int subCategoryFk;
+    private SubCategory subCategory;
 
 
-    public Expense(String expenseId, String name, String description, double amount, Date date, Time time) {
+    public Expense(String expenseId, String name, String description, double amount, Date date, Time time, int subCategoryFk) {
         this.expenseId = expenseId;
         this.name = name;
         this.description = description;
         this.amount = amount;
         this.date = date;
         this.time = time;
+
         this.isNegative = (amount < 0);
+
+        if (subCategoryFk != 0) {
+            this.subCategoryFk = subCategoryFk;
+            this.subCategory = MainApp.getCategoryConnection().getSubCat(subCategoryFk);
+        }
 
     }
     public String getDisplayAmount() {
@@ -48,5 +58,13 @@ public class Expense {
 
     public Time getTime() {
         return time;
+    }
+
+    public int getSubCategoryFk() {
+        return subCategoryFk;
+    }
+
+    public SubCategory getSubCategory() {
+        return subCategory;
     }
 }

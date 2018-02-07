@@ -5,20 +5,21 @@ import javafx.scene.image.Image;
 
 public class SubCategory {
 
-    private String subCategoryId;
+    private int subCategoryId;
     private String name;
     private String description;
-    private Image image;
+    private String color;
 
-    public SubCategory(String subCategoryId, String name, String description){
+    public SubCategory(int subCategoryId, String name, String description, String color){
         this.subCategoryId = subCategoryId;
         this.name = name;
         this.description = description;
-        this.image = new Image("/images/icon.png");
+        this.color = color;
+
     }
 
 
-    public String getSubCategoryId() {
+    public int getSubCategoryId() {
         return subCategoryId;
     }
 
@@ -30,7 +31,7 @@ public class SubCategory {
         return description;
     }
 
-    public Image getIcon() {
-        return image;
+    public String getColor() {
+        return color;
     }
 }

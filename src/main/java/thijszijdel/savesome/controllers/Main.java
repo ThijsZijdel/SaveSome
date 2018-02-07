@@ -75,7 +75,9 @@ public class Main implements Initializable {
      */
     @FXML
     public void setAppInfo(String message){
-        appInfo.clear();
+        if (appInfo.getText().trim().length() > 0 && appInfo.getText() != null)
+            appInfo.clear();
+
         appInfo.setText(message);
     }
 

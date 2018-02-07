@@ -41,9 +41,10 @@ public class ExpenseConnection implements Connection {
             double amount = resultSet.getDouble("amount");
             Date date = resultSet.getDate("date");
             Time time = resultSet.getTime("time");
+            int subCategoryFk = resultSet.getInt("subCategoryFk");
 
 
-            list.add(new Expense(id, name, description, amount, date, time));
+            list.add(new Expense(id, name, description, amount, date, time, subCategoryFk ));
         }
 
 

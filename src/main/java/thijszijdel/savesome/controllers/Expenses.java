@@ -10,6 +10,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import thijszijdel.savesome.MainApp;
 import thijszijdel.savesome.connections.CategoryConnection;
 import thijszijdel.savesome.connections.ExpenseConnection;
@@ -81,7 +82,8 @@ public class Expenses implements Initializable {
 
             Label name = new Label(expense.getName());
             Label desc = new Label(expense.getDescription());
-//            //ImageView imgView = new ImageView(expense.getAmount());
+
+//            ImageView imgView = new ImageView( new Image("/images/SaveSome.png") );
 //
 //            imgView.maxHeight(25);
 //            imgView.setFitHeight(25);
@@ -92,8 +94,8 @@ public class Expenses implements Initializable {
 
 
             HBox box = new HBox(new Label(expense.getDisplayAmount()), new VBox(name, desc, new HBox(new Label(expense.getDate().toString()), new Label(" "+expense.getTime().toString()) )));
-
-
+            String color = expense.getSubCategory().getColor();
+            box.setStyle("-fx-background-color: "+color+";");
 
             HBox.setHgrow(expensesList, Priority.ALWAYS);
 

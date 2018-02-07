@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import thijszijdel.savesome.connections.*;
@@ -50,9 +51,10 @@ public class MainApp extends Application {
     private static Expenses controllerExpenses = Expenses.getInstance();
 
 
-    public static long timeRate = 120000; // 2min
+    public static long timeRate = 100000000; // ms
 
     public final static String APP_NAME = "Save Some";
+    public final static Image logo = new Image("Images/Logo.png");
 
     /**
      * Start method for the entire application
@@ -63,7 +65,7 @@ public class MainApp extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         root = FXMLLoader.load(getClass().getResource("/fxml/Main.fxml"));
-        
+
         mainScene = new Scene(root);
         mainScene.getStylesheets().add("/styles/Styles.css");
 
@@ -81,9 +83,9 @@ public class MainApp extends Application {
 
         stage.show();
 
-//        Image logo = new Image("Images/logo.png");
-//        //Image applicationIcon = new Image(getClass().getResourceAsStream("Images/Logo.png"));
-//        stage.getIcons().add(logo);
+
+        //Image applicationIcon = new Image(getClass().getResourceAsStream("Images/Logo.png"));
+        stage.getIcons().add(logo);
 
 
         startRefreshTimer();
@@ -160,25 +162,21 @@ public class MainApp extends Application {
      * For opening new stages / pop ups
      *
      * @param viewLink the link to the fxml file
-     * @throws IOException opening new stages
      */
     public void openView(String viewLink, Stage stage) {
         try {
+            Parent fxmlView = FXMLLoader.load(MainApp.class.getResource(viewLink));
+
+            Scene scene = new Scene(fxmlView);
+            scene.getStylesheets().add("/styles/Styles.css");
 
 
 
-                    Parent fxmlView = FXMLLoader.load(MainApp.class.getResource(viewLink));
-
-                    Scene scene = new Scene(fxmlView);
-                    scene.getStylesheets().add("/styles/Styles.css");
-
-
-
-
-                    stage.setTitle(APP_NAME);
-                    stage.setAlwaysOnTop(true);
-                    stage.setScene(scene);
-                    stage.show();
+            stage.getIcons().add(logo);
+            stage.setTitle(APP_NAME);
+            stage.setAlwaysOnTop(true);
+            stage.setScene(scene);
+            stage.show();
 
 
 
@@ -247,15 +245,19 @@ public class MainApp extends Application {
 
         if (e instanceof IOException)
             log.append("IO Exception \n");
+            setAppMessage("IO Exception");
 
         if (e instanceof SQLException)
             log.append("SQL Exception \n");
+            setAppMessage("SQL Exception");
 
         if (e instanceof NullPointerException)
             log.append("Null pointer Exception \n");
+            setAppMessage("Null pointer Exception");
 
         if (e == null)
             log.append("Undefined Exception \n");
+            setAppMessage("Undefined Exception");
 
         log.append(e.getMessage());
 
