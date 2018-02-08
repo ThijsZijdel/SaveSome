@@ -8,6 +8,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Side;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -100,6 +101,9 @@ public class Home implements Initializable {
         chart.setData( datalist);
         chart.setAnimated(true);
         chart.setTitle("Categories");
+
+        chart.setLabelLineLength(10);
+        chart.setLegendSide(Side.RIGHT);
         //chart.setData(datalist.chartProperty());
 
         MainApp.setAppMessage("Home screen is loaded.");

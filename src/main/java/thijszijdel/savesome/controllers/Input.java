@@ -40,7 +40,6 @@ public class Input implements Initializable, State {
         BalanceConnection balances = new BalanceConnection();
 
 
-        System.out.println("input");
 
         background.setStyle("-fx-background-color: "+ MainApp.config.getBackground());
 

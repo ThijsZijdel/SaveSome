@@ -4,6 +4,8 @@ import com.jfoenix.controls.JFXListCell;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.transitions.JFXFillTransition;
 import javafx.animation.Transition;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -11,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -28,7 +31,10 @@ import thijszijdel.savesome.models.Expense;
 import thijszijdel.savesome.models.SubCategory;
 
 import java.net.URL;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+
 import java.util.ResourceBundle;
 
 public class Expenses implements Initializable {
@@ -92,22 +98,38 @@ public class Expenses implements Initializable {
             Label name = new Label(expense.getName());
             Label desc = new Label(expense.getDescription());
             Label amount = new Label(expense.getDisplayAmount());
-            Label dateTime = new Label(expense.getDate().toString() + " " + expense.getTime().toString());
+
+
+
+            Date date = expense.getDate();
+            String result;
+            SimpleDateFormat formatter;
+                                                        //EEE d MMM yy
+            formatter = new SimpleDateFormat("EEE, MMM d, ''yy");
+
+            result = formatter.format(date);
+            //System.out.println("Locale: " + currentLocale.toString());
+            //System.out.println("Result: " + result);
+
+
+
+
+
+            Label dateTime = new Label(result + "        " + expense.getTime().toString());
 
             String balanceN = "";
             if (expense.getBalance() != null)
                 balanceN = expense.getBalance().getName();
 
             Label balance = new Label(" " + balanceN + " ");
+
             balance.setStyle("-fx-font-size: 10px");
 
 
-            amount.setStyle(
-                    "-fx-font-weight: 400;" +
-                            "-fx-font-size : 20px;" +
-                            "-fx-fill:  slategray;"
-            );
-
+            name.getStyleClass().add("bold");
+            desc.getStyleClass().add("lighter");
+            dateTime.getStyleClass().add("lighter");
+            amount.getStyleClass().add("amountDisplay");
 
             if (expense.isNegative())
                 amount.setTextFill(Color.web(Settings.getAlertColorD()));
@@ -125,11 +147,30 @@ public class Expenses implements Initializable {
             circle.setFill(Color.web(color));
             circle.setStyle("-fx-stroke: darkgrey");
 
+            VBox amountBalance = new VBox(amount, balance);
+            amountBalance.getStyleClass().add("amountBalanceBox");
 
-            HBox box = new HBox(new VBox(amount, balance), new VBox(name, desc, dateTime), circle);
+
+            VBox details = new VBox(name, desc, dateTime);
+
+
+            details.getStyleClass().add("detailsBox");
+            HBox box = new HBox(amountBalance, details, circle);
 
             box.setStyle("-fx-background-color: #dcdde1 ;");
+
             box.getStyleClass().add("CellPadding");
+
+
+//            DropShadow e = new DropShadow();
+//            e.setWidth(5);
+//            e.setHeight(5);
+////            e.setOffsetX(2);
+////            e.setOffsetY(2);
+//            e.setRadius(10);
+//            box.setEffect(e);
+
+
             JFXFillTransition ts = new JFXFillTransition();
 
             ts.setRegion(box);
@@ -164,6 +205,7 @@ public class Expenses implements Initializable {
             });
 
 
+            expensesList.getStyleClass().add("noBlueBorders");
             HBox.setHgrow(expensesList, Priority.ALWAYS);
 
             expensesList.getItems().add(box);
@@ -174,21 +216,27 @@ public class Expenses implements Initializable {
 //                }
 //            });
 
+
+
+
         }
         // expensesList.getItems().addAll(cells);
 
+        expensesList.getSelectionModel().selectedItemProperty().addListener(
+                (ChangeListener<HBox>) (ov, old_val, new_val) -> {
+                    label.setText(new_val.toString());
+                    //label.setTextFill(Color.web(new_val.toString()));
+                });
 
-//             expensesList.getSelectionModel().selectedItemProperty().addListener(
-//                new ChangeListener<String>() {
-//                    public void changed(ObservableValue<? extends String> ov,
-//                                        String old_val, String new_val) {
-//                        label.setText(new_val);
-//                        label.setTextFill(Color.web(new_val));
-//                    }
-//              });
         expensesList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         expensesList.setExpanded(Boolean.TRUE);
 
+
+        setStyleClasses();
+
+    }
+    @FXML Label label;
+    private void setStyleClasses(){
 
     }
 
