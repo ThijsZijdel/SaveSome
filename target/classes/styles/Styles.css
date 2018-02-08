@@ -12,3 +12,34 @@ jfx-combo-box label {
     /*-fx-background-color:  WHITE;*/
     -fx-text-fill: #fff;
 }
+
+.jfx-list-view:selected {
+    -fx-stroke: none;
+}
+
+
+.root {
+    /* A bright blue for highlighting/accenting objects.  For example: selected
+     * text; selected items in menus, lists, trees, and tables; progress bars;
+     * default buttons.
+     */
+    -fx-accent: #00a8ff;
+
+    /* A bright blue for the focus indicator of objects. Typically used as the
+     * first color in -fx-background-color for the "focused" pseudo-class. Also
+     * typically used with insets of -1.4 to provide a glowing effect.
+     *
+     * TODO: should this be derived from -fx-accent?
+     */
+    -fx-focus-color: #00a8ff;
+}
+
+
+.CellPadding {
+    -fx-background-color: green;
+    -fx-padding: 15px 25px;
+    -fx-start-margin: 0px;
+    -fx-end-margin: 0px;
+    -fx-margin: 0px;
+}
+

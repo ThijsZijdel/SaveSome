@@ -12,6 +12,7 @@ import thijszijdel.savesome.interfaces.State;
 
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.sql.Time;
 import java.util.ResourceBundle;
 
@@ -28,7 +29,7 @@ public class Input implements Initializable, State {
 
     @FXML JFXCheckBox paid, today, repeat;
 
-    @FXML JFXTextField name, description;
+    @FXML JFXTextField amount, name, description;
 
     @FXML JFXTimePicker time;
     @FXML JFXDatePicker date;
@@ -128,5 +129,22 @@ public class Input implements Initializable, State {
     @Override
     public void setShowing(boolean state){
         this.isShowing = state;
+    }
+
+
+    public void insertExpense(){
+        Time timeValue = null;
+
+        if (time.getValue() != null)
+            timeValue = Time.valueOf(time.getValue());
+
+        try {
+            MainApp.getConnection().executeUpdateQuery("INSERT INTO Expense " +
+                    "(`name`, `description`, `amount`, `subcategoryFk`, `date`, `time`, `balanceFk`, `alreadyPaid`) VALUES " +
+                    "('" + name.getText() + "', '" + description.getText() + "', '" + Integer.parseInt(amount.getText()) + "', '1', '2018-02-02', '" + timeValue + "', '1', '0');");
+        } catch (Exception e){
+            MainApp.log(e);
+        }
+
     }
 }

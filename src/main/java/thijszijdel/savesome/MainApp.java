@@ -12,11 +12,8 @@ import javafx.stage.Stage;
 import thijszijdel.savesome.connections.*;
 import thijszijdel.savesome.constants.Theme;
 import thijszijdel.savesome.controllers.Expenses;
-import thijszijdel.savesome.controllers.Input;
 import thijszijdel.savesome.controllers.Main;
 import thijszijdel.savesome.database.JDBC;
-import thijszijdel.savesome.interfaces.State;
-import thijszijdel.savesome.models.Expense;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -55,6 +52,7 @@ public class MainApp extends Application {
 
     public final static String APP_NAME = "Save Some";
     public final static Image logo = new Image("Images/Logo.png");
+
 
     /**
      * Start method for the entire application
@@ -96,7 +94,7 @@ public class MainApp extends Application {
     /**
      * @return the connection to the declared database
      */
-    public static JDBC getDbConnection(){ return database; }
+    public static JDBC getConnection(){ return database; }
 
     /**
      * @return the current language

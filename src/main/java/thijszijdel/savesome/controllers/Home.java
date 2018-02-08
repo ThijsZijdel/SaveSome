@@ -51,30 +51,40 @@ public class Home implements Initializable {
 
         Data data = new ExpensesData();
 
+
+        int index = 1;
         try {
             ResultSet results = data.connection.executeResultSetQuery("" +
                     "SELECT sum(amount) AS amount, " +
-                    "SubCategory.name " +
+                    "SubCategory.name, SubCategory.color " +
                         "FROM Expense " +
                             "LEFT JOIN SubCategory " +
                             "ON Expense.subCategoryFk = SubCategory.idSubCategory "+
-                        "GROUP BY SubCategory.name");
+                        "GROUP BY SubCategory.name, SubCategory.color;");
 
 
 
             while (results.next()){
+
                 double amount = results.getDouble("amount");
                 String name = results.getString("SubCategory.name");
-
+                String color = results.getString("SubCategory.color");
 
                 if (amount < 0)
                     amount = amount * -1;
 
                 datalist.add(new PieChart.Data(name, amount));
+                chart.setStyle("CHART_COLOR_"+index+" : "+color+";");
+                System.out.println("-fx-CHART_COLOR_"+index+" : "+color+";");
+
+                index++;
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+//        chart.setStyle("CHART_COLOR_1: #e9967a;");
+//        chart.setStyle("CHART_COLOR_2: blue;");
 
 //        datalist.add(new PieChart.Data("jan", 30));
 //        datalist.add(new PieChart.Data("feb", 20));

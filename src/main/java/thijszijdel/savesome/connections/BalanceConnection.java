@@ -5,7 +5,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import thijszijdel.savesome.MainApp;
@@ -116,12 +115,12 @@ public class BalanceConnection implements Connection{
         amount.setId(ID);
         amount.setStyle("-fx-font-size: 15px");
         name.setStyle("-fx-font-size: 10px");
-        name.setTextFill(Color.web(MainApp.config.getTextColor()));
+        name.setTextFill(Color.web(MainApp.config.getTextColorW()));
 
         if (balance.isNegative())
             amount.setTextFill(Color.web(MainApp.config.getAlertColor()));
         else
-            amount.setTextFill(Color.web(MainApp.config.getTextColor()));
+            amount.setTextFill(Color.web(MainApp.config.getTextColorW()));
 
 
         name.setText(balance.getName());
@@ -162,5 +161,13 @@ public class BalanceConnection implements Connection{
 
         if (this.balances != null && !this.balances.isEmpty())
             this.balanceDisplays = generateBalanceDisplays();
+    }
+
+    public Balance getBalance(int balanceFk) {
+        for (Balance balance : this.balances)
+            if (balance.getId() == balanceFk)
+                return balance;
+        MainApp.log(new Exception("no match"));
+        return null;
     }
 }

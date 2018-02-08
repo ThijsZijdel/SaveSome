@@ -44,6 +44,7 @@
                   <JFXButton prefHeight="42.0" prefWidth="62.0" ripplerFill="#00a8ff" style="-fx-background-color: #eee; -fx-stroke: #0097e6#0097e6; -fx-stroke-width: 1;" text="+" textFill="#0097e6" />
                </children>
             </HBox>
+            <JFXButton layoutX="247.0" layoutY="366.0" onAction="#insertExpense" text="insertExpense" />
          </children>
       </Pane>
       <JFXTextField fx:id="amount" focusColor="#00a8ff" labelFloat="true" maxHeight="35.0" maxWidth="250.0" minHeight="25.0" minWidth="150.0" prefHeight="30.0" prefWidth="200.0" promptText="Amount" unFocusColor="#0097e6" GridPane.columnIndex="1" GridPane.rowIndex="1" />

@@ -16,8 +16,10 @@ public class Expense {
     private int subCategoryFk;
     private SubCategory subCategory;
 
+    private int balanceFk;
+    private Balance balance;
 
-    public Expense(String expenseId, String name, String description, double amount, Date date, Time time, int subCategoryFk) {
+    public Expense(String expenseId, String name, String description, double amount, Date date, Time time, int subCategoryFk, int balanceFk) {
         this.expenseId = expenseId;
         this.name = name;
         this.description = description;
@@ -26,6 +28,11 @@ public class Expense {
         this.time = time;
 
         this.isNegative = (amount < 0);
+
+        if (balanceFk != 0) {
+            this.balanceFk = balanceFk;
+            this.balance = MainApp.getBalanceConnection().getBalance(balanceFk);
+        }
 
         if (subCategoryFk != 0) {
             this.subCategoryFk = subCategoryFk;
@@ -66,5 +73,13 @@ public class Expense {
 
     public SubCategory getSubCategory() {
         return subCategory;
+    }
+
+    public Balance getBalance() {
+        return balance;
+    }
+
+    public boolean isNegative() {
+        return isNegative;
     }
 }
