@@ -10,20 +10,18 @@
 <AnchorPane prefHeight="573.0" prefWidth="699.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="thijszijdel.savesome.controllers.Expenses">
    <children>
       <JFXListView fx:id="expensesList" layoutX="27.0" layoutY="111.0" minWidth="425.0" prefHeight="462.0" prefWidth="450.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="111.0" />
-      <Label fx:id="label" layoutX="518.0" layoutY="114.0" text="Label" />
-      <JFXProgressBar layoutX="27.0" layoutY="88.0" prefHeight="18.0" prefWidth="447.0" progress="0.62" />
+      <Label fx:id="label" layoutX="518.0" layoutY="103.0" text="Label" />
+      <JFXProgressBar fx:id="indicatorBar" layoutX="27.0" layoutY="88.0" prefHeight="18.0" prefWidth="447.0" progress="0.62" />
       <Label layoutX="29.0" layoutY="66.0" text="BULK BUDGET" />
-      <Label layoutX="28.0" layoutY="21.0" text="Februari 2018">
+      <Label fx:id="monthYear" layoutX="28.0" layoutY="21.0" text="Februari 2018">
          <font>
             <Font size="27.0" />
          </font>
       </Label>
-      <JFXButton layoutX="213.0" layoutY="24.0" ripplerFill="#0daeff" style="-fx-background-color: #c2c2c2#c2c2c2;" text="&lt;" />
-      <JFXButton layoutX="250.0" layoutY="24.0" ripplerFill="#0daeff" style="-fx-background-color: #c2c2c2#c2c2c2;" text="&gt;" />
-      <Label layoutX="410.0" layoutY="66.0" text="\$3.203,00" />
-      <Label layoutX="329.0" layoutY="66.0" text="\$2.203,00" />
-      <Label layoutX="400.0" layoutY="64.0" prefHeight="17.0" prefWidth="0.0" text="/" />
-      <Label layoutX="380.0" layoutY="26.0" text="\$2.203,00" textFill="#1284ff">
+      <JFXButton fx:id="prevMonth" layoutX="213.0" layoutY="24.0" onAction="#prevMonth" ripplerFill="#0daeff" style="-fx-background-color: #c2c2c2#c2c2c2;" text="&lt;" />
+      <JFXButton fx:id="nextMonth" layoutX="250.0" layoutY="24.0" onAction="#nextMonth" ripplerFill="#0daeff" style="-fx-background-color: #c2c2c2#c2c2c2;" text="&gt;" />
+      <Label fx:id="spend_budget" layoutX="329.0" layoutY="66.0" text="\$2.203,00 / $3.203,00" />
+      <Label fx:id="spend" layoutX="380.0" layoutY="26.0" text="\$2.203,00" textFill="#1284ff">
          <font>
             <Font size="19.0" />
          </font>

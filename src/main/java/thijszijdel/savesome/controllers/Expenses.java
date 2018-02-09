@@ -45,6 +45,7 @@ public class Expenses implements Initializable {
     //Create one instance of this class
     private static Expenses instance = null;
 
+    @FXML Label monthYear;
 
     @FXML JFXListView expensesList;
 
@@ -76,15 +77,14 @@ public class Expenses implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         instance = this;
 
-
         isShowing = true;
-
 
         MainApp.getInstance().openView("/FXML/Input.fxml",  MainApp.getInputStage() );
 
-
         initializeExpensesList();
 
+
+       // monthYear.setText();
     }
 
     private void initializeExpensesList() {
@@ -93,6 +93,7 @@ public class Expenses implements Initializable {
 
         ArrayList<Expense> expenses = expensesConnection.getExpensesList();
 
+        ArrayList<HBox> boxes = new ArrayList<>();
         for (Expense expense : expenses) {
 
             Label name = new Label(expense.getName());
@@ -171,23 +172,24 @@ public class Expenses implements Initializable {
 //            box.setEffect(e);
 
 
-            JFXFillTransition ts = new JFXFillTransition();
+//            JFXFillTransition ts = new JFXFillTransition();
+//
+//            ts.setRegion(box);
 
-            ts.setRegion(box);
-
+            box.setStyle("-fx-background-color: rgba(209,209,209,0.5);");
             box.setOnMouseEntered(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent t) {
-                    ts.setFromValue(Color.web("#f5f6fa", 0.7));
-
-                    ts.setToValue(Color.web("#dcdde1", 0.7));
+//                    ts.setFromValue(Color.web("#f5f6fa", 0.7));
+//
+//                    ts.setToValue(Color.web("#dcdde1", 0.7));
 
                     if (expense.isNegative())
                         circle.setFill(Color.web(Settings.getAlertColorD()));
                     else
                         circle.setFill(Color.web(Settings.getAccentColor()));
 
-                    ts.play();
+                   // ts.play();
                 }
             });
 
@@ -196,11 +198,11 @@ public class Expenses implements Initializable {
                 public void handle(MouseEvent t) {
                     circle.setFill(Color.web(color));
 
+//
+//                    ts.setFromValue(Color.web("#dcdde1", 0.7));
+//                    ts.setToValue(Color.web("#f5f6fa", 0.7));
 
-                    ts.setFromValue(Color.web("#dcdde1", 0.7));
-                    ts.setToValue(Color.web("#f5f6fa", 0.7));
-
-                    ts.play();
+                   // ts.play();
                 }
             });
 
@@ -208,7 +210,8 @@ public class Expenses implements Initializable {
             expensesList.getStyleClass().add("noBlueBorders");
             HBox.setHgrow(expensesList, Priority.ALWAYS);
 
-            expensesList.getItems().add(box);
+            boxes.add(box);  ///new way
+//            expensesList.getItems().add(box);
 
 //            cell.setOnMousePressed((MouseEvent event) -> {
 //                if (event.isPrimaryButtonDown()){
@@ -221,7 +224,8 @@ public class Expenses implements Initializable {
 
         }
         // expensesList.getItems().addAll(cells);
-
+        expensesList.getItems().addAll(boxes);
+        //expensesList.getItems().addAll(expensesConnection.getExpenseBoxes());
         expensesList.getSelectionModel().selectedItemProperty().addListener(
                 (ChangeListener<HBox>) (ov, old_val, new_val) -> {
                     label.setText(new_val.toString());
@@ -241,7 +245,9 @@ public class Expenses implements Initializable {
     }
 
 
+    public void prevMonth(ActionEvent actionEvent) {
+    }
 
-
-
+    public void nextMonth(ActionEvent actionEvent) {
+    }
 }

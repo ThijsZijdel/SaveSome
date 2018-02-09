@@ -1,5 +1,6 @@
 package thijszijdel.savesome.connections;
 
+import javafx.scene.layout.HBox;
 import thijszijdel.savesome.MainApp;
 import thijszijdel.savesome.database.data.ExpensesData;
 import thijszijdel.savesome.models.Expense;
@@ -66,4 +67,18 @@ public class ExpenseConnection implements Connection {
             MainApp.log(e);
         }
     }
+
+    public ArrayList<HBox> getExpenseBoxes() {
+
+
+        //create the boxen
+        //createHBoxExpenseDisplay(Expense);
+        return null;
+    }
+
+
+
+
+            //with connection to categories
+    //createHBoxExpenseDisplay
 }
