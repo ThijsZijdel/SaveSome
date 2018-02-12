@@ -12,3 +12,54 @@ jfx-combo-box label {
     /*-fx-background-color:  WHITE;*/
     -fx-text-fill: #fff;
 }
+
+.jfx-list-view:selected {
+    -fx-stroke: none;
+}
+
+
+.root {
+    -fx-accent: #00a8ff;
+
+    -fx-focus-color: #00a8ff;
+}
+
+.noBlueBorders {
+    -fx-accent: none;
+
+    -fx-focus-color: none;
+}
+
+
+.CellPadding {
+
+    -fx-padding: 15px 25px;
+    -fx-start-margin: 0px;
+    -fx-end-margin: 0px;
+    -fx-margin: 0px;
+    -fx-background-color: rgba(209,209,209,0.5);
+}
+
+.bold {
+    -fx-text-weight: bold;
+}
+.lighter {
+    -fx-text-fill: #777777;
+}
+
+.amountDisplay {
+    -fx-font-weight: 400;
+    -fx-font-size : 20px;
+    -fx-fill:  slategray;
+}
+.amountBalanceBox {
+    -fx-text-alignment: center;
+    -fx-min-width: 100px;
+    -fx-padding:7px;
+}
+
+.detailsBox {
+    -fx-text-alignment: left;
+    -fx-min-width: 250px;
+    -fx-padding:1px;
+}

@@ -22,3 +22,7 @@
 hs_err_pid*
 .idea
 src/main/resources/.DS_Store
+target
+target
+target/classes
+target/classes/fxml

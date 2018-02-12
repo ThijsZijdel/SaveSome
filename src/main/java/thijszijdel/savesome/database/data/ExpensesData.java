@@ -27,7 +27,7 @@ public class ExpensesData implements Data{
      * @throws SQLException database connection
      */
     private final ResultSet getExpensesData() throws SQLException{
-        return connection.executeResultSetQuery("SELECT * FROM Expense;");
+        return connection.executeResultSetQuery("SELECT * FROM Expense ORDER BY date DESC;");
     }
 
     public ResultSet getExpensesResultSet() {

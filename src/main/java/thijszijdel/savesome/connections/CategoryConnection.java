@@ -43,12 +43,12 @@ public class CategoryConnection implements Connection{
         ResultSet resultSet = data.getSubCategoryResultSet();
 
         while ( resultSet.next() ){
-            String id = "1";
-            //resultSet.getString("idCategory");
+            int id = resultSet.getInt("idSubCategory");
             String name = resultSet.getString("name");
             String description = resultSet.getString("description");
+            String color = resultSet.getString("color");
 
-            list.add(new SubCategory(id, name, description));
+            list.add(new SubCategory(id, name, description, color));
         }
 
 
@@ -142,5 +142,13 @@ public class CategoryConnection implements Connection{
         } catch (SQLException e){
             MainApp.log(e);
         }
+    }
+
+    public SubCategory getSubCat(int subCategoryFk) {
+        for (SubCategory cat : this.subCategoryList)
+            if (cat.getSubCategoryId() == subCategoryFk)
+                return cat;
+        MainApp.log(new Exception("no match"));
+        return null;
     }
 }
