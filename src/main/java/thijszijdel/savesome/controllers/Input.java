@@ -36,6 +36,8 @@ public class Input implements Initializable, State {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
+        //**   WILL BE MOVED   **/
         CategoryConnection categories = new CategoryConnection();
         BalanceConnection balances = new BalanceConnection();
 
@@ -131,6 +133,9 @@ public class Input implements Initializable, State {
     }
 
 
+    /**
+     * WILL BE MOVED
+     */
     public void insertExpense(){
         Time timeValue = null;
 

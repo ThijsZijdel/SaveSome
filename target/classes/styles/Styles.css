@@ -32,11 +32,12 @@ jfx-combo-box label {
 
 
 .CellPadding {
-    -fx-background-color: green;
+
     -fx-padding: 15px 25px;
     -fx-start-margin: 0px;
     -fx-end-margin: 0px;
     -fx-margin: 0px;
+    -fx-background-color: rgba(209,209,209,0.5);
 }
 
 .bold {

@@ -18,7 +18,7 @@ public class Settings {
 
     private static final String textColorW ="#ffffff";
 
-
+    private static final String succesColor = "#44bd32";
     private static Balance preferredBalance = null;
 
     private  Theme theme;
@@ -60,5 +60,7 @@ public class Settings {
         return preferredBalance;
     }
 
-
+    public static String getSuccesColor() {
+        return succesColor;
+    }
 }

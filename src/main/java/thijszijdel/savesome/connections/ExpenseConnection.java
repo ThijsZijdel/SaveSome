@@ -1,19 +1,29 @@
 package thijszijdel.savesome.connections;
 
+import javafx.event.EventHandler;
+import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import thijszijdel.savesome.MainApp;
 import thijszijdel.savesome.database.data.ExpensesData;
 import thijszijdel.savesome.models.Expense;
+import thijszijdel.savesome.models.ExpenseDisplay;
 
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class ExpenseConnection implements Connection {
 
-    private final ExpensesData data = new ExpensesData();
+    private final ExpensesData data  = new ExpensesData();
+    private final ExpenseDisplay dsp = new ExpenseDisplay();
 
     private ArrayList<Expense> expensesList = new ArrayList<>();
 
@@ -29,6 +39,11 @@ public class ExpenseConnection implements Connection {
         }
     }
 
+    /**
+     * Method for converting the resultSet to a usable arrayList on initialize
+     * @return ArrayList Expenses (this)
+     * @throws SQLException resultSet
+     */
     private ArrayList<Expense> convertToExpenses() throws SQLException{
         ArrayList<Expense> list = new ArrayList<>();
 
@@ -36,7 +51,7 @@ public class ExpenseConnection implements Connection {
 
         while ( resultSet.next() ){
             String id = "1";
-            //resultSet.getString("idCategory");
+           // resultSet.getString("idCategory");
             String name = resultSet.getString("name");
             String description = resultSet.getString("description");
             double amount = resultSet.getDouble("amount");
@@ -45,22 +60,26 @@ public class ExpenseConnection implements Connection {
             int subCategoryFk = resultSet.getInt("subCategoryFk");
             int balanceFk = resultSet.getInt("balanceFk");
 
-
             list.add(new Expense(id, name, description, amount, date, time, subCategoryFk , balanceFk));
         }
-
 
         return list;
     }
 
+    /**
+     * Getter for the expenses list
+     * @return ArrayList of expenses
+     */
     public ArrayList<Expense> getExpensesList() {
         return expensesList;
     }
 
+    /**
+     * Refreshing the connection and data
+     */
     @Override
     public void refreshConnection() {
         data.refreshData();
-
         try {
             expensesList = convertToExpenses();
         } catch (SQLException e){
@@ -68,17 +87,61 @@ public class ExpenseConnection implements Connection {
         }
     }
 
-    public ArrayList<HBox> getExpenseBoxes() {
 
+    /**
+     * Getter for getting the expenses in display format
+     * Note: no sorting/ filtering is yet implemented
+     * @return styled HBoxes of expenses
+     */
+    public ArrayList<HBox> getExpenseDisplays(){
+        ArrayList<HBox> boxes = new ArrayList<>();
 
-        //create the boxen
-        //createHBoxExpenseDisplay(Expense);
-        return null;
+        for (Expense expense : this.getExpensesList()) {
+
+            //Get the almost completed expense display
+            HBox box = dsp.getExpenseDisplay(expense);
+            box.getStyleClass().add("CellPadding");
+
+            //Setup for the indicator dot
+            Circle indicator = getIndicatorCircle(expense);
+
+            box.setOnMouseEntered(t -> {
+                if (expense.isNegative())
+                    indicator.setFill(Color.web(Settings.getAlertColorD()));
+                else
+                    indicator.setFill(Color.web(Settings.getSuccesColor()));
+            });
+
+            box.setOnMouseExited(t -> {
+                indicator.setFill(Color.web(expense.getSubCategory().getColor()));
+            });
+
+            box.getChildren().add(indicator);
+            boxes.add(box);
+        }
+        return boxes;
     }
 
+    // [Optional]
+    //            ImageView imgView = new ImageView( new Image("/images/SaveSome.png") );
+    //
+    //            imgView.maxHeight(25);
+    //            imgView.setFitHeight(25);
+    //
+    //            imgView.maxWidth(25);
+    //            imgView.setFitWidth(25);
 
+    /**
+     * Get the indicator dot (circle)
+     * @param expense for the right color
+     * @return Circle indicator
+     */
+    private Circle getIndicatorCircle(Expense expense) {
+        Circle circle = new Circle(5, 5,5);
+        circle.setFill(Color.web(expense.getSubCategory().getColor()));
 
+        circle.setStyle("-fx-stroke: darkgrey");
 
-            //with connection to categories
-    //createHBoxExpenseDisplay
+        return circle;
+    }
 }
