@@ -26,8 +26,7 @@ Install and configure an SQL host.
 I used SQL Workbench's local host to run the database
 Note: this will probably changed to a embedded sql db or IO System.
 ```
-
-
+ 
 
 ### Installing
 
