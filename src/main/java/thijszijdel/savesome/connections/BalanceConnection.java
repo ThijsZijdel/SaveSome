@@ -128,7 +128,7 @@ public class BalanceConnection implements Connection{
 
         display.setOnMousePressed((MouseEvent event) -> {
 
-             if (event.isPrimaryButtonDown() && event.getClickCount() == 2) {
+             if (event.isPrimaryButtonDown()) {
                  Node item = ((Node) event.getTarget() ).getParent();
 
 
