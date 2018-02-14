@@ -1,6 +1,7 @@
 package thijszijdel.savesome.controllers;
 
 import com.jfoenix.controls.JFXListView;
+import com.jfoenix.controls.JFXProgressBar;
 import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,6 +11,7 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import thijszijdel.savesome.MainApp;
+import thijszijdel.savesome.models.Budget;
 
 
 import java.net.URL;
@@ -25,8 +27,10 @@ public class Expenses implements Initializable {
 
     @FXML Label monthYear;
     @FXML Label label;
+    @FXML Label spend, spend_budget, description;
     @FXML JFXListView expensesList;
 
+    @FXML JFXProgressBar indicatorBar;
     /**
      * Getter for the instance of this class
      *
@@ -44,6 +48,21 @@ public class Expenses implements Initializable {
         return instance;
     }
 
+    private void initializeBudget(){
+        Budget budget = MainApp.getBudgetConnection().getMainBudget();
+        double left = budget.getAmountLeft();
+        double start = budget.getAmountStart();
+
+        spend_budget.setText("$"+Double.toString(left)+" / $"+Double.toString(start));
+        spend.setText("$"+Double.toString(left));
+
+        monthYear.setText(budget.getDisplayName());
+        description.setText(budget.getDescription());
+
+        double perc =   ((left - start) / (double)start);
+        System.out.println((1+perc)+",,,,,,");
+        indicatorBar.setProgress((1+perc));
+    }
 
     /**
      * Initialize method for the home controller class
@@ -60,6 +79,7 @@ public class Expenses implements Initializable {
         MainApp.getInstance().openView("/FXML/Input.fxml",  MainApp.getInputStage() );
 
         initializeExpensesList();
+        initializeBudget();
     }
 
     /**

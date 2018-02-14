@@ -156,6 +156,8 @@ public class MainApp extends Application {
         return expenseConnection;
     }
 
+    private static final BudgetConnection budgetConnection = new BudgetConnection();
+    public static BudgetConnection getBudgetConnection() { return budgetConnection; }
     /**
      * For opening new stages / pop ups
      *

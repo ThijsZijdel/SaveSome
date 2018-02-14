@@ -92,7 +92,7 @@ public class Home implements Initializable {
 
         MainApp.setAppMessage("Home screen is loaded.");
 
-        setView("/FXML/Input.fxml");
+        setView("/FXML/Expenses.fxml");
     }
 
     /**
