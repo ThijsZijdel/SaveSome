@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -29,7 +30,7 @@ public class Expenses implements Initializable {
     @FXML Label label;
     @FXML Label spend, spend_budget, description;
     @FXML JFXListView expensesList;
-
+    @FXML ProgressBar bar1, bar2, bar3;
     @FXML JFXProgressBar indicatorBar;
     /**
      * Getter for the instance of this class
@@ -91,6 +92,7 @@ public class Expenses implements Initializable {
         expensesList.getSelectionModel().selectedItemProperty().addListener(
                 (ChangeListener<HBox>) (ov, old_val, new_val) -> {
                     label.setText(new_val.toString());
+                    MainApp.setAppMessage("Expense selected, value: "+new_val.toString());
                 });
 
         expensesList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);

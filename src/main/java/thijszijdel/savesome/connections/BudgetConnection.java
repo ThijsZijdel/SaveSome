@@ -30,18 +30,10 @@ public class BudgetConnection implements Connection {
         }
     }
 
-    private Budget getMainBudgetFromList() {
-        for (Budget budget : this.budgetsList)
-            if (budget.getId() == mainBudgetId)
-                return budget;
-        MainApp.setAppMessage("No main budget found");
-        return null;
-    }
-
     /**
      * Method for converting the resultSet to a usable arrayList on initialize
      *
-     * @return ArrayList Expenses (this)
+     * @return ArrayList Budgets (this)
      * @throws SQLException resultSet
      */
     private ArrayList<Budget> convertToBudgets() throws SQLException {
@@ -62,8 +54,6 @@ public class BudgetConnection implements Connection {
             String name = resultSet.getString("name");
 
 
-
-
             list.add(new Budget(id, typeFk, repeatingFk, amountLeft, amountStart, description , displayName, startDate, endDate, name));
         }
 
@@ -73,7 +63,7 @@ public class BudgetConnection implements Connection {
     /**
      * Getter for the expenses list
      *
-     * @return ArrayList of expenses
+     * @return ArrayList of budgets
      */
     public ArrayList<Budget> getBudgetList() {
         return budgetsList;
@@ -90,6 +80,14 @@ public class BudgetConnection implements Connection {
         } catch (SQLException e) {
             MainApp.log(e);
         }
+    }
+
+    private Budget getMainBudgetFromList() {
+        for (Budget budget : this.budgetsList)
+            if (budget.getId() == mainBudgetId)
+                return budget;
+        MainApp.setAppMessage("No main budget found");
+        return null;
     }
 
     public Budget getMainBudget() {
