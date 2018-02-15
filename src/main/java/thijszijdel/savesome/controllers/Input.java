@@ -1,9 +1,14 @@
 package thijszijdel.savesome.controllers;
 
 import com.jfoenix.controls.*;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import thijszijdel.savesome.MainApp;
 import thijszijdel.savesome.connections.BalanceConnection;
@@ -11,6 +16,7 @@ import thijszijdel.savesome.connections.CategoryConnection;
 import thijszijdel.savesome.interfaces.State;
 
 
+import java.awt.event.ActionListener;
 import java.net.URL;
 import java.sql.SQLException;
 import java.sql.Time;
@@ -59,7 +65,7 @@ public class Input implements Initializable, State {
 
         subCategory.getItems().addAll(categories.getSubCategoryNameList());
 
-
+        setCategoryListner();
 
         balance.getItems().addAll(balances.getBalanceComboBoxList());
 
@@ -77,6 +83,14 @@ public class Input implements Initializable, State {
         balance.setValue(balances.getBalanceComboBoxList().get(0));
 
         setShowing(true);
+    }
+
+    private void setCategoryListner() {
+        mainCategory.valueProperty().addListener((ChangeListener<String>) (object, valBefore, valAfter) -> {
+            System.out.println("object: "+object);
+            System.out.println("valBefore: "+valBefore);
+            System.out.println("valAfter: "+valAfter);
+        });
     }
 
     /**

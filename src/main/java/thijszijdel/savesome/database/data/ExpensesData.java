@@ -10,7 +10,7 @@ public class ExpensesData implements Data{
 
 
     /**
-     * Constructor for the database connection for category data
+     * Constructor for the database connection for expenses data
      */
     public ExpensesData(){
         try {

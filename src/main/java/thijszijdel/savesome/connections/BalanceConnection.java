@@ -1,12 +1,16 @@
 package thijszijdel.savesome.connections;
 
+import com.jfoenix.controls.JFXRippler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import thijszijdel.savesome.MainApp;
 import thijszijdel.savesome.database.data.BalanceData;
 import thijszijdel.savesome.models.Balance;
@@ -19,7 +23,7 @@ import java.util.ArrayList;
 public class BalanceConnection implements Connection{
 
     private final BalanceData data = new BalanceData();
-    private ArrayList<VBox> balanceDisplays = new ArrayList<>();
+    private ArrayList<JFXRippler> balanceDisplays = new ArrayList<>();
     private ArrayList<Balance> balances = new ArrayList<>();
 
     private final String SPACING = "     ";
@@ -86,11 +90,11 @@ public class BalanceConnection implements Connection{
      *
      * @return array of balance vBoxes
      */
-    private ArrayList<VBox> generateBalanceDisplays() {
-        ArrayList<VBox> displays = new ArrayList<>();
+    private ArrayList<JFXRippler> generateBalanceDisplays() {
+        ArrayList<JFXRippler> displays = new ArrayList<>();
 
         for (Balance balance : balances){
-            displays.add(display(balance));
+            displays.add(new JFXRippler(display(balance)));
         }
 
         return displays;
@@ -128,7 +132,7 @@ public class BalanceConnection implements Connection{
 
         display.setOnMousePressed((MouseEvent event) -> {
 
-             if (event.isPrimaryButtonDown() && event.getClickCount() == 2) {
+             if (event.isPrimaryButtonDown()) {
                  Node item = ((Node) event.getTarget() ).getParent();
 
 
@@ -140,11 +144,10 @@ public class BalanceConnection implements Connection{
          });
 
         display.getChildren().addAll(amount, name);
-
         return display;
     }
 
-    public ArrayList<VBox> getAllBalanceDisplays() {
+    public ArrayList<JFXRippler> getAllBalanceDisplays() {
         return balanceDisplays;
     }
 

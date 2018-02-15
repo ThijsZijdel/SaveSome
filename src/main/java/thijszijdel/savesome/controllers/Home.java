@@ -36,7 +36,7 @@ public class Home implements Initializable {
 
     @FXML Label chartLabel;
 
-    @FXML AnchorPane topLeft;
+    @FXML AnchorPane topLeft,topRight;
 
     /**
      * Initializing method for the Home view
@@ -92,7 +92,8 @@ public class Home implements Initializable {
 
         MainApp.setAppMessage("Home screen is loaded.");
 
-        setView("/FXML/Input.fxml");
+        setView("/FXML/Expenses.fxml", topLeft);
+        setView("/FXML/Income.fxml", topRight);
     }
 
     /**
@@ -101,7 +102,7 @@ public class Home implements Initializable {
      *
      * @param viewLink FXML link to the view
      */
-    private void setView(String viewLink) {
+    private void setView(String viewLink, AnchorPane location) {
         try {
             Parent fxmlView = FXMLLoader.load(MainApp.class.getResource(viewLink));
 
@@ -111,7 +112,7 @@ public class Home implements Initializable {
             Node node;
             node = (Node)fxmlView;
 
-            topLeft.getChildren().add(node);
+            location.getChildren().add(node);
         } catch (IOException e) {
             MainApp.log(e);
         }
@@ -127,8 +128,14 @@ public class Home implements Initializable {
     private void getChartSelection(MouseEvent event ) {
         for (final PieChart.Data data : chart.getData()) {
             data.getNode().addEventHandler(MouseEvent.MOUSE_PRESSED,
-                e -> chartLabel.setText(String.valueOf(data.getPieValue()) + "%"));
+                e -> chartSelected(data));
         }
+    }
+
+    private void chartSelected(PieChart.Data data) {
+        chartLabel.setText(String.valueOf(data.getPieValue()) + "%");
+        MainApp.setAppMessage(String.valueOf(data.getPieValue()) + "% spend on "+data.getName());
+
     }
 
 }

@@ -11,8 +11,8 @@
    <children>
       <JFXListView fx:id="expensesList" layoutX="27.0" layoutY="111.0" minWidth="425.0" prefHeight="462.0" prefWidth="460.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="111.0" />
       <Label fx:id="label" layoutX="518.0" layoutY="103.0" text="Label" />
-      <JFXProgressBar fx:id="indicatorBar" layoutX="27.0" layoutY="88.0" prefHeight="18.0" prefWidth="460.0" progress="0.62" />
-      <Label layoutX="29.0" layoutY="66.0" text="BULK BUDGET" />
+      <JFXProgressBar fx:id="indicatorBar" layoutX="27.0" layoutY="88.0" prefHeight="18.0" prefWidth="460.0" progress="0.0" />
+      <Label fx:id="description" layoutX="29.0" layoutY="66.0" text="BULK BUDGET" />
       <Label fx:id="monthYear" layoutX="28.0" layoutY="21.0" text="Februari 2018">
          <font>
             <Font size="27.0" />
