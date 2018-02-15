@@ -18,6 +18,8 @@
 *.tar.gz
 *.rar
 
+.idea
+idea
 
 hs_err_pid*
 src/main/resources/.DS_Store
