@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.StackedBarChart?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
@@ -14,14 +14,6 @@
             <Font size="19.0" />
          </font>
       </Label>
-      <BarChart layoutY="69.0" prefHeight="331.0" prefWidth="600.0">
-        <xAxis>
-          <CategoryAxis side="BOTTOM" />
-        </xAxis>
-        <yAxis>
-          <NumberAxis side="LEFT" />
-        </yAxis>
-      </BarChart>
       <Label fx:id="spent" layoutX="507.0" layoutY="52.0" text="\$3.203,00" />
       <Label fx:id="income" layoutX="386.0" layoutY="52.0" text="\$3.203,00" />
       <Label layoutX="336.0" layoutY="52.0" text="Earned:" textFill="#a8a8a8" />
@@ -33,5 +25,13 @@
          </font>
       </Label>
       <Label fx:id="income1" layoutX="41.0" layoutY="52.0" text="August 2018" textFill="#1284ff" />
+      <StackedBarChart fx:id="incomeChart" layoutY="91.0" prefHeight="319.0" prefWidth="600.0">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </StackedBarChart>
    </children>
 </AnchorPane>

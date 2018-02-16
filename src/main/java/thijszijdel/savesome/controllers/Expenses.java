@@ -61,7 +61,6 @@ public class Expenses implements Initializable {
         description.setText(budget.getDescription());
 
         double perc =   ((left - start) / (double)start);
-        System.out.println((1+perc)+",,,,,,");
         indicatorBar.setProgress((1+perc));
     }
 
