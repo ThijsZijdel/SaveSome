@@ -30,7 +30,6 @@ public class Expenses implements Initializable {
     @FXML Label label;
     @FXML Label spend, spend_budget, description;
     @FXML JFXListView expensesList;
-    @FXML ProgressBar bar1, bar2, bar3;
     @FXML JFXProgressBar indicatorBar;
     /**
      * Getter for the instance of this class
