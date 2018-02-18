@@ -4,19 +4,29 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.*;
+import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
+import thijszijdel.savesome.ui.OverviewChart;
 
 import java.net.URL;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class Income implements Initializable {
-   final CategoryAxis xAxis = new CategoryAxis();
-   final NumberAxis yAxis = new NumberAxis();
-    //final StackedBarChart<String, Number> sbc = new StackedBarChart<>(xAxis, yAxis);
-    final XYChart.Series<String, Number> incoming = new XYChart.Series<>();
-    final XYChart.Series<String, Number> outgoing = new XYChart.Series<>();
+    CategoryAxis xAxis = new CategoryAxis();
+    NumberAxis yAxis = new NumberAxis();
 
-    @FXML StackedBarChart incomeChart;
+    OverviewChart chart = new OverviewChart(xAxis, yAxis, this);
+
+    XYChart.Series<String, Number> incoming = new XYChart.Series<>();
+    XYChart.Series<String, Number> outgoing = new XYChart.Series<>();
+    XYChart.Series<String, Number> ended = new XYChart.Series<>();
+    @FXML
+    Pane pane;
+
+    @FXML
+    Label income, spent;
+
     /**
      * Initializing method for the Income view
      *
@@ -25,25 +35,42 @@ public class Income implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        incomeChart = new StackedBarChart(xAxis, yAxis);
 
+        yAxis.setLabel("Amount");
         xAxis.setLabel("Month");
+        xAxis.setCategories(FXCollections.observableArrayList(Arrays.asList("Jan", "Feb", "Mar")));
 
-        xAxis.setCategories(FXCollections.observableArrayList(
-                Arrays.asList("Jan", "Feb", "Mar")));
-        yAxis.setLabel("Value");
+
         incoming.setName("Incoming");
-        incoming.getData().add(new XYChart.Data("Jan", 25601.34));
-        incoming.getData().add(new XYChart.Data("Feb2", 20148.82));
-        incoming.getData().add(new XYChart.Data("Mar2", 10000));
-        outgoing.setName("Outgoing");
-        outgoing.getData().add(new XYChart.Data("Jan", -7401.85));
-        outgoing.getData().add(new XYChart.Data("Feb2", -1941.19));
-        outgoing.getData().add(new XYChart.Data("Mar2", -5263.37));
-        //Scene scene = new Scene(sbc, 800, 600);
-        //incomeChart.getXAxis().setLabel("Month");
-        //incomeChart.getYAxis().setLabel("Amount");
+        incoming.getData().add(new XYChart.Data("Jan", 750));
+        incoming.getData().add(new XYChart.Data("Feb", 500));
+        incoming.getData().add(new XYChart.Data("Mar", 1000));
 
-        incomeChart.getData().addAll(incoming, outgoing);
+        outgoing.setName("Outgoing");
+        outgoing.getData().add(new XYChart.Data("Jan", -500));
+        outgoing.getData().add(new XYChart.Data("Feb", -750));
+        outgoing.getData().add(new XYChart.Data("Mar", -500));
+
+        ended.setName("Ended up with");
+        ended.getData().add(new XYChart.Data<>("Jan",250));
+        ended.getData().add(new XYChart.Data<>("Feb",-250));
+        ended.getData().add(new XYChart.Data<>("Mar",500));
+
+        chart.getData().addAll(incoming, outgoing, ended);
+        chart.setLegendVisible(false);
+
+        chart.setMaxHeight(300);
+
+        pane.getChildren().clear();
+
+        pane.getChildren().setAll(chart);
+    }
+
+    public void setIncome(String income) {
+        this.income.setText(income);
+    }
+
+    public void setSpent(String spent) {
+        this.spent.setText(spent);
     }
 }
