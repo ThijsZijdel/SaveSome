@@ -66,8 +66,7 @@ jfx-combo-box label {
 
 
 .active-nav {
-    -fx-fill: red;
-    -fx-text-fill: red;
+    -fx-background-color: #00a8ff;
 }
 
 

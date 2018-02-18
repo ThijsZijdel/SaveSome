@@ -19,16 +19,42 @@ import java.util.ResourceBundle;
 
 public class Main implements Initializable {
 
+    /**
+     * link of the current view
+     */
     private String currentView;
 
-    //Create one instance of this class
+    /**
+     * Create one instance of this class
+     */
     private static Main instance = null;
 
+    /**
+     * main application view
+     * Location: between header & footer
+     */
     @FXML BorderPane mainView;
+
+    /**
+     * Balance displays
+     */
     @FXML HBox balance;
 
+    /**
+     * application information
+     * Location: footer
+     */
     @FXML TextField appInfo;
 
+    /**
+     * Main tool/ nav bar
+     * Location: header / top
+     */
+    @FXML ToolBar toolbar;
+
+    /**
+     * Array list of all the buttons in the toolbar
+     */
     private ArrayList<JFXButton> buttons = new ArrayList<>();
 
     /**
@@ -97,7 +123,6 @@ public class Main implements Initializable {
     }
 
 
-
     /**
      * Method for opening views based on the buttons name      (Navigation Bar!)
      * The name will be converted to the normal (/fxml/..) director path.
@@ -117,23 +142,21 @@ public class Main implements Initializable {
         if (!fileName.equals(currentView)){
 
             try {
+                //set the scene
                 setMainScene(linkBuilder.toString());
                 currentView = fileName;
 
-
-
+                //remove the active class from all the buttons
                 for (JFXButton butt : buttons)
                     butt.getStyleClass().remove("active-nav");
-                
+
+                //add it to the current button
                 ((JFXButton) e.getSource()).getStyleClass().add("active-nav");
             } catch (Exception exception) {
                 MainApp.log(exception);
             }
         }
     }
-
-    @FXML ToolBar toolbar;
-
 
 
     /**
@@ -148,10 +171,15 @@ public class Main implements Initializable {
     }
 
 
+    /**
+     * Main call for the refresh methods
+     * Called by: refresh button in the footer
+     * @param e on click
+     */
     @FXML
     private void refresh(Event e){
         MainApp.refresh();
-        MainApp.setAppMessage("Balances are reloaded.");
+        MainApp.setAppMessage("Application data is reloaded.");
     }
 
 }
