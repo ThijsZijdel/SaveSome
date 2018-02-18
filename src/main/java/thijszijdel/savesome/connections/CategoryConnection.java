@@ -1,5 +1,10 @@
 package thijszijdel.savesome.connections;
 
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -170,4 +175,6 @@ public class CategoryConnection implements Connection{
         MainApp.log(new Exception("no match"));
         return null;
     }
+
+
 }

@@ -37,7 +37,7 @@ public class Input implements Initializable, State {
 
     @FXML JFXTextField amount, name, description, sub1, date1;
 
-    @FXML JFXTimePicker time;
+    //@FXML JFXTimePicker time;
     @FXML JFXDatePicker date;
 
     @Override
@@ -51,8 +51,8 @@ public class Input implements Initializable, State {
 
         background.setStyle("-fx-background-color: "+ MainApp.config.getBackground());
 
-        time._24HourViewProperty().setValue(true);
-        time.setIs24HourView(true);
+//        time._24HourViewProperty().setValue(true);
+//        time.setIs24HourView(true);
 
 
 
@@ -130,11 +130,11 @@ public class Input implements Initializable, State {
 
 
         //time value test
-        Time timeValue = null;
+       // Time timeValue = null;
 
-        if (time.getValue() != null)
-            timeValue = Time.valueOf(time.getValue());
-            System.out.println(timeValue);
+//        if (time.getValue() != null)
+//            timeValue = Time.valueOf(time.getValue());
+//            System.out.println(timeValue);
 
     }
 
@@ -155,13 +155,13 @@ public class Input implements Initializable, State {
     public void insertExpense(){
         Time timeValue = null;
 
-        if (time.getValue() != null)
-            timeValue = Time.valueOf(time.getValue());
+//        if (time.getValue() != null)
+//            timeValue = Time.valueOf(time.getValue());
 
         try {
             MainApp.getConnection().executeUpdateQuery("INSERT INTO Expense " +
                     "(`name`, `description`, `amount`, `subcategoryFk`, `date`, `time`, `balanceFk`, `alreadyPaid`) VALUES " +
-                    "('" + name.getText() + "', '" + description.getText() + "', '" + Integer.parseInt(amount.getText()) + "', ' "+sub1.getText()+ " ', '"+date1.getText()+"', '" + timeValue + "', '1', '0');");
+                    "('" + name.getText() + "', '" + description.getText() + "', '" + Integer.parseInt(amount.getText()) + "', ' "+sub1.getText()+ " ', '"+date1.getText()+"', '       11:00', '1', '0');");
         } catch (Exception e){
             MainApp.log(e);
         }
