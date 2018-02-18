@@ -61,7 +61,7 @@ public class CategoryConnection implements Connection{
         ResultSet resultSet = data.getMainCategoryResultSet();
 
         while ( resultSet.next() ){
-            String id = resultSet.getString("idCategory");
+            int id = resultSet.getInt("idCategory");
             String name = resultSet.getString("name");
             String description = resultSet.getString("description");
 
@@ -98,6 +98,25 @@ public class CategoryConnection implements Connection{
         }
         return mainCatNameList;
     }
+    public ArrayList<String> setSubCategoryNameList(String mainCategoryName){
+        ArrayList<String> subCategoryNameList = new ArrayList<>();
+        int id = getMainCategoryId(mainCategoryName);
+        if (id != 0){
+            for (SubCategory subCat : this.subCategoryList)
+                if (subCat.getSubCategoryId()==id)
+                    subCategoryNameList.add(subCat.getName());
+        }
+        return subCategoryNameList;
+    }
+
+    private int getMainCategoryId(String mainCategoryName) {
+        for (Category mainCat : this.mainCategoryList){
+            if (mainCat.getName().equals(mainCategoryName))
+                return mainCat.getId();
+        }
+        return 0;
+    }
+
 
     public void setImage(){
 
