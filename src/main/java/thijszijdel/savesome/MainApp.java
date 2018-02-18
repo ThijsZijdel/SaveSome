@@ -125,6 +125,7 @@ public class MainApp extends Application {
         getBalanceConnection().refreshConnection();
         getCategoryConnection().refreshConnection();
         getExpenseConnection().refreshConnection();
+        getBudgetConnection().refreshConnection();
         System.out.println("-                   -");
     }
 

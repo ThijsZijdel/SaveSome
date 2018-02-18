@@ -26,7 +26,7 @@ public class BalanceConnection implements Connection{
     private ArrayList<JFXRippler> balanceDisplays = new ArrayList<>();
     private ArrayList<Balance> balances = new ArrayList<>();
 
-    private final String SPACING = "     ";
+    private final String SPACING = " | ";
     /**
      * Constructor for the balance connection
      */

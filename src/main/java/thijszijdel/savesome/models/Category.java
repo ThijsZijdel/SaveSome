@@ -1,9 +1,12 @@
 package thijszijdel.savesome.models;
 
-public class Category {
-    private String categoryId, name, description;
+import java.util.ArrayList;
 
-    public Category(String categoryId, String name, String description){
+public class Category {
+    private int categoryId;
+    private String name, description;
+
+    public Category(int categoryId, String name, String description){
         this.categoryId = categoryId;
         this.name = name;
         this.description = description;
@@ -15,5 +18,9 @@ public class Category {
 
     public String getDescription() {
         return description;
+    }
+
+    public int getId() {
+        return categoryId;
     }
 }
