@@ -35,7 +35,7 @@ public class Input implements Initializable, State {
 
     @FXML JFXCheckBox paid, today, repeat;
 
-    @FXML JFXTextField amount, name, description;
+    @FXML JFXTextField amount, name, description, sub1, date1;
 
     @FXML JFXTimePicker time;
     @FXML JFXDatePicker date;
@@ -44,8 +44,8 @@ public class Input implements Initializable, State {
     public void initialize(URL url, ResourceBundle rb) {
 
         //**   WILL BE MOVED   **/
-        CategoryConnection categories = new CategoryConnection();
-        BalanceConnection balances = new BalanceConnection();
+
+       // BalanceConnection balances = new BalanceConnection();
 
 
 
@@ -57,17 +57,17 @@ public class Input implements Initializable, State {
 
 
 
-        mainCategory.getItems().addAll(categories.getMainCategoryNameList());
+        mainCategory.getItems().addAll(MainApp.getCategoryConnection().getMainCategoryNameList());
 
         mainCategory.setStyle("-fx-text-fill : #e4e4e4");
         mainCategory.setStyle("-fx-fill: #e4e4e4");
 
 
-        subCategory.getItems().addAll(categories.getSubCategoryNameList());
+
 
         setCategoryListner();
 
-        balance.getItems().addAll(balances.getBalanceComboBoxList());
+        balance.getItems().addAll(MainApp.getBalanceConnection().getBalanceComboBoxList());
 
 
 
@@ -80,7 +80,7 @@ public class Input implements Initializable, State {
 
         MainApp.setAppMessage("Input screen is loaded.");
 
-        balance.setValue(balances.getBalanceComboBoxList().get(0));
+        balance.setValue(MainApp.getBalanceConnection().getBalanceComboBoxList().get(0));
 
         setShowing(true);
     }
@@ -90,6 +90,8 @@ public class Input implements Initializable, State {
             System.out.println("object: "+object);
             System.out.println("valBefore: "+valBefore);
             System.out.println("valAfter: "+valAfter);
+            subCategory.getItems().clear();
+            subCategory.getItems().addAll(MainApp.getCategoryConnection().setSubCategoryNameList(mainCategory.getValue().toString()));
         });
     }
 
@@ -159,7 +161,7 @@ public class Input implements Initializable, State {
         try {
             MainApp.getConnection().executeUpdateQuery("INSERT INTO Expense " +
                     "(`name`, `description`, `amount`, `subcategoryFk`, `date`, `time`, `balanceFk`, `alreadyPaid`) VALUES " +
-                    "('" + name.getText() + "', '" + description.getText() + "', '" + Integer.parseInt(amount.getText()) + "', '1', '2018-02-02', '" + timeValue + "', '1', '0');");
+                    "('" + name.getText() + "', '" + description.getText() + "', '" + Integer.parseInt(amount.getText()) + "', ' "+sub1.getText()+ " ', '"+date1.getText()+"', '" + timeValue + "', '1', '0');");
         } catch (Exception e){
             MainApp.log(e);
         }

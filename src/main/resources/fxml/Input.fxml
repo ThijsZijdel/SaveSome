@@ -2,7 +2,6 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXCheckBox?>
-<?import com.jfoenix.controls.JFXColorPicker?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTextField?>
@@ -33,7 +32,6 @@
    <children>
       <Pane fx:id="background" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="5" GridPane.rowSpan="5">
          <children>
-            <JFXColorPicker layoutX="53.0" layoutY="393.0" />
             <JFXTimePicker fx:id="time" defaultColor="#00a8ff" layoutX="200.0" layoutY="183.0" />
             <JFXCheckBox fx:id="today" checkedColor="#00a8ff" layoutX="14.0" layoutY="174.0" onAction="#setToday" selected="true" text="today" />
             <JFXTextField fx:id="description" focusColor="#00a8ff" labelFloat="true" layoutX="1.0" layoutY="250.0" maxHeight="35.0" maxWidth="366.0" minHeight="25.0" minWidth="150.0" prefHeight="30.0" prefWidth="366.0" promptText="Description" unFocusColor="#0097e6" />
@@ -45,6 +43,8 @@
                </children>
             </HBox>
             <JFXButton layoutX="247.0" layoutY="366.0" onAction="#insertExpense" text="insertExpense" />
+            <JFXTextField fx:id="date1" focusColor="#00a8ff" labelFloat="true" layoutY="395.0" maxHeight="35.0" maxWidth="250.0" minHeight="25.0" minWidth="150.0" prefHeight="30.0" prefWidth="200.0" promptText="date" unFocusColor="#0097e6" />
+            <JFXTextField fx:id="sub1" focusColor="#00a8ff" labelFloat="true" layoutX="71.0" layoutY="374.0" maxHeight="35.0" maxWidth="250.0" minHeight="25.0" minWidth="150.0" prefHeight="30.0" prefWidth="200.0" promptText="subcatkey" unFocusColor="#0097e6" />
          </children>
       </Pane>
       <JFXTextField fx:id="amount" focusColor="#00a8ff" labelFloat="true" maxHeight="35.0" maxWidth="250.0" minHeight="25.0" minWidth="150.0" prefHeight="30.0" prefWidth="200.0" promptText="Amount" unFocusColor="#0097e6" GridPane.columnIndex="1" GridPane.rowIndex="1" />
