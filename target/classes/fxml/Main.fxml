@@ -30,7 +30,7 @@
             <RowConstraints maxHeight="50.0" minHeight="29.0" prefHeight="36.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <ToolBar maxHeight="40.0" minHeight="40.0" minWidth="600.0" prefHeight="40.0" prefWidth="966.0" style="-fx-background-color: #2f3640;" GridPane.columnSpan="2">
+            <ToolBar fx:id="toolbar" maxHeight="40.0" minHeight="40.0" minWidth="600.0" prefHeight="40.0" prefWidth="966.0" style="-fx-background-color: #2f3640;" GridPane.columnSpan="2">
               <items>
                   <JFXButton fx:id="btnHome" defaultButton="true" onAction="#headerMainLink" prefHeight="18.0" prefWidth="56.0" ripplerFill="#00aeff" style="-fx-background-color: #353b48;" text="home" textFill="WHITE">
                      <tooltip>
