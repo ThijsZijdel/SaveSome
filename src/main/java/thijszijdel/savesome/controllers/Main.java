@@ -7,12 +7,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToolBar;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import thijszijdel.savesome.MainApp;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class Main implements Initializable {
@@ -27,6 +29,7 @@ public class Main implements Initializable {
 
     @FXML TextField appInfo;
 
+    private ArrayList<JFXButton> buttons = new ArrayList<>();
 
     /**
      * Initialize method for the home controller class
@@ -45,6 +48,9 @@ public class Main implements Initializable {
         }
 
 
+        for (Object obj : toolbar.getItems())
+            if (obj instanceof JFXButton)
+                buttons.add((JFXButton) obj);
 
 
         initializeBalance();
@@ -113,11 +119,20 @@ public class Main implements Initializable {
             try {
                 setMainScene(linkBuilder.toString());
                 currentView = fileName;
+
+
+
+                for (JFXButton butt : buttons)
+                    butt.getStyleClass().remove("active-nav");
+                
+                ((JFXButton) e.getSource()).getStyleClass().add("active-nav");
             } catch (Exception exception) {
                 MainApp.log(exception);
             }
         }
     }
+
+    @FXML ToolBar toolbar;
 
 
 
