@@ -1,16 +1,14 @@
-package thijszijdel.savesome.database.data;
+package thijszijdel.savesome.settings;
 
 import thijszijdel.savesome.MainApp;
 import thijszijdel.savesome.database.JDBC;
-import thijszijdel.savesome.models.Balance;
-import thijszijdel.savesome.models.Setting;
+import thijszijdel.savesome.interfaces.Data;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.HashMap;
 
-public class SettingsData implements Data{
+public class SettingsData implements Data {
 
     private ResultSet settingResultSet;
 

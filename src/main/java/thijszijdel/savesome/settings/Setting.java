@@ -1,4 +1,4 @@
-package thijszijdel.savesome.models;
+package thijszijdel.savesome.settings;
 
 public class Setting {
     private int id;

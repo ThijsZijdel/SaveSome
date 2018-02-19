@@ -7,12 +7,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import thijszijdel.savesome.MainApp;
-import thijszijdel.savesome.models.Budget;
+import thijszijdel.savesome.connections.Budget.Budget;
 
 
 import java.net.URL;

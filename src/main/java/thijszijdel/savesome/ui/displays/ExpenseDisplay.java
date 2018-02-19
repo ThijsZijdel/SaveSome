@@ -1,9 +1,10 @@
-package thijszijdel.savesome.models;
+package thijszijdel.savesome.ui.displays;
 
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import thijszijdel.savesome.connections.Expense.Expense;
 import thijszijdel.savesome.connections.Settings;
 
 import java.sql.Date;

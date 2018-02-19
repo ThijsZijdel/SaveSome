@@ -1,29 +1,17 @@
-package thijszijdel.savesome.connections;
+package thijszijdel.savesome.connections.Category;
 
-import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import thijszijdel.savesome.MainApp;
-import thijszijdel.savesome.database.data.CategoryData;
-import thijszijdel.savesome.models.Category;
-import thijszijdel.savesome.models.SubCategory;
+import thijszijdel.savesome.interfaces.Connection;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
-import java.net.URL;
-import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class CategoryConnection implements Connection{
+public class CategoryConnection implements Connection {
 
     private CategoryData data = new CategoryData();
 

@@ -1,4 +1,4 @@
-package thijszijdel.savesome.database.data;
+package thijszijdel.savesome.interfaces;
 
 import thijszijdel.savesome.MainApp;
 import thijszijdel.savesome.database.JDBC;

@@ -1,4 +1,4 @@
-package thijszijdel.savesome.models;
+package thijszijdel.savesome.connections.Category;
 
 
 import javafx.scene.image.Image;

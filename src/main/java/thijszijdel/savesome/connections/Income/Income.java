@@ -1,9 +1,9 @@
-package thijszijdel.savesome.models;
+package thijszijdel.savesome.connections.Income;
 
 import thijszijdel.savesome.MainApp;
+import thijszijdel.savesome.connections.Balance.Balance;
 
 import java.sql.Date;
-import java.sql.Time;
 
 public class Income {
     private int incomeId;

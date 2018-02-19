@@ -1,4 +1,4 @@
-package thijszijdel.savesome.connections;
+package thijszijdel.savesome.interfaces;
 
 public interface Connection {
 

@@ -1,8 +1,7 @@
-package thijszijdel.savesome.connections;
+package thijszijdel.savesome.connections.Budget;
 
 import thijszijdel.savesome.MainApp;
-import thijszijdel.savesome.database.data.BudgetData;
-import thijszijdel.savesome.models.Budget;
+import thijszijdel.savesome.interfaces.Connection;
 
 import java.sql.Date;
 import java.sql.ResultSet;

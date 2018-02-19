@@ -1,4 +1,4 @@
-package thijszijdel.savesome.ui;
+package thijszijdel.savesome.ui.charts;
 
 import javafx.event.ActionEvent;
 import javafx.scene.chart.Axis;

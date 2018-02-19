@@ -1,8 +1,7 @@
-package thijszijdel.savesome.connections;
+package thijszijdel.savesome.connections.Income;
 
 import thijszijdel.savesome.MainApp;
-import thijszijdel.savesome.database.data.IncomeData;
-import thijszijdel.savesome.models.Income;
+import thijszijdel.savesome.interfaces.Connection;
 
 import java.sql.Date;
 import java.sql.ResultSet;

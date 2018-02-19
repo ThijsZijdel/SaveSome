@@ -6,7 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.chart.*;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
-import thijszijdel.savesome.ui.OverviewChart;
+import thijszijdel.savesome.ui.charts.OverviewChart;
 
 import java.net.URL;
 import java.util.Arrays;

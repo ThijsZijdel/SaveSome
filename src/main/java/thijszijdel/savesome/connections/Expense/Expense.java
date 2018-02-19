@@ -1,6 +1,8 @@
-package thijszijdel.savesome.models;
+package thijszijdel.savesome.connections.Expense;
 
 import thijszijdel.savesome.MainApp;
+import thijszijdel.savesome.connections.Balance.Balance;
+import thijszijdel.savesome.connections.Category.SubCategory;
 
 import java.sql.Date;
 import java.sql.Time;

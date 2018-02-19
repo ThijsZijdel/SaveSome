@@ -1,8 +1,8 @@
 package thijszijdel.savesome.connections;
 
 import thijszijdel.savesome.constants.Theme;
-import thijszijdel.savesome.database.data.SettingsData;
-import thijszijdel.savesome.models.Balance;
+import thijszijdel.savesome.settings.SettingsData;
+import thijszijdel.savesome.connections.Balance.Balance;
 
 public class Settings {
 

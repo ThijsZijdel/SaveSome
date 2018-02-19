@@ -1,23 +1,17 @@
-package thijszijdel.savesome.connections;
+package thijszijdel.savesome.connections.Expense;
 
-import javafx.event.EventHandler;
-import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import thijszijdel.savesome.MainApp;
-import thijszijdel.savesome.database.data.ExpensesData;
-import thijszijdel.savesome.models.Expense;
-import thijszijdel.savesome.models.ExpenseDisplay;
+import thijszijdel.savesome.interfaces.Connection;
+import thijszijdel.savesome.connections.Settings;
+import thijszijdel.savesome.ui.displays.ExpenseDisplay;
 
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class ExpenseConnection implements Connection {
