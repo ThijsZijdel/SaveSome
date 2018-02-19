@@ -10,6 +10,11 @@ import javafx.scene.image.Image;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import thijszijdel.savesome.connections.*;
+import thijszijdel.savesome.connections.Balance.BalanceConnection;
+import thijszijdel.savesome.connections.Budget.BudgetConnection;
+import thijszijdel.savesome.connections.Category.CategoryConnection;
+import thijszijdel.savesome.connections.Expense.ExpenseConnection;
+import thijszijdel.savesome.connections.Income.IncomeConnection;
 import thijszijdel.savesome.constants.Theme;
 import thijszijdel.savesome.controllers.Expenses;
 import thijszijdel.savesome.controllers.Main;
@@ -180,6 +185,7 @@ public class MainApp extends Application {
             stage.setTitle(APP_NAME);
             stage.setAlwaysOnTop(true);
             stage.setScene(scene);
+            stage.getIcons().add(logo);
             stage.show();
 
 

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -9,7 +11,6 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
-
 
 <JFXTabPane minHeight="400.0" minWidth="500.0" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="thijszijdel.savesome.controllers.Settings">
    <tabs>
@@ -24,18 +25,32 @@
                <children>
                   <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="132.0" minWidth="10.0" prefWidth="78.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="448.0" minWidth="10.0" prefWidth="413.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="160.0" minWidth="10.0" prefWidth="160.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                      </columnConstraints>
                      <rowConstraints>
                         <RowConstraints maxHeight="415.611572265625" minHeight="10.0" prefHeight="236.44708251953125" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="415.611572265625" minHeight="10.0" prefHeight="236.44708251953125" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="415.611572265625" minHeight="10.0" prefHeight="236.44708251953125" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="233.55291748046875" minHeight="10.0" prefHeight="233.55291748046875" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <Pane fx:id="mainCatPane" prefHeight="194.0" prefWidth="350.0" />
-                        <Pane fx:id="subCatPane" prefHeight="194.0" prefWidth="350.0" GridPane.rowIndex="1" />
-                        <JFXTextField fx:id="search" promptText="Search..." GridPane.columnIndex="1" />
-                        <Label fx:id="hits" text="0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Pane fx:id="mainCatPane" prefHeight="194.0" prefWidth="350.0" GridPane.columnIndex="1" GridPane.rowSpan="2" />
+                        <Pane fx:id="subCatPane" prefHeight="194.0" prefWidth="350.0" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.rowSpan="2" />
+                        <JFXTextField fx:id="search" focusColor="#08b3e7" labelFloat="true" promptText="Search" GridPane.columnIndex="2" />
+                        <Label fx:id="hitsMain" text="0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets right="25.0" top="15.0" />
+                           </GridPane.margin></Label>
+                        <Label fx:id="hitsSub" text="0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+                           <padding>
+                              <Insets right="25.0" top="15.0" />
+                           </padding>
+                        </Label>
+                        <JFXButton ripplerFill="WHITE" style="-fx-background-color: #eee;" text="clear selection" GridPane.columnIndex="3" />
+                        <Pane fx:id="categoryInput" prefHeight="194.0" prefWidth="350.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="1" GridPane.rowSpan="3" />
                      </children>
                   </GridPane>
                </children>
