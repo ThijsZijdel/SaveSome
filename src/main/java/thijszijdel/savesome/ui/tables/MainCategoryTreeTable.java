@@ -1,4 +1,4 @@
-package thijszijdel.savesome.ui;
+package thijszijdel.savesome.ui.tables;
 
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableColumn;
@@ -10,21 +10,15 @@ import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import thijszijdel.savesome.MainApp;
-import thijszijdel.savesome.models.Category;
+import thijszijdel.savesome.connections.Category.Category;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 public class MainCategoryTreeTable {
@@ -88,8 +82,8 @@ public class MainCategoryTreeTable {
                 Node item = ((Node) event.getTarget()).getParent();
                 System.out.println(item.toString()+ "<<<<<<<<");
                 MainApp.setAppMessage("Expense selected, value: "+categoriesTable.getSelectionModel().getSelectedItem().getValue().idCategory+" <<<");
-
-                linkedTable.filter(categoriesTable.getSelectionModel().getSelectedItem().getValue().idCategory.toString());
+                System.out.println("Filtered on: +"+categoriesTable.getSelectionModel().getSelectedItem().getValue().idCategory.getValue());
+                linkedTable.filter(categoriesTable.getSelectionModel().getSelectedItem().getValue().idCategory.getValue());
             }
         });
 
@@ -193,7 +187,11 @@ public class MainCategoryTreeTable {
      */
     private void getData(){
         for (Category cat : categoriesData)
-            categoryList.add(new RecursiveCat(String.valueOf(cat.getId()),cat.getName(),cat.getDescription()));
+            categoryList.add(new RecursiveCat(
+                    String.valueOf(cat.getId()),
+                    cat.getName().toLowerCase(),
+                    cat.getDescription().toLowerCase()
+            ));
     }
 
     /**
@@ -222,9 +220,9 @@ public class MainCategoryTreeTable {
     private void setupSearch(JFXTextField search){
         search.textProperty().addListener((o, oldVal, newVal)-> {
             categoriesTable.setPredicate(RecursiveCat ->
-                               RecursiveCat.getValue().descCategory.get().contains(newVal)
-                            || RecursiveCat.getValue().idCategory.get().contains(newVal)
-                            || RecursiveCat.getValue().nameCategory.get().contains(newVal));
+                               RecursiveCat.getValue().descCategory.get().contains(newVal.toLowerCase())
+                            || RecursiveCat.getValue().idCategory.get().contains(newVal.toLowerCase())
+                            || RecursiveCat.getValue().nameCategory.get().contains(newVal.toLowerCase()));
         });
 
     }

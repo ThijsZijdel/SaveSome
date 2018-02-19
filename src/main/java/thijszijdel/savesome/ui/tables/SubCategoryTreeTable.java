@@ -1,4 +1,4 @@
-package thijszijdel.savesome.ui;
+package thijszijdel.savesome.ui.tables;
 
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableColumn;
@@ -15,10 +15,9 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
-import javafx.scene.layout.Pane;
 import thijszijdel.savesome.MainApp;
 
-import thijszijdel.savesome.models.SubCategory;
+import thijszijdel.savesome.connections.Category.SubCategory;
 
 import java.util.ArrayList;
 
@@ -174,9 +173,9 @@ public class SubCategoryTreeTable {
                 categoryList.add(new RecursiveSubCat(
                         String.valueOf(cat.getSubCategoryId()),
                         String.valueOf(cat.getIdCategoryFk()),
-                        cat.getName(),
-                        cat.getDescription())
-                );
+                        cat.getName().toLowerCase(),
+                        cat.getDescription().toLowerCase()
+                ));
         }
 
         /**
@@ -204,16 +203,16 @@ public class SubCategoryTreeTable {
         private void setupSearch(JFXTextField search){
             search.textProperty().addListener((o, oldVal, newVal)-> {
                 categoriesTable.setPredicate(RecursiveSubCat ->
-                        RecursiveSubCat.getValue().descCategory.get().contains(newVal)
-                                || RecursiveSubCat.getValue().idCategory.get().contains(newVal)
-                                || RecursiveSubCat.getValue().nameCategory.get().contains(newVal));
+                                   RecursiveSubCat.getValue().descCategory.get().contains(newVal.toLowerCase())
+                                || RecursiveSubCat.getValue().idCategory.get().contains(newVal.toLowerCase())
+                                || RecursiveSubCat.getValue().nameCategory.get().contains(newVal.toLowerCase()));
             });
 
         }
 
         public void filter(String fk){
             categoriesTable.setPredicate(RecursiveSubCat ->
-                RecursiveSubCat.getValue().idCategory.get().contains(fk));
+                RecursiveSubCat.getValue().fkCategory.get().equals(fk));
         }
 
 
@@ -232,7 +231,7 @@ public class SubCategoryTreeTable {
          * RecursiveCategory class for the categories setup
          * Note: Strings are converted to StringProperties
          */
-        private class RecursiveSubCat extends RecursiveTreeObject<thijszijdel.savesome.ui.SubCategoryTreeTable.RecursiveSubCat> {
+        private class RecursiveSubCat extends RecursiveTreeObject<SubCategoryTreeTable.RecursiveSubCat> {
             StringProperty nameCategory;
             StringProperty descCategory;
             StringProperty idCategory;
