@@ -56,13 +56,12 @@ public class SubCategoryTreeTable {
          *
          * @param search    field for searching
          * @param hits      label for amount of hits
-         * @param location  where the table will be set
          */
-        public SubCategoryTreeTable(JFXTextField search, Label hits, Pane location){
+        public SubCategoryTreeTable(JFXTextField search, Label hits){
             setupColumns();
             setupEdit();
             getData();
-            setupTree(location);
+            setupTree();
 
             //if the params are passed, set them up
             if (search != null) setupSearch(search);
@@ -122,9 +121,9 @@ public class SubCategoryTreeTable {
             descCol.setOnEditCommit((
                     TreeTableColumn.CellEditEvent<RecursiveSubCat, String> t)->{
                 //TODO :: Update this record in db
-                System.out.println(( t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue() ).idCategory+" is the id");
-                System.out.println(t.getOldValue()+" <OLD   |   NEW>"+t.getNewValue());
-                ( t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue() ).descCategory.set(t.getNewValue());
+//                System.out.println(( t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue() ).idCategory+" is the id");
+//                System.out.println(t.getOldValue()+" <OLD   |   NEW>"+t.getNewValue());
+//                ( t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue() ).descCategory.set(t.getNewValue());
             });
 
 
@@ -135,9 +134,9 @@ public class SubCategoryTreeTable {
             nameCol.setOnEditCommit((
                     TreeTableColumn.CellEditEvent<RecursiveSubCat, String> t)->{
                 //TODO :: Update this record in db
-                System.out.println(( t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue() ).idCategory+" is the id");
-                System.out.println(t.getOldValue()+" <OLD   |   NEW>"+t.getNewValue());
-                ( t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue() ).nameCategory.set(t.getNewValue());
+//                System.out.println(( t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue() ).idCategory+" is the id");
+//                System.out.println(t.getOldValue()+" <OLD   |   NEW>"+t.getNewValue());
+//                ( t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue() ).nameCategory.set(t.getNewValue());
             });
 
 
@@ -148,9 +147,9 @@ public class SubCategoryTreeTable {
             fkCol.setOnEditCommit((
                     TreeTableColumn.CellEditEvent<RecursiveSubCat, String> t)->{
                 //TODO :: Update this record in db
-                System.out.println(( t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue() ).fkCategory+" is the id");
-                System.out.println(t.getOldValue()+" <OLD   |   NEW>"+t.getNewValue());
-                ( t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue() ).fkCategory.set(t.getNewValue());
+//                System.out.println(( t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue() ).fkCategory+" is the id");
+//                System.out.println(t.getOldValue()+" <OLD   |   NEW>"+t.getNewValue());
+//                ( t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue() ).fkCategory.set(t.getNewValue());
             });
 
 
@@ -160,9 +159,9 @@ public class SubCategoryTreeTable {
             idCol.setOnEditCommit((
                     TreeTableColumn.CellEditEvent<RecursiveSubCat, String> t)->{
                 //TODO :: Update this record in db
-                System.out.println(( t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue() ).idCategory+" is the id");
-                System.out.println(t.getOldValue()+" <OLD   |   NEW>"+t.getNewValue());
-                ( t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue() ).idCategory.set(t.getNewValue());
+//                System.out.println(( t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue() ).idCategory+" is the id");
+//                System.out.println(t.getOldValue()+" <OLD   |   NEW>"+t.getNewValue());
+//                ( t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue() ).idCategory.set(t.getNewValue());
             });
         }
 
@@ -172,14 +171,18 @@ public class SubCategoryTreeTable {
          */
         private void getData(){
             for (SubCategory cat : categoriesData)
-                categoryList.add(new RecursiveSubCat(String.valueOf(cat.getSubCategoryId()), String.valueOf(cat.getIdCategoryFk()),  cat.getName(),cat.getDescription()));
+                categoryList.add(new RecursiveSubCat(
+                        String.valueOf(cat.getSubCategoryId()),
+                        String.valueOf(cat.getIdCategoryFk()),
+                        cat.getName(),
+                        cat.getDescription())
+                );
         }
 
         /**
          * Setup for the table (all the pieces are put together)
-         * @param location      Pane where the table will be set
          */
-        private void setupTree(Pane location){
+        private void setupTree(){
             categoriesTable.setShowRoot(false);
             categoriesTable.setEditable(true);
 
@@ -188,8 +191,10 @@ public class SubCategoryTreeTable {
             categoriesTable.setRoot(root);
             categoriesTable.setMinWidth(500);
             categoriesTable.setPrefWidth(650);
+        }
 
-            location.getChildren().add(categoriesTable);
+        public JFXTreeTableView<RecursiveSubCat> getTable() {
+            return categoriesTable;
         }
 
         /**
@@ -205,6 +210,12 @@ public class SubCategoryTreeTable {
             });
 
         }
+
+        public void filter(String fk){
+            categoriesTable.setPredicate(RecursiveSubCat ->
+                RecursiveSubCat.getValue().idCategory.get().contains(fk));
+        }
+
 
         /**
          * Setup the hit results
