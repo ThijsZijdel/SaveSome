@@ -49,11 +49,12 @@ public class CategoryConnection implements Connection{
 
         while ( resultSet.next() ){
             int id = resultSet.getInt("idSubCategory");
+            int fk = resultSet.getInt("idCategoryFk");
             String name = resultSet.getString("name");
             String description = resultSet.getString("description");
             String color = resultSet.getString("color");
 
-            list.add(new SubCategory(id, name, description, color));
+            list.add(new SubCategory(id, fk, name, description, color));
         }
 
 

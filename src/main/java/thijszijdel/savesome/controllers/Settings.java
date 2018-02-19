@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 
 import javafx.scene.layout.Pane;
 import thijszijdel.savesome.ui.MainCategoryTreeTable;
+import thijszijdel.savesome.ui.SubCategoryTreeTable;
 
 
 import java.net.URL;
@@ -19,7 +20,7 @@ public class Settings implements Initializable {
    // @FXML
    // JFXTreeTableView categories;
     @FXML
-   Pane mainCatPane;
+   Pane mainCatPane,subCatPane;
 
 
 
@@ -40,6 +41,7 @@ public class Settings implements Initializable {
     public void initializeMainCategory(){
 
         new MainCategoryTreeTable(search, hits, mainCatPane);
+        new SubCategoryTreeTable(search, hits, subCatPane);
 //        mainCatTable.setupHits(hits);
 //        mainCatTable.setupSearch(search);
 
