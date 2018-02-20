@@ -20,8 +20,13 @@ public class OverviewChart extends StackedBarChart<String, Number> {
     }
     public OverviewChart(CategoryAxis xAxis, Axis<Number> yAxis, Income incomeClass) {
         super(xAxis, yAxis);
+
+        //TODO move chart data etc to here
+
+        // for outputing the results
         this.incomeClass = incomeClass;
     }
+
 
     @Override
     protected void layoutPlotChildren() {

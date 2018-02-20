@@ -190,6 +190,9 @@ public class SubCategoryTreeTable {
             categoriesTable.setRoot(root);
             categoriesTable.setMinWidth(500);
             categoriesTable.setPrefWidth(650);
+
+           //TODO set message on empty table: no results based et. etc.
+           // categoriesTable.set
         }
 
         public JFXTreeTableView<RecursiveSubCat> getTable() {

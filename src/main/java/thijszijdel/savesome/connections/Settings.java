@@ -6,6 +6,7 @@ import thijszijdel.savesome.connections.Balance.Balance;
 
 public class Settings {
 
+    // TODO: enums..!
     private static final String bgColorDarkL = "#353b48";
     private static final String bgColorDarkD = "#2f3640";
 

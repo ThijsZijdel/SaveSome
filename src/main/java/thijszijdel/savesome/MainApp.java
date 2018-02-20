@@ -127,7 +127,7 @@ public class MainApp extends Application {
      */
     public static void refresh() {
         System.out.println("- Automatic Refresh -");
-        getBalanceConnection().refreshConnection();
+        balanceConnection().refreshConnection();
         getCategoryConnection().refreshConnection();
         getExpenseConnection().refreshConnection();
         getBudgetConnection().refreshConnection();
@@ -148,7 +148,7 @@ public class MainApp extends Application {
      * Connection methods
      */
     private static BalanceConnection balanceConnection = new BalanceConnection();
-    public static BalanceConnection getBalanceConnection() {
+    public static BalanceConnection balanceConnection() {
         return balanceConnection;
     }
 

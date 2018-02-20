@@ -119,7 +119,7 @@ public class Main implements Initializable {
      */
     public void initializeBalance() {
         balance.getChildren().clear();
-        balance.getChildren().addAll(MainApp.getBalanceConnection().getAllBalanceDisplays());
+        balance.getChildren().addAll(MainApp.balanceConnection().getAllBalanceDisplays());
     }
 
 

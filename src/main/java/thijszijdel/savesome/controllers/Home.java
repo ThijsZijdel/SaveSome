@@ -41,6 +41,7 @@ public class Home implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
 
+        // TODO:      Move overview cat chart for expenses
         //**     WILL BE MOVED      **/
         ObservableList<PieChart.Data> datalist = FXCollections.observableArrayList();
 
@@ -83,6 +84,12 @@ public class Home implements Initializable {
         chart.setLabelLineLength(10);
         chart.setLegendSide(Side.RIGHT);
 
+
+
+
+
+
+        // TODO: impliment all views
         MainApp.setAppMessage("Home screen is loaded.");
 
         setView("/FXML/Expenses.fxml", topLeft);
@@ -112,6 +119,11 @@ public class Home implements Initializable {
     }
 
 
+
+
+
+
+    // TODO: possible move these with the chart
     /**
      * Get the selection of the chart
      *

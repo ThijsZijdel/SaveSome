@@ -35,18 +35,10 @@ public class Input implements Initializable, State {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        //**   WILL BE MOVED   **/
-
-       // BalanceConnection balances = new BalanceConnection();
-
+        // TODO: CLEAN UP !!
 
 
         background.setStyle("-fx-background-color: "+ MainApp.config.getBackground());
-
-//        time._24HourViewProperty().setValue(true);
-//        time.setIs24HourView(true);
-
-
 
 
         mainCategory.getItems().addAll(MainApp.getCategoryConnection().getMainCategoryNameList());
@@ -59,7 +51,7 @@ public class Input implements Initializable, State {
 
         setCategoryListner();
 
-        balance.getItems().addAll(MainApp.getBalanceConnection().getBalanceComboBoxList());
+        balance.getItems().addAll(MainApp.balanceConnection().getBalanceComboBoxList());
 
 
 
@@ -72,11 +64,15 @@ public class Input implements Initializable, State {
 
         MainApp.setAppMessage("Input screen is loaded.");
 
-        balance.setValue(MainApp.getBalanceConnection().getBalanceComboBoxList().get(0));
+
+        //pref fered balance
+        balance.setValue(MainApp.balanceConnection().getBalanceComboBoxList().get(0));
 
         setShowing(true);
     }
 
+
+    // TODO: CAT LISTENER !!!!
     private void setCategoryListner() {
         mainCategory.valueProperty().addListener((ChangeListener<String>) (object, valBefore, valAfter) -> {
             System.out.println("object: "+object);
@@ -145,6 +141,11 @@ public class Input implements Initializable, State {
      * WILL BE MOVED
      */
     public void insertExpense(){
+
+
+
+
+        // TODO: MOVE INSERT, IMPROVE IT & IMPLIMENT ALL METHODS AND FIELDS
         Time timeValue = null;
 
 //        if (time.getValue() != null)

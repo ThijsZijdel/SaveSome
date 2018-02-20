@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<JFXTabPane minHeight="400.0" minWidth="500.0" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="thijszijdel.savesome.controllers.Settings">
+<JFXTabPane minHeight="400.0" minWidth="500.0" prefHeight="497.0" prefWidth="899.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="thijszijdel.savesome.controllers.Settings">
    <tabs>
       <Tab text="Main">
         <content>
@@ -26,9 +26,9 @@
                   <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="132.0" minWidth="10.0" prefWidth="78.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="448.0" minWidth="10.0" prefWidth="413.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="160.0" minWidth="10.0" prefWidth="160.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="750.0" minWidth="550.0" prefWidth="600.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="250.0" minWidth="150.0" prefWidth="160.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="150.0" prefWidth="100.0" />
                      </columnConstraints>
                      <rowConstraints>
                         <RowConstraints maxHeight="415.611572265625" minHeight="10.0" prefHeight="236.44708251953125" vgrow="SOMETIMES" />

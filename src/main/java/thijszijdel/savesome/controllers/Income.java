@@ -36,6 +36,9 @@ public class Income implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
+
+        // TODO: make data dynamic
+        // TODO: move stacked bar chart to separate gui classe
         yAxis.setLabel("Amount");
         xAxis.setLabel("Month");
         xAxis.setCategories(FXCollections.observableArrayList(Arrays.asList("Jan", "Feb", "Mar")));
@@ -63,6 +66,8 @@ public class Income implements Initializable {
 
         pane.getChildren().clear();
 
+
+        // keep this
         pane.getChildren().setAll(chart);
     }
 
