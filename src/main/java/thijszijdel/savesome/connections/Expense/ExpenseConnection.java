@@ -4,6 +4,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import thijszijdel.savesome.MainApp;
+import thijszijdel.savesome.connections.Income.Income;
 import thijszijdel.savesome.interfaces.Connection;
 import thijszijdel.savesome.connections.Settings;
 import thijszijdel.savesome.ui.displays.ExpenseDisplay;
@@ -64,7 +65,8 @@ public class ExpenseConnection implements Connection {
      * Getter for the expenses list
      * @return ArrayList of expenses
      */
-    public ArrayList<Expense> getExpensesList() {
+    @Override
+    public ArrayList<Expense> getList() {
         return expensesList;
     }
 
@@ -90,7 +92,7 @@ public class ExpenseConnection implements Connection {
     public ArrayList<HBox> getExpenseDisplays(){
         ArrayList<HBox> boxes = new ArrayList<>();
 
-        for (Expense expense : this.getExpensesList()) {
+        for (Expense expense : this.getList()) {
 
             //Get the almost completed expense display
             HBox box = dsp.getExpenseDisplay(expense);
@@ -137,5 +139,14 @@ public class ExpenseConnection implements Connection {
         circle.setStyle("-fx-stroke: darkgrey");
 
         return circle;
+    }
+
+    @Override
+    public Object get(int key) {
+        for (Expense expense : this.expensesList)
+            if (Integer.parseInt(expense.getExpenseId()) == key)
+                return expense;
+        MainApp.log(new Exception("no expense matched key"));
+        return null;
     }
 }

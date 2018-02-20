@@ -64,8 +64,18 @@ public class BudgetConnection implements Connection {
      *
      * @return ArrayList of budgets
      */
-    public ArrayList<Budget> getBudgetList() {
+    @Override
+    public ArrayList<Budget> getList() {
         return budgetsList;
+    }
+
+    @Override
+    public Budget get(int key) {
+        for (Budget budget : this.budgetsList)
+            if (budget.getId() == key)
+                return budget;
+        MainApp.log(new Exception("no budget matched key"));
+        return null;
     }
 
     /**

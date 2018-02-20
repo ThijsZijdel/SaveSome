@@ -33,7 +33,7 @@ public class Expense {
 
         if (balanceFk != 0) {
             this.balanceFk = balanceFk;
-            this.balance = MainApp.getBalanceConnection().getBalance(balanceFk);
+            this.balance = MainApp.balanceConnection().get(balanceFk);
         }
 
         if (subCategoryFk != 0) {
@@ -47,6 +47,10 @@ public class Expense {
             return Double.toString(amount);
         else
             return "+ "+Double.toString(amount);
+    }
+
+    public String getExpenseId() {
+        return expenseId;
     }
 
     public String getName() {

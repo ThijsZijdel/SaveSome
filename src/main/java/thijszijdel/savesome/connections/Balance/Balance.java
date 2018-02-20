@@ -8,9 +8,6 @@ public class Balance {
     private String description;
     private boolean isNegative;
 
-    public Balance(String id, String name, Double amount, String description){
-
-    }
 
     public Balance(int id, String name, String description, String type, double amount, int bankFk) {
         this.id = id;

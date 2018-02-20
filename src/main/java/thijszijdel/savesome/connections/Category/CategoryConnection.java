@@ -166,4 +166,21 @@ public class CategoryConnection implements Connection {
     }
 
 
+    /**
+     * No need for implementation
+     * @param  none
+     * @return null
+     */
+    @Override
+    public Object get(int none) {
+        return null;
+    }
+    /**
+     * No need for implementation
+     * @return null
+     */
+    @Override
+    public ArrayList getList() {
+        return null;
+    }
 }

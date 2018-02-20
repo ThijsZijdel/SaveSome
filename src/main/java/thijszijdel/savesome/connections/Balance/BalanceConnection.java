@@ -37,6 +37,10 @@ public class BalanceConnection implements Connection {
             this.balanceDisplays = generateBalanceDisplays();
     }
 
+    @Override
+    public ArrayList<Balance> getList() {
+        return this.balances;
+    }
     private ArrayList<Balance> convertToBalance() throws SQLException {
         ArrayList<Balance> list = new ArrayList<>();
 
@@ -162,11 +166,12 @@ public class BalanceConnection implements Connection {
             this.balanceDisplays = generateBalanceDisplays();
     }
 
-    public Balance getBalance(int balanceFk) {
+    @Override
+    public Balance get(int key) {
         for (Balance balance : this.balances)
-            if (balance.getId() == balanceFk)
+            if (balance.getId() == key)
                 return balance;
-        MainApp.log(new Exception("no match"));
+        MainApp.log(new Exception("no balance matched key"));
         return null;
     }
 }

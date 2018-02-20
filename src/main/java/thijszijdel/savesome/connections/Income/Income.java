@@ -32,7 +32,7 @@ public class Income {
 
         if (balanceFk != 0) {
             this.balanceFk = balanceFk;
-            this.balance = MainApp.getBalanceConnection().getBalance(balanceFk);
+            this.balance = MainApp.balanceConnection().get(balanceFk);
         }
 
         this.alreadyPaid = alreadyPaid;
