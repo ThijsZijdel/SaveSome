@@ -13,21 +13,21 @@ public class Expense {
     private String description;
     private double amount;
     private Date date;
-    private Time time;
     private boolean isNegative;
     private int subCategoryFk;
     private SubCategory subCategory;
+    private String month;
 
     private int balanceFk;
     private Balance balance;
 
-    public Expense(String expenseId, String name, String description, double amount, Date date, Time time, int subCategoryFk, int balanceFk) {
+    public Expense(String expenseId, String name, String description, double amount, Date date, String month, int subCategoryFk, int balanceFk) {
         this.expenseId = expenseId;
         this.name = name;
         this.description = description;
         this.amount = amount;
         this.date = date;
-        this.time = time;
+        this.month = month;
 
         this.isNegative = (amount < 0);
 
@@ -67,10 +67,6 @@ public class Expense {
 
     public Date getDate() {
         return date;
-    }
-
-    public Time getTime() {
-        return time;
     }
 
     public int getSubCategoryFk() {
