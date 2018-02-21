@@ -1,14 +1,14 @@
 package thijszijdel.savesome.connections.Income;
 
 import thijszijdel.savesome.MainApp;
-import thijszijdel.savesome.interfaces.Connection;
+import thijszijdel.savesome.interfaces.IConnection;
 
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class IncomeConnection implements Connection {
+public class IncomeConnection implements IConnection {
 
     private final IncomeData data = new IncomeData();
 

@@ -9,14 +9,14 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import thijszijdel.savesome.MainApp;
-import thijszijdel.savesome.interfaces.Connection;
+import thijszijdel.savesome.interfaces.IConnection;
 
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class BalanceConnection implements Connection {
+public class BalanceConnection implements IConnection {
 
     private final BalanceData data = new BalanceData();
     private ArrayList<JFXRippler> balanceDisplays = new ArrayList<>();

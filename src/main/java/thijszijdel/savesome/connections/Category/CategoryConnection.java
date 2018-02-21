@@ -4,14 +4,14 @@ import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import thijszijdel.savesome.MainApp;
-import thijszijdel.savesome.interfaces.Connection;
+import thijszijdel.savesome.interfaces.IConnection;
 
 import java.io.File;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class CategoryConnection implements Connection {
+public class CategoryConnection implements IConnection {
 
     private CategoryData data = new CategoryData();
 

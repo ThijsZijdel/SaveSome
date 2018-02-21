@@ -5,17 +5,15 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import thijszijdel.savesome.MainApp;
-import thijszijdel.savesome.interfaces.Connection;
-import thijszijdel.savesome.connections.Settings;
+import thijszijdel.savesome.interfaces.IConnection;
 import thijszijdel.savesome.ui.displays.ExpenseDisplay;
 
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Time;
 import java.util.ArrayList;
 
-public class ExpenseConnection implements Connection {
+public class ExpenseConnection implements IConnection {
 
     private final ExpensesData data  = new ExpensesData();
     private final ExpenseDisplay display = new ExpenseDisplay();
