@@ -107,7 +107,6 @@ public class Home implements Initializable {
 
     private void setUpBillsCalendar() {
 
-
         //JFXDatePickerSkin datePickerSkin = new JFXDatePickerSkin(new JFXDatePicker(LocalDate.now()));
         DatePickerSkin datePickerSkin = new DatePickerSkin(new DatePicker(LocalDate.now()));
         Node popupContent = datePickerSkin.getPopupContent();
