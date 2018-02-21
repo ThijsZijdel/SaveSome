@@ -1,43 +1,42 @@
-package thijszijdel.savesome.models;
+package thijszijdel.savesome.connections.Income;
 
 import thijszijdel.savesome.MainApp;
+import thijszijdel.savesome.connections.Balance.Balance;
 
 import java.sql.Date;
-import java.sql.Time;
 
-public class Expense {
-    private String expenseId;
+public class Income {
+    private int incomeId;
     private String name;
     private String description;
     private double amount;
+    private int repeatingFk;
     private Date date;
-    private Time time;
     private boolean isNegative;
-    private int subCategoryFk;
-    private SubCategory subCategory;
 
     private int balanceFk;
-    private Balance balance;
 
-    public Expense(String expenseId, String name, String description, double amount, Date date, Time time, int subCategoryFk, int balanceFk) {
-        this.expenseId = expenseId;
+    private Balance balance;
+    private int alreadyPaid;
+    private boolean alreadyPaidBool;
+
+    public Income(int incomeId, String name, String description, double amount, int repeatingFk, Date date, int balanceFk, int alreadyPaid) {
+        this.incomeId = incomeId;
         this.name = name;
         this.description = description;
         this.amount = amount;
+        this.repeatingFk = repeatingFk;
         this.date = date;
-        this.time = time;
 
         this.isNegative = (amount < 0);
 
         if (balanceFk != 0) {
             this.balanceFk = balanceFk;
-            this.balance = MainApp.getBalanceConnection().getBalance(balanceFk);
+            this.balance = MainApp.balanceConnection().get(balanceFk);
         }
 
-        if (subCategoryFk != 0) {
-            this.subCategoryFk = subCategoryFk;
-            this.subCategory = MainApp.getCategoryConnection().getSubCat(subCategoryFk);
-        }
+        this.alreadyPaid = alreadyPaid;
+        this.alreadyPaidBool = alreadyPaid == 1;
 
     }
     public String getDisplayAmount() {
@@ -63,16 +62,20 @@ public class Expense {
         return date;
     }
 
-    public Time getTime() {
-        return time;
+    public int getAlreadyPaid() {
+        return alreadyPaid;
     }
 
-    public int getSubCategoryFk() {
-        return subCategoryFk;
+    public int getBalanceFk() {
+        return balanceFk;
     }
 
-    public SubCategory getSubCategory() {
-        return subCategory;
+    public int getIncomeId() {
+        return incomeId;
+    }
+
+    public int getRepeatingFk() {
+        return repeatingFk;
     }
 
     public Balance getBalance() {

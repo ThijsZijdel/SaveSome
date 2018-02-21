@@ -1,11 +1,12 @@
-package thijszijdel.savesome.database.data;
+package thijszijdel.savesome.connections.Balance;
 
 import thijszijdel.savesome.MainApp;
+import thijszijdel.savesome.interfaces.Data;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class BalanceData implements Data{
+public class BalanceData implements Data {
     private ResultSet balanceResultSet = null;
 
 

@@ -1,26 +1,22 @@
-package thijszijdel.savesome.connections;
+package thijszijdel.savesome.connections.Balance;
 
 import com.jfoenix.controls.JFXRippler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
 import thijszijdel.savesome.MainApp;
-import thijszijdel.savesome.database.data.BalanceData;
-import thijszijdel.savesome.models.Balance;
+import thijszijdel.savesome.interfaces.Connection;
 
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class BalanceConnection implements Connection{
+public class BalanceConnection implements Connection {
 
     private final BalanceData data = new BalanceData();
     private ArrayList<JFXRippler> balanceDisplays = new ArrayList<>();
@@ -41,6 +37,10 @@ public class BalanceConnection implements Connection{
             this.balanceDisplays = generateBalanceDisplays();
     }
 
+    @Override
+    public ArrayList<Balance> getList() {
+        return this.balances;
+    }
     private ArrayList<Balance> convertToBalance() throws SQLException {
         ArrayList<Balance> list = new ArrayList<>();
 
@@ -166,11 +166,12 @@ public class BalanceConnection implements Connection{
             this.balanceDisplays = generateBalanceDisplays();
     }
 
-    public Balance getBalance(int balanceFk) {
+    @Override
+    public Balance get(int key) {
         for (Balance balance : this.balances)
-            if (balance.getId() == balanceFk)
+            if (balance.getId() == key)
                 return balance;
-        MainApp.log(new Exception("no match"));
+        MainApp.log(new Exception("no balance matched key"));
         return null;
     }
 }

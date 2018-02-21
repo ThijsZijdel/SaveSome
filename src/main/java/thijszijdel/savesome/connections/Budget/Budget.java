@@ -1,4 +1,4 @@
-package thijszijdel.savesome.models;
+package thijszijdel.savesome.connections.Budget;
 
 import java.sql.Date;
 

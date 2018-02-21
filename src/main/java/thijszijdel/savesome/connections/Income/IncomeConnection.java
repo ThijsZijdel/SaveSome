@@ -1,8 +1,7 @@
-package thijszijdel.savesome.connections;
+package thijszijdel.savesome.connections.Income;
 
 import thijszijdel.savesome.MainApp;
-import thijszijdel.savesome.database.data.IncomeData;
-import thijszijdel.savesome.models.Income;
+import thijszijdel.savesome.interfaces.Connection;
 
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -58,10 +57,20 @@ public class IncomeConnection implements Connection {
     /**
      * Getter for the Incomes list
      *
-     * @return ArrayList of expenses
+     * @return ArrayList of incomes
      */
-    public ArrayList<Income> getIncomesList() {
+    @Override
+    public ArrayList<Income> getList() {
         return incomesList;
+    }
+
+    @Override
+    public Object get(int key) {
+        for (Income income : this.incomesList)
+            if (income.getIncomeId() == key)
+                return income;
+        MainApp.log(new Exception("no income matched key"));
+        return null;
     }
 
     /**

@@ -1,4 +1,4 @@
-package thijszijdel.savesome.ui;
+package thijszijdel.savesome.ui.tables;
 
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableColumn;
@@ -12,12 +12,12 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.Node;
+import javafx.scene.control.*;
 import javafx.scene.control.Label;
-import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeTableColumn;
-import javafx.scene.layout.Pane;
+import javafx.scene.input.MouseEvent;
 import thijszijdel.savesome.MainApp;
-import thijszijdel.savesome.models.Category;
+import thijszijdel.savesome.connections.Category.Category;
 
 import java.util.ArrayList;
 
@@ -54,17 +54,50 @@ public class MainCategoryTreeTable {
      *
      * @param search    field for searching
      * @param hits      label for amount of hits
-     * @param location  where the table will be set
      */
-    public MainCategoryTreeTable(JFXTextField search, Label hits, Pane location){
+    public MainCategoryTreeTable(JFXTextField search, Label hits){
         setupColumns();
         setupEdit();
         getData();
-        setupTree(location);
+        setupTree();
 
         //if the params are passed, set them up
         if (search != null) setupSearch(search);
         if (hits != null) setupHits(hits);
+
+        setupSelection();
+    }
+    private SubCategoryTreeTable linkedTable;
+    public void setRelatedSubCatTable(SubCategoryTreeTable table){
+        this.linkedTable = table;
+    }
+
+    private void setupSelection() {
+//        categoriesTable.addEventHandler(Event.MOUSE_DOWN, (EventHandler<Event>) event -> {
+//
+//        });
+
+        categoriesTable.setOnMousePressed((MouseEvent event) -> {
+            if (event.isPrimaryButtonDown()) {
+                Node item = ((Node) event.getTarget()).getParent();
+                System.out.println(item.toString()+ "<<<<<<<<");
+                MainApp.setAppMessage("Expense selected, value: "+categoriesTable.getSelectionModel().getSelectedItem().getValue().idCategory+" <<<");
+                System.out.println("Filtered on: +"+categoriesTable.getSelectionModel().getSelectedItem().getValue().idCategory.getValue());
+                linkedTable.filter(categoriesTable.getSelectionModel().getSelectedItem().getValue().idCategory.getValue());
+            }
+        });
+
+
+                // categoriesTable.getSelectionModel().getSelectedItem().addEventHandler(
+
+       // });
+
+//        categoriesTable.getSelectionModel().selectedItemProperty().addListener(
+//                (ChangeListener<RecursiveCat>) (ov, old_val, new_val) -> {
+//                    //label.setText(new_val.toString());
+//                    MainApp.setAppMessage("Expense selected, value: "+new_val.toString());
+//                });
+
     }
 
     /**
@@ -111,9 +144,9 @@ public class MainCategoryTreeTable {
         descCol.setOnEditCommit((
                 TreeTableColumn.CellEditEvent<RecursiveCat, String> t)->{
             //TODO :: Update this record in db
-            System.out.println(( t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue() ).idCategory+" is the id");
-            System.out.println(t.getOldValue()+" <OLD   |   NEW>"+t.getNewValue());
-            ( t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue() ).descCategory.set(t.getNewValue());
+//            System.out.println(( t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue() ).idCategory+" is the id");
+//            System.out.println(t.getOldValue()+" <OLD   |   NEW>"+t.getNewValue());
+//            ( t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue() ).descCategory.set(t.getNewValue());
         });
 
 
@@ -124,9 +157,9 @@ public class MainCategoryTreeTable {
         nameCol.setOnEditCommit((
                 TreeTableColumn.CellEditEvent<RecursiveCat, String> t)->{
             //TODO :: Update this record in db
-            System.out.println(( t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue() ).idCategory+" is the id");
-            System.out.println(t.getOldValue()+" <OLD   |   NEW>"+t.getNewValue());
-            ( t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue() ).nameCategory.set(t.getNewValue());
+//            System.out.println(( t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue() ).idCategory+" is the id");
+//            System.out.println(t.getOldValue()+" <OLD   |   NEW>"+t.getNewValue());
+//            ( t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue() ).nameCategory.set(t.getNewValue());
         });
 
 
@@ -137,11 +170,16 @@ public class MainCategoryTreeTable {
         idCol.setOnEditCommit((
                 TreeTableColumn.CellEditEvent<RecursiveCat, String> t)->{
             //TODO :: Update this record in db
-            System.out.println(( t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue() ).idCategory+" is the id");
-            System.out.println(t.getOldValue()+" <OLD   |   NEW>"+t.getNewValue());
-            ( t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue() ).idCategory.set(t.getNewValue());
+//            System.out.println(( t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue() ).idCategory+" is the id");
+//            System.out.println(t.getOldValue()+" <OLD   |   NEW>"+t.getNewValue());
+//            ( t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue() ).idCategory.set(t.getNewValue());
         });
+
+
+
     }
+
+
 
     /**
      * Get all the data for the table
@@ -149,14 +187,17 @@ public class MainCategoryTreeTable {
      */
     private void getData(){
         for (Category cat : categoriesData)
-            categoryList.add(new RecursiveCat(String.valueOf(cat.getId()),cat.getName(),cat.getDescription()));
+            categoryList.add(new RecursiveCat(
+                    String.valueOf(cat.getId()),
+                    cat.getName().toLowerCase(),
+                    cat.getDescription().toLowerCase()
+            ));
     }
 
     /**
      * Setup for the table (all the pieces are put together)
-     * @param location      Pane where the table will be set
      */
-    private void setupTree(Pane location){
+    private void setupTree(){
         categoriesTable.setShowRoot(false);
         categoriesTable.setEditable(true);
 
@@ -166,7 +207,10 @@ public class MainCategoryTreeTable {
         categoriesTable.setMinWidth(500);
         categoriesTable.setPrefWidth(650);
 
-        location.getChildren().add(categoriesTable);
+    }
+
+    public JFXTreeTableView<RecursiveCat> getTable() {
+        return categoriesTable;
     }
 
     /**
@@ -176,9 +220,9 @@ public class MainCategoryTreeTable {
     private void setupSearch(JFXTextField search){
         search.textProperty().addListener((o, oldVal, newVal)-> {
             categoriesTable.setPredicate(RecursiveCat ->
-                               RecursiveCat.getValue().descCategory.get().contains(newVal)
-                            || RecursiveCat.getValue().idCategory.get().contains(newVal)
-                            || RecursiveCat.getValue().nameCategory.get().contains(newVal));
+                               RecursiveCat.getValue().descCategory.get().contains(newVal.toLowerCase())
+                            || RecursiveCat.getValue().idCategory.get().contains(newVal.toLowerCase())
+                            || RecursiveCat.getValue().nameCategory.get().contains(newVal.toLowerCase()));
         });
 
     }

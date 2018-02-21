@@ -1,17 +1,18 @@
-package thijszijdel.savesome.models;
+package thijszijdel.savesome.connections.Category;
 
 
 import javafx.scene.image.Image;
 
 public class SubCategory {
 
-    private int subCategoryId;
+    private int idSubcategory, idCategoryFk;
     private String name;
     private String description;
     private String color;
 
-    public SubCategory(int subCategoryId, String name, String description, String color){
-        this.subCategoryId = subCategoryId;
+    public SubCategory(int idSubcategory, int idCategoryFk, String name, String description, String color){
+        this.idSubcategory = idSubcategory;
+        this.idCategoryFk = idCategoryFk;
         this.name = name;
         this.description = description;
         this.color = color;
@@ -20,7 +21,11 @@ public class SubCategory {
 
 
     public int getSubCategoryId() {
-        return subCategoryId;
+        return idSubcategory;
+    }
+
+    public int getIdCategoryFk() {
+        return idCategoryFk;
     }
 
     public String getName() {

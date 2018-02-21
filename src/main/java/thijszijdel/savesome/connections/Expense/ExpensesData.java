@@ -1,11 +1,12 @@
-package thijszijdel.savesome.database.data;
+package thijszijdel.savesome.connections.Expense;
 
 import thijszijdel.savesome.MainApp;
+import thijszijdel.savesome.interfaces.Data;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ExpensesData implements Data{
+public class ExpensesData implements Data {
     private ResultSet expensesResultSet = null;
 
 

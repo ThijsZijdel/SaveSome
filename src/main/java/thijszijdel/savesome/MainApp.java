@@ -10,6 +10,11 @@ import javafx.scene.image.Image;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import thijszijdel.savesome.connections.*;
+import thijszijdel.savesome.connections.Balance.BalanceConnection;
+import thijszijdel.savesome.connections.Budget.BudgetConnection;
+import thijszijdel.savesome.connections.Category.CategoryConnection;
+import thijszijdel.savesome.connections.Expense.ExpenseConnection;
+import thijszijdel.savesome.connections.Income.IncomeConnection;
 import thijszijdel.savesome.constants.Theme;
 import thijszijdel.savesome.controllers.Expenses;
 import thijszijdel.savesome.controllers.Main;
@@ -122,7 +127,7 @@ public class MainApp extends Application {
      */
     public static void refresh() {
         System.out.println("- Automatic Refresh -");
-        getBalanceConnection().refreshConnection();
+        balanceConnection().refreshConnection();
         getCategoryConnection().refreshConnection();
         getExpenseConnection().refreshConnection();
         getBudgetConnection().refreshConnection();
@@ -143,7 +148,7 @@ public class MainApp extends Application {
      * Connection methods
      */
     private static BalanceConnection balanceConnection = new BalanceConnection();
-    public static BalanceConnection getBalanceConnection() {
+    public static BalanceConnection balanceConnection() {
         return balanceConnection;
     }
 
@@ -160,8 +165,8 @@ public class MainApp extends Application {
     private static final BudgetConnection budgetConnection = new BudgetConnection();
     public static BudgetConnection getBudgetConnection() { return budgetConnection; }
 
-    private static final IncomeConnection incomeConnection = new IncomeConnection();
-    public static IncomeConnection getIncomeConnection() { return incomeConnection; }
+    //private static final IncomeConnection incomeConnection = new IncomeConnection();
+    //public static IncomeConnection getIncomeConnection() { return incomeConnection; }
     /**
      * For opening new stages / pop ups
      *
@@ -175,11 +180,19 @@ public class MainApp extends Application {
             scene.getStylesheets().add("/styles/Styles.css");
 
 
+            //TODO: test load Exception catch
+//            URL url = getClass().getResource(viewLink);
+//            FXMLLoader loader = new FXMLLoader(url);
+//            if (loader == null) {
+//                throw new RuntimeException("Could not find " + url.toString());
+//            }
+
 
             stage.getIcons().add(logo);
             stage.setTitle(APP_NAME);
             stage.setAlwaysOnTop(true);
             stage.setScene(scene);
+            stage.getIcons().add(logo);
             stage.show();
 
 

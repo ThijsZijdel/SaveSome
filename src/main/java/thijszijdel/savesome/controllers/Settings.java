@@ -7,7 +7,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 
 import javafx.scene.layout.Pane;
-import thijszijdel.savesome.ui.MainCategoryTreeTable;
+import thijszijdel.savesome.ui.tables.MainCategoryTreeTable;
+import thijszijdel.savesome.ui.tables.SubCategoryTreeTable;
 
 
 import java.net.URL;
@@ -19,7 +20,7 @@ public class Settings implements Initializable {
    // @FXML
    // JFXTreeTableView categories;
     @FXML
-   Pane mainCatPane;
+   Pane mainCatPane,subCatPane;
 
 
 
@@ -39,7 +40,14 @@ public class Settings implements Initializable {
     //TODO :: Comment + Move + Split this way to big method
     public void initializeMainCategory(){
 
-        new MainCategoryTreeTable(search, hits, mainCatPane);
+
+        SubCategoryTreeTable subCatTable = new SubCategoryTreeTable(search, hitsSub);
+
+        MainCategoryTreeTable mainCatTable = new MainCategoryTreeTable(search, hitsMain);
+
+        mainCatTable.setRelatedSubCatTable(subCatTable);
+        mainCatPane.getChildren().add(mainCatTable.getTable());
+        subCatPane.getChildren().add(subCatTable.getTable());
 //        mainCatTable.setupHits(hits);
 //        mainCatTable.setupSearch(search);
 
@@ -49,5 +57,5 @@ public class Settings implements Initializable {
 
 
     @FXML JFXTextField search;
-    @FXML Label hits;
+    @FXML Label hitsMain, hitsSub;
 }

@@ -1,8 +1,7 @@
-package thijszijdel.savesome.connections;
+package thijszijdel.savesome.connections.Budget;
 
 import thijszijdel.savesome.MainApp;
-import thijszijdel.savesome.database.data.BudgetData;
-import thijszijdel.savesome.models.Budget;
+import thijszijdel.savesome.interfaces.Connection;
 
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -65,8 +64,18 @@ public class BudgetConnection implements Connection {
      *
      * @return ArrayList of budgets
      */
-    public ArrayList<Budget> getBudgetList() {
+    @Override
+    public ArrayList<Budget> getList() {
         return budgetsList;
+    }
+
+    @Override
+    public Budget get(int key) {
+        for (Budget budget : this.budgetsList)
+            if (budget.getId() == key)
+                return budget;
+        MainApp.log(new Exception("no budget matched key"));
+        return null;
     }
 
     /**

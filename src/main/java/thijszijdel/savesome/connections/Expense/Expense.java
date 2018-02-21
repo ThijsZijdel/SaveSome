@@ -1,42 +1,45 @@
-package thijszijdel.savesome.models;
+package thijszijdel.savesome.connections.Expense;
 
 import thijszijdel.savesome.MainApp;
+import thijszijdel.savesome.connections.Balance.Balance;
+import thijszijdel.savesome.connections.Category.SubCategory;
 
 import java.sql.Date;
 import java.sql.Time;
 
-public class Income {
-    private int incomeId;
+public class Expense {
+    private String expenseId;
     private String name;
     private String description;
     private double amount;
-    private int repeatingFk;
     private Date date;
     private boolean isNegative;
+    private int subCategoryFk;
+    private SubCategory subCategory;
+    private String month;
 
     private int balanceFk;
-
     private Balance balance;
-    private int alreadyPaid;
-    private boolean alreadyPaidBool;
 
-    public Income(int incomeId, String name, String description, double amount, int repeatingFk, Date date, int balanceFk, int alreadyPaid) {
-        this.incomeId = incomeId;
+    public Expense(String expenseId, String name, String description, double amount, Date date, String month, int subCategoryFk, int balanceFk) {
+        this.expenseId = expenseId;
         this.name = name;
         this.description = description;
         this.amount = amount;
-        this.repeatingFk = repeatingFk;
         this.date = date;
+        this.month = month;
 
         this.isNegative = (amount < 0);
 
         if (balanceFk != 0) {
             this.balanceFk = balanceFk;
-            this.balance = MainApp.getBalanceConnection().getBalance(balanceFk);
+            this.balance = MainApp.balanceConnection().get(balanceFk);
         }
 
-        this.alreadyPaid = alreadyPaid;
-        this.alreadyPaidBool = alreadyPaid == 1;
+        if (subCategoryFk != 0) {
+            this.subCategoryFk = subCategoryFk;
+            this.subCategory = MainApp.getCategoryConnection().getSubCat(subCategoryFk);
+        }
 
     }
     public String getDisplayAmount() {
@@ -44,6 +47,10 @@ public class Income {
             return Double.toString(amount);
         else
             return "+ "+Double.toString(amount);
+    }
+
+    public String getExpenseId() {
+        return expenseId;
     }
 
     public String getName() {
@@ -62,20 +69,12 @@ public class Income {
         return date;
     }
 
-    public int getAlreadyPaid() {
-        return alreadyPaid;
+    public int getSubCategoryFk() {
+        return subCategoryFk;
     }
 
-    public int getBalanceFk() {
-        return balanceFk;
-    }
-
-    public int getIncomeId() {
-        return incomeId;
-    }
-
-    public int getRepeatingFk() {
-        return repeatingFk;
+    public SubCategory getSubCategory() {
+        return subCategory;
     }
 
     public Balance getBalance() {

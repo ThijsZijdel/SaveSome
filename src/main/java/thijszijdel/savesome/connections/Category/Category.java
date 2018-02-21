@@ -1,4 +1,4 @@
-package thijszijdel.savesome.models;
+package thijszijdel.savesome.connections.Category;
 
 import java.util.ArrayList;
 

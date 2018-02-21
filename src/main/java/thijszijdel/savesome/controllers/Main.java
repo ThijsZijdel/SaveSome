@@ -119,7 +119,7 @@ public class Main implements Initializable {
      */
     public void initializeBalance() {
         balance.getChildren().clear();
-        balance.getChildren().addAll(MainApp.getBalanceConnection().getAllBalanceDisplays());
+        balance.getChildren().addAll(MainApp.balanceConnection().getAllBalanceDisplays());
     }
 
 
@@ -168,6 +168,13 @@ public class Main implements Initializable {
     public void setMainScene(String view) throws IOException {
         Parent fxmlView = FXMLLoader.load(Main.class.getResource(view));
         mainView.setCenter(fxmlView);
+
+        //TODO: test load Exception catch
+//            URL url = getClass().getResource(viewLink);
+//            FXMLLoader loader = new FXMLLoader(url);
+//            if (loader == null) {
+//                throw new RuntimeException("Could not find " + url.toString());
+//            }
     }
 
 

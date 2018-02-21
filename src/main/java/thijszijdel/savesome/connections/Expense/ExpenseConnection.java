@@ -1,29 +1,24 @@
-package thijszijdel.savesome.connections;
+package thijszijdel.savesome.connections.Expense;
 
-import javafx.event.EventHandler;
-import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.VBox;
+
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import thijszijdel.savesome.MainApp;
-import thijszijdel.savesome.database.data.ExpensesData;
-import thijszijdel.savesome.models.Expense;
-import thijszijdel.savesome.models.ExpenseDisplay;
+import thijszijdel.savesome.interfaces.Connection;
+import thijszijdel.savesome.connections.Settings;
+import thijszijdel.savesome.ui.displays.ExpenseDisplay;
 
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class ExpenseConnection implements Connection {
 
     private final ExpensesData data  = new ExpensesData();
-    private final ExpenseDisplay dsp = new ExpenseDisplay();
+    private final ExpenseDisplay display = new ExpenseDisplay();
 
     private ArrayList<Expense> expensesList = new ArrayList<>();
 
@@ -56,11 +51,11 @@ public class ExpenseConnection implements Connection {
             String description = resultSet.getString("description");
             double amount = resultSet.getDouble("amount");
             Date date = resultSet.getDate("date");
-            Time time = resultSet.getTime("time");
+            String month = resultSet.getString("month");
             int subCategoryFk = resultSet.getInt("subCategoryFk");
             int balanceFk = resultSet.getInt("balanceFk");
 
-            list.add(new Expense(id, name, description, amount, date, time, subCategoryFk , balanceFk));
+            list.add(new Expense(id, name, description, amount, date, month, subCategoryFk , balanceFk));
         }
 
         return list;
@@ -70,7 +65,8 @@ public class ExpenseConnection implements Connection {
      * Getter for the expenses list
      * @return ArrayList of expenses
      */
-    public ArrayList<Expense> getExpensesList() {
+    @Override
+    public ArrayList<Expense> getList() {
         return expensesList;
     }
 
@@ -96,25 +92,25 @@ public class ExpenseConnection implements Connection {
     public ArrayList<HBox> getExpenseDisplays(){
         ArrayList<HBox> boxes = new ArrayList<>();
 
-        for (Expense expense : this.getExpensesList()) {
+        for (Expense expense : this.getList()) {
 
             //Get the almost completed expense display
-            HBox box = dsp.getExpenseDisplay(expense);
+            HBox box = display.getExpenseDisplay(expense);
             box.getStyleClass().add("CellPadding");
 
             //Setup for the indicator dot
             Circle indicator = getIndicatorCircle(expense);
 
-            box.setOnMouseEntered(t -> {
-                if (expense.isNegative())
-                    indicator.setFill(Color.web(Settings.getAlertColorD()));
-                else
-                    indicator.setFill(Color.web(Settings.getSuccesColor()));
-            });
-
-            box.setOnMouseExited(t -> {
-                indicator.setFill(Color.web(expense.getSubCategory().getColor()));
-            });
+//            box.setOnMouseEntered(t -> {
+//                if (expense.isNegative())
+//                    indicator.setStyle("-fx-fill:"+Settings.getAlertColorD());
+//                else
+//                    indicator.setStyle("-fx-fill:"+Settings.getSuccesColor());
+//            });
+//
+//            box.setOnMouseExited(t -> {
+//                indicator.setStyle("-fx-fill:"+expense.getSubCategory().getColor());
+//            });
 
             box.getChildren().add(indicator);
             boxes.add(box);
@@ -143,5 +139,14 @@ public class ExpenseConnection implements Connection {
         circle.setStyle("-fx-stroke: darkgrey");
 
         return circle;
+    }
+
+    @Override
+    public Object get(int key) {
+        for (Expense expense : this.expensesList)
+            if (Integer.parseInt(expense.getExpenseId()) == key)
+                return expense;
+        MainApp.log(new Exception("no expense matched key"));
+        return null;
     }
 }

@@ -1,15 +1,16 @@
-package thijszijdel.savesome.models;
+package thijszijdel.savesome.ui.displays;
 
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import thijszijdel.savesome.connections.Expense.Expense;
 import thijszijdel.savesome.connections.Settings;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 
-public class ExpenseDisplay {
+public class ExpenseDisplay extends HBox{
     private static final String B_SEPERATOR = "        ";
 
     /**
@@ -20,13 +21,12 @@ public class ExpenseDisplay {
      */
     public HBox getExpenseDisplay(Expense expense) {
         VBox amountBalance = getBalanceAmount(expense);
-        String dateTime = getFormattedDate(expense)+B_SEPERATOR+ expense.getTime().toString();
+        String dateTime = getFormattedDate(expense)+B_SEPERATOR; //+ expense.getTime().toString();
 
         VBox details = new VBox(
                 getLabel(expense.getName(),"bold"),
                 getLabel(expense.getDescription(),"lighter"),
                 getLabel(dateTime,"lighter")
-
         );
 
         //add the final styling
