@@ -165,8 +165,8 @@ public class MainApp extends Application {
     private static final BudgetConnection budgetConnection = new BudgetConnection();
     public static BudgetConnection getBudgetConnection() { return budgetConnection; }
 
-    private static final IncomeConnection incomeConnection = new IncomeConnection();
-    public static IncomeConnection getIncomeConnection() { return incomeConnection; }
+    //private static final IncomeConnection incomeConnection = new IncomeConnection();
+    //public static IncomeConnection getIncomeConnection() { return incomeConnection; }
     /**
      * For opening new stages / pop ups
      *

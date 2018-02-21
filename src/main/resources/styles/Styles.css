@@ -8,13 +8,13 @@
     /*-fx-background-color:  PINK;*/
 }
 
-jfx-combo-box label {
+.jfx-combo-box .label {
     /*-fx-background-color:  WHITE;*/
     -fx-text-fill: #fff;
 }
 
-.jfx-list-view:selected {
-    -fx-stroke: none;
+.jfx-list-view:selected, .jfx-list-view {
+    -fx-stroke: null;
 }
 
 
@@ -25,9 +25,9 @@ jfx-combo-box label {
 }
 
 .noBlueBorders {
-    -fx-accent: none;
+    -fx-accent: #00a8ff;
 
-    -fx-focus-color: none;
+    -fx-focus-color: #00a8ff;
 }
 
 

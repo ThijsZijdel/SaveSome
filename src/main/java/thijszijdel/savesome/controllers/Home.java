@@ -18,6 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import thijszijdel.savesome.MainApp;
 import thijszijdel.savesome.interfaces.Data;
 import thijszijdel.savesome.connections.Expense.ExpensesData;
@@ -74,8 +75,9 @@ public class Home implements Initializable {
                     amount = amount * -1;
 
                 datalist.add(new PieChart.Data(name, amount));
-                chart.setStyle("CHART_COLOR_"+index+" : "+color+";");
-                System.out.println("-fx-CHART_COLOR_"+index+" : "+color+";");
+//                chart.setStyle("CHART_COLOR_"+index+" : "+color+";");
+//
+//                System.out.println("-fx-CHART_COLOR_"+index+" : "+color+";");
 
                 index++;
             }
@@ -108,8 +110,16 @@ public class Home implements Initializable {
     private void setUpBillsCalendar() {
 
         //JFXDatePickerSkin datePickerSkin = new JFXDatePickerSkin(new JFXDatePicker(LocalDate.now()));
-        DatePickerSkin datePickerSkin = new DatePickerSkin(new DatePicker(LocalDate.now()));
+
+        DatePicker datePicker = new DatePicker(LocalDate.now());
+        datePicker.setShowWeekNumbers(false);
+
+        datePicker.setEffect(null);
+        datePicker.setStyle("-fx-effect: null;");
+
+        DatePickerSkin datePickerSkin = new DatePickerSkin(datePicker);
         Node popupContent = datePickerSkin.getPopupContent();
+
 
         dateBills.getChildren().add(popupContent);
     }
