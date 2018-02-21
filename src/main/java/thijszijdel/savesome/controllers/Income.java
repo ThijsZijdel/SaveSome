@@ -38,21 +38,26 @@ public class Income implements Initializable {
 
 
         // TODO: make data dynamic
-        // TODO: move stacked bar chart to separate gui classe
-        yAxis.setLabel("Amount");
-        xAxis.setLabel("Month");
-        xAxis.setCategories(FXCollections.observableArrayList(Arrays.asList("Jan", "Feb", "Mar")));
+        // TODO: set the entire chart in the overviewChart class
+        // TODO: move stacked bar chart to separate gui class
+        //yAxis.setLabel("Amount");
+        //xAxis.setLabel("Month");
+        xAxis.setCategories(FXCollections.observableArrayList(Arrays.asList("Jan", "Feb", "Mar", "Apr", "May")));
 
 
         incoming.setName("Incoming");
         incoming.getData().add(new XYChart.Data("Jan", 750));
         incoming.getData().add(new XYChart.Data("Feb", 500));
         incoming.getData().add(new XYChart.Data("Mar", 1000));
+        incoming.getData().add(new XYChart.Data("Apr", 3000));
+        incoming.getData().add(new XYChart.Data("May", 1750));
 
         outgoing.setName("Outgoing");
         outgoing.getData().add(new XYChart.Data("Jan", -500));
         outgoing.getData().add(new XYChart.Data("Feb", -750));
         outgoing.getData().add(new XYChart.Data("Mar", -500));
+        outgoing.getData().add(new XYChart.Data("Apr", -700));
+        outgoing.getData().add(new XYChart.Data("May", -800));
 
         ended.setName("Ended up with");
         ended.getData().add(new XYChart.Data<>("Jan",250));

@@ -180,6 +180,13 @@ public class MainApp extends Application {
             scene.getStylesheets().add("/styles/Styles.css");
 
 
+            //TODO: test load Exception catch
+//            URL url = getClass().getResource(viewLink);
+//            FXMLLoader loader = new FXMLLoader(url);
+//            if (loader == null) {
+//                throw new RuntimeException("Could not find " + url.toString());
+//            }
+
 
             stage.getIcons().add(logo);
             stage.setTitle(APP_NAME);

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="573.0" prefWidth="699.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="thijszijdel.savesome.controllers.Expenses">
+<AnchorPane minHeight="450.0" prefHeight="900.0" prefWidth="699.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="thijszijdel.savesome.controllers.Expenses">
    <children>
       <JFXListView fx:id="expensesList" layoutX="27.0" layoutY="111.0" minWidth="425.0" prefHeight="462.0" prefWidth="460.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="111.0" />
       <Label fx:id="label" layoutX="518.0" layoutY="103.0" text="Label" />

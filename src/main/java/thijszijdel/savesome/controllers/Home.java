@@ -1,5 +1,8 @@
 package thijszijdel.savesome.controllers;
 
+import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.skins.JFXDatePickerSkin;
+import com.sun.javafx.scene.control.skin.DatePickerSkin;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -10,9 +13,11 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import thijszijdel.savesome.MainApp;
 import thijszijdel.savesome.interfaces.Data;
 import thijszijdel.savesome.connections.Expense.ExpensesData;
@@ -21,6 +26,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class Home implements Initializable {
@@ -31,6 +37,8 @@ public class Home implements Initializable {
 
     @FXML AnchorPane topLeft,topRight;
 
+    @FXML
+    Pane dateBills;
     /**
      * Initializing method for the Home view
      *
@@ -88,12 +96,23 @@ public class Home implements Initializable {
 
 
 
+        setUpBillsCalendar();
 
         // TODO: impliment all views
         MainApp.setAppMessage("Home screen is loaded.");
 
         setView("/FXML/Expenses.fxml", topLeft);
         setView("/FXML/Income.fxml", topRight);
+    }
+
+    private void setUpBillsCalendar() {
+
+
+        //JFXDatePickerSkin datePickerSkin = new JFXDatePickerSkin(new JFXDatePicker(LocalDate.now()));
+        DatePickerSkin datePickerSkin = new DatePickerSkin(new DatePicker(LocalDate.now()));
+        Node popupContent = datePickerSkin.getPopupContent();
+
+        dateBills.getChildren().add(popupContent);
     }
 
     /**
