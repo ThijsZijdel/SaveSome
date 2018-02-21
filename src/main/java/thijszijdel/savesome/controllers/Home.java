@@ -1,7 +1,5 @@
 package thijszijdel.savesome.controllers;
 
-import com.jfoenix.controls.JFXDatePicker;
-import com.jfoenix.skins.JFXDatePickerSkin;
 import com.sun.javafx.scene.control.skin.DatePickerSkin;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,9 +16,8 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import thijszijdel.savesome.MainApp;
-import thijszijdel.savesome.interfaces.Data;
+import thijszijdel.savesome.interfaces.IData;
 import thijszijdel.savesome.connections.Expense.ExpensesData;
 
 import java.io.IOException;
@@ -54,7 +51,7 @@ public class Home implements Initializable {
         //**     WILL BE MOVED      **/
         ObservableList<PieChart.Data> datalist = FXCollections.observableArrayList();
 
-        Data data = new ExpensesData();
+        IData data = new ExpensesData();
         int index = 1;
         try {
             ResultSet results = data.connection.executeResultSetQuery("" +

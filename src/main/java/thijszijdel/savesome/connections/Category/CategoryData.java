@@ -1,12 +1,12 @@
 package thijszijdel.savesome.connections.Category;
 
 import thijszijdel.savesome.MainApp;
-import thijszijdel.savesome.interfaces.Data;
+import thijszijdel.savesome.interfaces.IData;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class CategoryData implements Data {
+public class CategoryData implements IData {
 
     private ResultSet mainCategoryResultSet = null;
     private ResultSet subCategoryResultSet = null;

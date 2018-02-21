@@ -1,12 +1,12 @@
 package thijszijdel.savesome.connections.Budget;
 
 import thijszijdel.savesome.MainApp;
-import thijszijdel.savesome.interfaces.Data;
+import thijszijdel.savesome.interfaces.IData;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class BudgetData implements Data {
+public class BudgetData implements IData {
     private ResultSet budgetResultSet = null;
 
 

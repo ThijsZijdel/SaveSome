@@ -81,11 +81,11 @@ public class Income implements Initializable {
 
     private void setIncomingData() {
         incoming.setName("Incoming");
-//        incoming.getData().add(new XYChart.Data("Jan", 750));
-//        incoming.getData().add(new XYChart.Data("Feb", 500));
-//        incoming.getData().add(new XYChart.Data("Mar", 1000));
-//        incoming.getData().add(new XYChart.Data("Apr", 3000));
-//        incoming.getData().add(new XYChart.Data("May", 1750));
+//        incoming.getData().add(new XYChart.IData("Jan", 750));
+//        incoming.getData().add(new XYChart.IData("Feb", 500));
+//        incoming.getData().add(new XYChart.IData("Mar", 1000));
+//        incoming.getData().add(new XYChart.IData("Apr", 3000));
+//        incoming.getData().add(new XYChart.IData("May", 1750));
 
         try {
             ResultSet results = MainApp.getConnection().executeResultSetQuery("" +
