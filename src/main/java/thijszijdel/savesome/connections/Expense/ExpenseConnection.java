@@ -26,7 +26,7 @@ public class ExpenseConnection implements IConnection {
      */
     public ExpenseConnection(){
         try {
-            expensesList = convertToExpenses();
+            expensesList = convertToExpenses(data.getExpensesResultSet());
         } catch (SQLException e){
             MainApp.log(e);
         }
@@ -37,14 +37,11 @@ public class ExpenseConnection implements IConnection {
      * @return ArrayList Expenses (this)
      * @throws SQLException resultSet
      */
-    private ArrayList<Expense> convertToExpenses() throws SQLException{
+    private ArrayList<Expense> convertToExpenses(ResultSet resultSet) throws SQLException{
         ArrayList<Expense> list = new ArrayList<>();
 
-        ResultSet resultSet = data.getExpensesResultSet();
-
         while ( resultSet.next() ){
-            String id = "1";
-           // resultSet.getString("idCategory");
+            int id = resultSet.getInt("idExpense");
             String name = resultSet.getString("name");
             String description = resultSet.getString("description");
             double amount = resultSet.getDouble("amount");
@@ -75,46 +72,14 @@ public class ExpenseConnection implements IConnection {
     public void refreshConnection() {
         data.refreshData();
         try {
+            //TODO fix expense connection
+            //TODO implement month filtering on getting expenses
             expensesList = convertToExpenses();
         } catch (SQLException e){
             MainApp.log(e);
         }
     }
 
-
-    /**
-     * Getter for getting the expenses in display format
-     * Note: no sorting/ filtering is yet implemented
-     * @return styled HBoxes of expenses
-     */
-    public ArrayList<HBox> getExpenseDisplays(){
-        ArrayList<HBox> boxes = new ArrayList<>();
-
-        for (Expense expense : this.getList()) {
-
-            //Get the almost completed expense display
-            HBox box = display.getExpenseDisplay(expense);
-            box.getStyleClass().add("CellPadding");
-
-            //Setup for the indicator dot
-            Circle indicator = getIndicatorCircle(expense);
-
-//            box.setOnMouseEntered(t -> {
-//                if (expense.isNegative())
-//                    indicator.setStyle("-fx-fill:"+Settings.getAlertColorD());
-//                else
-//                    indicator.setStyle("-fx-fill:"+Settings.getSuccesColor());
-//            });
-//
-//            box.setOnMouseExited(t -> {
-//                indicator.setStyle("-fx-fill:"+expense.getSubCategory().getColor());
-//            });
-
-            box.getChildren().add(indicator);
-            boxes.add(box);
-        }
-        return boxes;
-    }
 
     // [Optional]
     //            ImageView imgView = new ImageView( new Image("/images/SaveSome.png") );
@@ -147,4 +112,72 @@ public class ExpenseConnection implements IConnection {
         MainApp.log(new Exception("no expense matched key"));
         return null;
     }
+
+    public ArrayList<HBox> getExpenseDisplays(int monthKey) {
+        ArrayList<HBox> boxes = new ArrayList<>();
+
+        try {
+            for (Expense expense : convertToExpenses(data.getExpensesResultSet(monthKey)) ) {
+
+                //Get the almost completed expense display
+                HBox box = display.getExpenseDisplay(expense);
+                box.getStyleClass().add("CellPadding");
+
+                //Setup for the indicator dot
+                Circle indicator = getIndicatorCircle(expense);
+
+    //            box.setOnMouseEntered(t -> {
+    //                if (expense.isNegative())
+    //                    indicator.setStyle("-fx-fill:"+Settings.getAlertColorD());
+    //                else
+    //                    indicator.setStyle("-fx-fill:"+Settings.getSuccesColor());
+    //            });
+    //
+    //            box.setOnMouseExited(t -> {
+    //                indicator.setStyle("-fx-fill:"+expense.getSubCategory().getColor());
+    //            });
+
+                box.getChildren().add(indicator);
+                boxes.add(box);
+            }
+        } catch (SQLException e) {
+            MainApp.log(e);
+        }
+        return boxes;
+
+    }
+
+    /**
+     * Getter for getting the expenses in display format
+     * Note: no sorting/ filtering is yet implemented
+     * @return styled HBoxes of expenses
+     */
+//    public ArrayList<HBox> getExpenseDisplays(){
+//        ArrayList<HBox> boxes = new ArrayList<>();
+//
+//        for (Expense expense : this.getList()) {
+//
+//            //Get the almost completed expense display
+//            HBox box = display.getExpenseDisplay(expense);
+//            box.getStyleClass().add("CellPadding");
+//
+//            //Setup for the indicator dot
+//            Circle indicator = getIndicatorCircle(expense);
+//
+////            box.setOnMouseEntered(t -> {
+////                if (expense.isNegative())
+////                    indicator.setStyle("-fx-fill:"+Settings.getAlertColorD());
+////                else
+////                    indicator.setStyle("-fx-fill:"+Settings.getSuccesColor());
+////            });
+////
+////            box.setOnMouseExited(t -> {
+////                indicator.setStyle("-fx-fill:"+expense.getSubCategory().getColor());
+////            });
+//
+//            box.getChildren().add(indicator);
+//            boxes.add(box);
+//        }
+//        return boxes;
+//    }
 }

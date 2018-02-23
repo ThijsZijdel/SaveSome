@@ -35,6 +35,15 @@ public class ExpensesData implements IData {
         return expensesResultSet;
     }
 
+    public ResultSet getExpensesResultSet(int monthKey) {
+        try {
+            return connection.executeResultSetQuery("SELECT * FROM Expense ORDER BY date DESC ;");
+        } catch (SQLException e) {
+            MainApp.log(e);
+            return null;
+        }
+    }
+
     @Override
     public void refreshData() {
         try {

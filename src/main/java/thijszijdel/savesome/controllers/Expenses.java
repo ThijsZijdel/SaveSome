@@ -12,6 +12,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import thijszijdel.savesome.MainApp;
 import thijszijdel.savesome.connections.Budget.Budget;
+import thijszijdel.savesome.connections.Expense.ExpenseConnection;
 
 
 import java.net.URL;
@@ -80,11 +81,14 @@ public class Expenses implements Initializable {
         initializeBudget();
     }
 
+    ExpenseConnection expenses = MainApp.getExpenseConnection();
     /**
      * Setup for expenses list
      */
     private void initializeExpensesList() {
-        expensesList.getItems().addAll(MainApp.getExpenseConnection().getExpenseDisplays());
+        int monthFk = 1;
+
+        expensesList.getItems().addAll(expenses.getExpenseDisplays(1));
 
         expensesList.getSelectionModel().selectedItemProperty().addListener(
                 (ChangeListener<HBox>) (ov, old_val, new_val) -> {
