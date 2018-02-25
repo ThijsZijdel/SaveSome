@@ -101,9 +101,7 @@ public class Input implements Initializable, State {
      */
     @FXML
     public void setToday(ActionEvent e){
-        //set date editable
         date.setDisable(!date.isDisabled());
-
     }
 
     /**

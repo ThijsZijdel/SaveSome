@@ -74,7 +74,7 @@ public class ExpenseConnection implements IConnection {
         try {
             //TODO fix expense connection
             //TODO implement month filtering on getting expenses
-            expensesList = convertToExpenses();
+            expensesList = convertToExpenses(data.getExpensesResultSet());
         } catch (SQLException e){
             MainApp.log(e);
         }
@@ -107,7 +107,7 @@ public class ExpenseConnection implements IConnection {
     @Override
     public Object get(int key) {
         for (Expense expense : this.expensesList)
-            if (Integer.parseInt(expense.getExpenseId()) == key)
+            if (expense.getExpenseId() == key)
                 return expense;
         MainApp.log(new Exception("no expense matched key"));
         return null;
