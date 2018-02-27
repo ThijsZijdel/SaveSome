@@ -3,7 +3,7 @@ package thijszijdel.savesome.interfaces;
 import thijszijdel.savesome.MainApp;
 import thijszijdel.savesome.database.JDBC;
 
-public interface Data {
+public interface IData {
 
     JDBC connection = MainApp.getConnection();
 

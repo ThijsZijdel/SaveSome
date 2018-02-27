@@ -29,57 +29,49 @@ public class Input implements Initializable, State {
 
     @FXML JFXTextField amount, name, description, sub1, date1;
 
-    //@FXML JFXTimePicker time;
     @FXML JFXDatePicker date;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        setStyling();
+        setCategories();
+        setBalances();
 
-        // TODO: CLEAN UP !!
+        setShowing(true);
+    }
 
-
-        background.setStyle("-fx-background-color: "+ MainApp.config.getBackground());
-
-
-        mainCategory.getItems().addAll(MainApp.getCategoryConnection().getMainCategoryNameList());
-
-        mainCategory.setStyle("-fx-text-fill : #e4e4e4");
-        mainCategory.setStyle("-fx-fill: #e4e4e4");
-
-
-
-
-        setCategoryListner();
-
+    private void setBalances() {
         balance.getItems().addAll(MainApp.balanceConnection().getBalanceComboBoxList());
-
-
-
-    //  PREFERRED BALANCE
 
 //        Balance preferredBalance = MainApp.config.getPreferredBalance();
 //        if (preferredBalance != null)
 //            System.out.println(preferredBalance.getName());
 //        //balance.setValue(balances.balanceComboBoxItem(preferredBalance));
-
-        MainApp.setAppMessage("Input screen is loaded.");
-
-
-        //pref fered balance
         balance.setValue(MainApp.balanceConnection().getBalanceComboBoxList().get(0));
 
-        setShowing(true);
+    }
+
+    private void setCategories() {
+        mainCategory.getItems().addAll(MainApp.getCategoryConnection().getMainCategoryNameList());
+
+        setCategoryListener();
+    }
+
+    private void setStyling() {
+        background.setStyle("-fx-background-color: "+ MainApp.config.getBackground());
+
+        mainCategory.setStyle("-fx-text-fill : #e4e4e4");
+        mainCategory.setStyle("-fx-fill: #e4e4e4");
     }
 
 
-    // TODO: CAT LISTENER !!!!
-    private void setCategoryListner() {
+    private void setCategoryListener() {
         mainCategory.valueProperty().addListener((ChangeListener<String>) (object, valBefore, valAfter) -> {
-            System.out.println("object: "+object);
-            System.out.println("valBefore: "+valBefore);
-            System.out.println("valAfter: "+valAfter);
+//            System.out.println("object: "+object);
+//            System.out.println("valBefore: "+valBefore);
+//            System.out.println("valAfter: "+valAfter);
             subCategory.getItems().clear();
-            subCategory.getItems().addAll(MainApp.getCategoryConnection().setSubCategoryNameList(mainCategory.getValue().toString()));
+            subCategory.getItems().addAll(MainApp.getCategoryConnection().getSubCatNameList(mainCategory.getValue().toString()));
         });
     }
 
@@ -101,9 +93,7 @@ public class Input implements Initializable, State {
      */
     @FXML
     public void setToday(ActionEvent e){
-        //set date editable
         date.setDisable(!date.isDisabled());
-
     }
 
     /**
@@ -114,15 +104,7 @@ public class Input implements Initializable, State {
     @FXML
     public void setRepeat(ActionEvent e){
         System.out.println("repeat");
-
-
-
-        //time value test
-       // Time timeValue = null;
-
-//        if (time.getValue() != null)
-//            timeValue = Time.valueOf(time.getValue());
-//            System.out.println(timeValue);
+        // TODO: repeat object
 
     }
 
@@ -136,20 +118,9 @@ public class Input implements Initializable, State {
         this.isShowing = state;
     }
 
-
-    /**
-     * WILL BE MOVED
-     */
     public void insertExpense(){
 
-
-
-
-        // TODO: MOVE INSERT, IMPROVE IT & IMPLIMENT ALL METHODS AND FIELDS
-        Time timeValue = null;
-
-//        if (time.getValue() != null)
-//            timeValue = Time.valueOf(time.getValue());
+        // TODO: MOVE INSERT, IMPROVE IT & IMPLEMENT ALL METHODS AND FIELDS
 
         try {
             MainApp.getConnection().executeUpdateQuery("INSERT INTO Expense " +

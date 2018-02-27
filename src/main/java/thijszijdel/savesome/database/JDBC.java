@@ -72,7 +72,7 @@ public class JDBC {
             try {
                 this.connection.close();
                 this.connection = null;
-                this.log("Data base has been closed");
+                this.log("IData base has been closed");
             } catch (SQLException eSQL) {
                 error(eSQL);
             }

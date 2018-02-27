@@ -1,12 +1,15 @@
 package thijszijdel.savesome.connections.Expense;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.chart.PieChart;
 import thijszijdel.savesome.MainApp;
-import thijszijdel.savesome.interfaces.Data;
+import thijszijdel.savesome.interfaces.IData;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ExpensesData implements Data {
+public class ExpensesData implements IData {
     private ResultSet expensesResultSet = null;
 
 
@@ -35,6 +38,25 @@ public class ExpensesData implements Data {
         return expensesResultSet;
     }
 
+    /**
+     * Get expenses for a specifc month
+     *
+     * @param monthKey for the correct month
+     * @return the resultSet
+     */
+    public ResultSet getExpensesResultSet(int monthKey) {
+        try {
+            //TODO impliment where statement
+            return connection.executeResultSetQuery("SELECT * FROM Expense ORDER BY date DESC ;");
+        } catch (SQLException e) {
+            MainApp.log(e);
+            return null;
+        }
+    }
+
+    /**
+     * Refreshing the data connection
+     */
     @Override
     public void refreshData() {
         try {
@@ -42,5 +64,32 @@ public class ExpensesData implements Data {
         } catch (SQLException e) {
             MainApp.log(e);
         }
+    }
+
+
+    /**
+     * Get the resultSet for a specific month
+     *
+     * @param month key
+     * @return resultSet for a specific month
+     */
+    protected ResultSet getResultSetMonth(int month) {
+
+        try {
+            //TODO add where monthfk = month!!
+            return  connection.executeResultSetQuery("" +
+                    "SELECT sum(amount) AS amount, " +
+                    "SubCategory.name, SubCategory.color " +
+                    "FROM Expense " +
+                    "LEFT JOIN SubCategory " +
+                    "ON Expense.subCategoryFk = SubCategory.idSubCategory "+
+                    "GROUP BY SubCategory.name, SubCategory.color;");
+
+
+        } catch (SQLException e) {
+            MainApp.log(e);
+            return null;
+        }
+
     }
 }

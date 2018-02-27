@@ -145,7 +145,7 @@ public class MainApp extends Application {
 
 
     /**
-     * Connection methods
+     * IConnection methods
      */
     private static BalanceConnection balanceConnection = new BalanceConnection();
     public static BalanceConnection balanceConnection() {

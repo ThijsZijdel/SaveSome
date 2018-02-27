@@ -12,6 +12,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import thijszijdel.savesome.MainApp;
 import thijszijdel.savesome.connections.Budget.Budget;
+import thijszijdel.savesome.connections.Expense.ExpenseConnection;
 
 
 import java.net.URL;
@@ -30,6 +31,11 @@ public class Expenses implements Initializable {
     @FXML Label spend, spend_budget, description;
     @FXML JFXListView expensesList;
     @FXML JFXProgressBar indicatorBar;
+
+    private ExpenseConnection expenses = MainApp.getExpenseConnection();
+
+    private int monthFk = 1;
+
     /**
      * Getter for the instance of this class
      *
@@ -76,33 +82,45 @@ public class Expenses implements Initializable {
 
         MainApp.getInstance().openView("/FXML/Input.fxml",  MainApp.getInputStage() );
 
-        initializeExpensesList();
+        setupExpensesDisplays();
         initializeBudget();
     }
 
     /**
      * Setup for expenses list
      */
-    private void initializeExpensesList() {
-        expensesList.getItems().addAll(MainApp.getExpenseConnection().getExpenseDisplays());
+    private void setupExpensesDisplays() {
+
+        setExpensesData();
 
         expensesList.getSelectionModel().selectedItemProperty().addListener(
                 (ChangeListener<HBox>) (ov, old_val, new_val) -> {
-                    label.setText(new_val.toString());
-                    MainApp.setAppMessage("Expense selected, value: "+new_val.toString());
+                    if (new_val.toString().trim().length()>0)
+                        label.setText(new_val.toString());
+                        MainApp.setAppMessage("Expense selected, value: "+new_val.toString());
                 });
 
         expensesList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         expensesList.setExpanded(Boolean.TRUE);
 
-        expensesList.getStyleClass().add("noBlueBorders");
+       // expensesList.getStyleClass().add("noBlueBorders");
         HBox.setHgrow(expensesList, Priority.ALWAYS);
+    }
+
+    private void setExpensesData() {
+        expensesList.getItems().clear();
+
+        expensesList.getItems().addAll(expenses.getExpenseDisplays(monthFk));
     }
 
 
     public void prevMonth(ActionEvent actionEvent) {
+        monthFk--;
+        setExpensesData();
     }
 
     public void nextMonth(ActionEvent actionEvent) {
+        monthFk++;
+        setExpensesData();
     }
 }

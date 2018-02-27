@@ -1,19 +1,19 @@
 package thijszijdel.savesome.connections.Income;
 
 import thijszijdel.savesome.MainApp;
-import thijszijdel.savesome.interfaces.Data;
+import thijszijdel.savesome.interfaces.IData;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class IncomeData implements Data {
+public class IncomeData implements IData {
     private ResultSet incomesResultSet = null;
 
 
     /**
      * Constructor for the database connection for incomes
      */
-    public IncomeData(){
+    protected IncomeData(){
         try {
             this.incomesResultSet = getIncomesData();
         } catch (SQLException e) {
@@ -31,10 +31,14 @@ public class IncomeData implements Data {
         return connection.executeResultSetQuery("SELECT * FROM Income;");
     }
 
-    public ResultSet getIncomesResultSet() {
+    protected ResultSet getIncomesResultSet() {
         return incomesResultSet;
     }
 
+
+    /**
+     * Refreshing the income data
+     */
     @Override
     public void refreshData() {
         try {

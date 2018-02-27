@@ -1,14 +1,14 @@
 package thijszijdel.savesome.connections.Budget;
 
 import thijszijdel.savesome.MainApp;
-import thijszijdel.savesome.interfaces.Connection;
+import thijszijdel.savesome.interfaces.IConnection;
 
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class BudgetConnection implements Connection {
+public class BudgetConnection implements IConnection {
 
     private final BudgetData data = new BudgetData();
 

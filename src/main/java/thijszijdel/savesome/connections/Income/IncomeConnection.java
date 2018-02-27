@@ -1,14 +1,14 @@
 package thijszijdel.savesome.connections.Income;
 
 import thijszijdel.savesome.MainApp;
-import thijszijdel.savesome.interfaces.Connection;
+import thijszijdel.savesome.interfaces.IConnection;
 
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class IncomeConnection implements Connection {
+public class IncomeConnection implements IConnection {
 
     private final IncomeData data = new IncomeData();
 
@@ -39,16 +39,20 @@ public class IncomeConnection implements Connection {
 
         while (resultSet.next()) {
             int incomeId =  resultSet.getInt("incomeId");
+            String name = resultSet.getString("name");
+            String description = resultSet.getString("description");
             int alreadyPaid = resultSet.getInt("alreadyPaid");
             int repeatingFk = resultSet.getInt("repeatingFk");
             double amount = resultSet.getDouble("amount");
-            String description = resultSet.getString("description");
+
             int balanceFk = resultSet.getInt("balanceFk");
             Date date = resultSet.getDate("date");
-            String name = resultSet.getString("name");
+            int monthFk = resultSet.getInt("monthFk");
+            int compnayFk = resultSet.getInt("companyFk");
 
 
-            list.add(new Income(incomeId, name, description, amount, repeatingFk, date, balanceFk, alreadyPaid));
+
+            list.add(new Income(incomeId, name, description, amount, repeatingFk, date, balanceFk, alreadyPaid, monthFk, compnayFk));
         }
 
         return list;

@@ -2,13 +2,13 @@ package thijszijdel.savesome.settings;
 
 import thijszijdel.savesome.MainApp;
 import thijszijdel.savesome.database.JDBC;
-import thijszijdel.savesome.interfaces.Data;
+import thijszijdel.savesome.interfaces.IData;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 
-public class SettingsData implements Data {
+public class SettingsData implements IData {
 
     private ResultSet settingResultSet;
 

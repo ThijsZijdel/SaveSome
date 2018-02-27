@@ -1,12 +1,12 @@
 package thijszijdel.savesome.connections.Budget;
 
 import thijszijdel.savesome.MainApp;
-import thijszijdel.savesome.interfaces.Data;
+import thijszijdel.savesome.interfaces.IData;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class BudgetData implements Data {
+public class BudgetData implements IData {
     private ResultSet budgetResultSet = null;
 
 
@@ -31,7 +31,7 @@ public class BudgetData implements Data {
         return connection.executeResultSetQuery("SELECT * FROM Budget;");
     }
 
-    public ResultSet getBudgetResultSet() {
+    protected ResultSet getBudgetResultSet() {
         return budgetResultSet;
     }
 

@@ -1,7 +1,5 @@
 package thijszijdel.savesome.controllers;
 
-import com.jfoenix.controls.JFXDatePicker;
-import com.jfoenix.skins.JFXDatePickerSkin;
 import com.sun.javafx.scene.control.skin.DatePickerSkin;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,10 +16,11 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import thijszijdel.savesome.MainApp;
-import thijszijdel.savesome.interfaces.Data;
+import thijszijdel.savesome.connections.Expense.ExpenseConnection;
+import thijszijdel.savesome.interfaces.IData;
 import thijszijdel.savesome.connections.Expense.ExpensesData;
+import thijszijdel.savesome.ui.displays.BillsCalendar;
 
 import java.io.IOException;
 import java.net.URL;
@@ -50,54 +49,8 @@ public class Home implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
 
-        // TODO:      Move overview cat chart for expenses
-        //**     WILL BE MOVED      **/
-        ObservableList<PieChart.Data> datalist = FXCollections.observableArrayList();
 
-        Data data = new ExpensesData();
-        int index = 1;
-        try {
-            ResultSet results = data.connection.executeResultSetQuery("" +
-                    "SELECT sum(amount) AS amount, " +
-                    "SubCategory.name, SubCategory.color " +
-                        "FROM Expense " +
-                            "LEFT JOIN SubCategory " +
-                            "ON Expense.subCategoryFk = SubCategory.idSubCategory "+
-                        "GROUP BY SubCategory.name, SubCategory.color;");
-
-            while (results.next()){
-
-                double amount = results.getDouble("amount");
-                String name = results.getString("SubCategory.name");
-                String color = results.getString("SubCategory.color");
-
-                if (amount < 0)
-                    amount = amount * -1;
-
-                datalist.add(new PieChart.Data(name, amount));
-//                chart.setStyle("CHART_COLOR_"+index+" : "+color+";");
-//
-//                System.out.println("-fx-CHART_COLOR_"+index+" : "+color+";");
-
-                index++;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        chart.getData().clear();
-
-        chart.setData( datalist);
-        chart.setAnimated(true);
-        chart.setTitle("Categories");
-
-        chart.setLabelLineLength(10);
-        chart.setLegendSide(Side.RIGHT);
-
-
-
-
-
+        setupCategoryChart();
         setUpBillsCalendar();
 
         // TODO: impliment all views
@@ -107,21 +60,27 @@ public class Home implements Initializable {
         setView("/FXML/Income.fxml", topRight);
     }
 
+    private void setupCategoryChart() {
+        ObservableList<PieChart.Data> datalist = FXCollections.observableArrayList();
+
+        ExpenseConnection data = MainApp.getExpenseConnection();
+
+        datalist.addAll(data.getExpensesSumMonth(1));
+
+        chart.getData().clear();
+
+        chart.setData( datalist);
+        chart.setAnimated(true);
+        chart.setTitle("Categories");
+
+        chart.setLabelLineLength(10);
+        chart.setLegendSide(Side.RIGHT);
+    }
+
     private void setUpBillsCalendar() {
+        BillsCalendar cal = new BillsCalendar();
 
-        //JFXDatePickerSkin datePickerSkin = new JFXDatePickerSkin(new JFXDatePicker(LocalDate.now()));
-
-        DatePicker datePicker = new DatePicker(LocalDate.now());
-        datePicker.setShowWeekNumbers(false);
-
-        datePicker.setEffect(null);
-        datePicker.setStyle("-fx-effect: null;");
-
-        DatePickerSkin datePickerSkin = new DatePickerSkin(datePicker);
-        Node popupContent = datePickerSkin.getPopupContent();
-
-
-        dateBills.getChildren().add(popupContent);
+        dateBills.getChildren().add(cal.getCalendarNode());
     }
 
     /**
@@ -147,24 +106,19 @@ public class Home implements Initializable {
     }
 
 
-
-
-
-
-    // TODO: possible move these with the chart
     /**
-     * Get the selection of the chart
+     * Get the selection of the incomeChart
      *
-     * @param event when click chart piece
+     * @param event when click incomeChart piece
      */
     @FXML
     private void getChartSelection(MouseEvent event ) {
+        //TODO move incomeChart selection to incomeChart class
         for (final PieChart.Data data : chart.getData()) {
             data.getNode().addEventHandler(MouseEvent.MOUSE_PRESSED,
                 e -> chartSelected(data));
         }
     }
-
     private void chartSelected(PieChart.Data data) {
         chartLabel.setText(String.valueOf(data.getPieValue()) + "%");
         MainApp.setAppMessage(String.valueOf(data.getPieValue()) + "% spend on "+data.getName());

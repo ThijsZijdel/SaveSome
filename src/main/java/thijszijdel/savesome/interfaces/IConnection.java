@@ -2,7 +2,7 @@ package thijszijdel.savesome.interfaces;
 
 import java.util.ArrayList;
 
-public interface Connection {
+public interface IConnection {
 
     // TODO: Cleanup all the implementation classes
     void refreshConnection();

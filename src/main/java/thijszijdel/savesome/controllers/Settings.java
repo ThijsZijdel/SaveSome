@@ -17,12 +17,7 @@ import java.util.ResourceBundle;
 
 public class Settings implements Initializable {
 
-   // @FXML
-   // JFXTreeTableView categories;
-    @FXML
-   Pane mainCatPane,subCatPane;
-
-
+    @FXML Pane mainCatPane,subCatPane;
 
 
     /**

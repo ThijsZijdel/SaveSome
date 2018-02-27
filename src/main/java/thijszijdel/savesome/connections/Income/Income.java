@@ -20,13 +20,20 @@ public class Income {
     private int alreadyPaid;
     private boolean alreadyPaidBool;
 
-    public Income(int incomeId, String name, String description, double amount, int repeatingFk, Date date, int balanceFk, int alreadyPaid) {
+
+    private int monthFk;
+    private int companyFk;
+
+    public Income(int incomeId, String name, String description, double amount, int repeatingFk, Date date, int balanceFk, int alreadyPaid, int monthFk, int companyFk) {
         this.incomeId = incomeId;
         this.name = name;
         this.description = description;
         this.amount = amount;
         this.repeatingFk = repeatingFk;
         this.date = date;
+
+        this.monthFk = monthFk;
+        this.companyFk = companyFk;
 
         this.isNegative = (amount < 0);
 

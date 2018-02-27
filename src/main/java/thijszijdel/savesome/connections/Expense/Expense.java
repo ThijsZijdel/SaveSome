@@ -8,7 +8,7 @@ import java.sql.Date;
 import java.sql.Time;
 
 public class Expense {
-    private String expenseId;
+    private int expenseId;
     private String name;
     private String description;
     private double amount;
@@ -21,7 +21,7 @@ public class Expense {
     private int balanceFk;
     private Balance balance;
 
-    public Expense(String expenseId, String name, String description, double amount, Date date, String month, int subCategoryFk, int balanceFk) {
+    public Expense(int expenseId, String name, String description, double amount, Date date, String month, int subCategoryFk, int balanceFk) {
         this.expenseId = expenseId;
         this.name = name;
         this.description = description;
@@ -49,7 +49,7 @@ public class Expense {
             return "+ "+Double.toString(amount);
     }
 
-    public String getExpenseId() {
+    public int getExpenseId() {
         return expenseId;
     }
 

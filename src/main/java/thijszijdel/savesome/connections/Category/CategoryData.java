@@ -1,12 +1,12 @@
 package thijszijdel.savesome.connections.Category;
 
 import thijszijdel.savesome.MainApp;
-import thijszijdel.savesome.interfaces.Data;
+import thijszijdel.savesome.interfaces.IData;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class CategoryData implements Data {
+public class CategoryData implements IData {
 
     private ResultSet mainCategoryResultSet = null;
     private ResultSet subCategoryResultSet = null;
@@ -47,17 +47,20 @@ public class CategoryData implements Data {
     /**
      * @return initialized main category resultSet
      */
-    public ResultSet getMainCategoryResultSet() {
+    protected ResultSet getMainCategoryResultSet() {
         return this.mainCategoryResultSet;
     }
 
     /**
      * @return initialized sub category resultSet
      */
-    public ResultSet getSubCategoryResultSet() {
+    protected ResultSet getSubCategoryResultSet() {
         return this.subCategoryResultSet;
     }
 
+    /**
+     * Refreshing the catergory data
+     */
     @Override
     public void refreshData() {
         try {
