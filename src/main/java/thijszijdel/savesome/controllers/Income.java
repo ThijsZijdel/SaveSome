@@ -5,12 +5,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.chart.*;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import thijszijdel.savesome.interfaces.IRefresh;
 import thijszijdel.savesome.ui.charts.IncomeChart;
 
 import java.net.URL;
 import java.util.*;
 
-public class Income implements Initializable {
+public class Income implements Initializable, IRefresh {
     CategoryAxis xAxis = new CategoryAxis();
     NumberAxis yAxis = new NumberAxis();
 
@@ -52,5 +53,10 @@ public class Income implements Initializable {
 
     public void setSpent(String spent) {
         this.spent.setText(spent);
+    }
+
+    @Override
+    public void refresh() {
+        
     }
 }

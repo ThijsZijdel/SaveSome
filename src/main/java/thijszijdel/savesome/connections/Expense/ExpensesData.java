@@ -66,6 +66,11 @@ public class ExpensesData implements IData {
         }
     }
 
+    @Override
+    public void update(int key) {
+
+    }
+
 
     /**
      * Get the resultSet for a specific month

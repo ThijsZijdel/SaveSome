@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 
 import javafx.scene.layout.Pane;
+import thijszijdel.savesome.interfaces.IRefresh;
 import thijszijdel.savesome.ui.tables.MainCategoryTreeTable;
 import thijszijdel.savesome.ui.tables.SubCategoryTreeTable;
 
@@ -15,7 +16,7 @@ import java.net.URL;
 
 import java.util.ResourceBundle;
 
-public class Settings implements Initializable {
+public class Settings implements Initializable, IRefresh {
 
     @FXML Pane mainCatPane,subCatPane;
 
@@ -53,4 +54,9 @@ public class Settings implements Initializable {
 
     @FXML JFXTextField search;
     @FXML Label hitsMain, hitsSub;
+
+    @Override
+    public void refresh() {
+
+    }
 }

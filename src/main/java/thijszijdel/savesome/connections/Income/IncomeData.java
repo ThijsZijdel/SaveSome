@@ -47,4 +47,9 @@ public class IncomeData implements IData {
             MainApp.log(e);
         }
     }
+
+    @Override
+    public void update(int key) {
+
+    }
 }

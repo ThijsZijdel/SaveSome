@@ -13,13 +13,14 @@ import javafx.scene.layout.Priority;
 import thijszijdel.savesome.MainApp;
 import thijszijdel.savesome.connections.Budget.Budget;
 import thijszijdel.savesome.connections.Expense.ExpenseConnection;
+import thijszijdel.savesome.interfaces.IRefresh;
 
 
 import java.net.URL;
 
 import java.util.ResourceBundle;
 
-public class Expenses implements Initializable {
+public class Expenses implements Initializable, IRefresh {
 
     private static boolean isShowing = false;
 
@@ -122,5 +123,11 @@ public class Expenses implements Initializable {
     public void nextMonth(ActionEvent actionEvent) {
         monthFk++;
         setExpensesData();
+    }
+
+
+    @Override
+    public void refresh() {
+
     }
 }

@@ -20,6 +20,7 @@ import thijszijdel.savesome.MainApp;
 import thijszijdel.savesome.connections.Expense.ExpenseConnection;
 import thijszijdel.savesome.interfaces.IData;
 import thijszijdel.savesome.connections.Expense.ExpensesData;
+import thijszijdel.savesome.interfaces.IRefresh;
 import thijszijdel.savesome.ui.displays.BillsCalendar;
 
 import java.io.IOException;
@@ -29,7 +30,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
-public class Home implements Initializable {
+public class Home implements Initializable, IRefresh {
 
     @FXML PieChart chart;
 
@@ -125,4 +126,8 @@ public class Home implements Initializable {
 
     }
 
+    @Override
+    public void refresh() {
+
+    }
 }

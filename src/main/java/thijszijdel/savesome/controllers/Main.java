@@ -11,13 +11,14 @@ import javafx.scene.control.ToolBar;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import thijszijdel.savesome.MainApp;
+import thijszijdel.savesome.interfaces.IRefresh;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class Main implements Initializable {
+public class Main implements Initializable, IRefresh {
 
     /**
      * link of the current view
@@ -76,7 +77,7 @@ public class Main implements Initializable {
 
         for (Object obj : toolbar.getItems())
             if (obj instanceof JFXButton)
-                buttons.add((JFXButton) obj);
+                buttons.add( (JFXButton) obj );
 
 
         initializeBalance();
@@ -185,8 +186,12 @@ public class Main implements Initializable {
      */
     @FXML
     private void refresh(Event e){
+        refresh();
+    }
+
+    @Override
+    public void refresh() {
         MainApp.refresh();
         MainApp.setAppMessage("Application data is reloaded.");
     }
-
 }

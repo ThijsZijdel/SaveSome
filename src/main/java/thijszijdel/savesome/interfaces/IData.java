@@ -15,4 +15,9 @@ public interface IData {
     //      Like: data query
     //      ResultSet setup etc etc.
     // TODO: Maybe specifc searches??
+
+    /**
+     * @param key
+     */
+    void update(int key);
 }
