@@ -20,6 +20,7 @@ import thijszijdel.savesome.MainApp;
 import thijszijdel.savesome.connections.Expense.ExpenseConnection;
 import thijszijdel.savesome.interfaces.IData;
 import thijszijdel.savesome.connections.Expense.ExpensesData;
+import thijszijdel.savesome.ui.displays.BillsCalendar;
 
 import java.io.IOException;
 import java.net.URL;
@@ -50,11 +51,6 @@ public class Home implements Initializable {
 
 
         setupCategoryChart();
-
-
-
-
-
         setUpBillsCalendar();
 
         // TODO: impliment all views
@@ -65,11 +61,9 @@ public class Home implements Initializable {
     }
 
     private void setupCategoryChart() {
-        //**     WILL BE MOVED      **/
         ObservableList<PieChart.Data> datalist = FXCollections.observableArrayList();
 
         ExpenseConnection data = MainApp.getExpenseConnection();
-
 
         datalist.addAll(data.getExpensesSumMonth(1));
 
@@ -84,20 +78,9 @@ public class Home implements Initializable {
     }
 
     private void setUpBillsCalendar() {
+        BillsCalendar cal = new BillsCalendar();
 
-        //JFXDatePickerSkin datePickerSkin = new JFXDatePickerSkin(new JFXDatePicker(LocalDate.now()));
-
-        DatePicker datePicker = new DatePicker(LocalDate.now());
-        datePicker.setShowWeekNumbers(false);
-
-        datePicker.setEffect(null);
-        datePicker.setStyle("-fx-effect: null;");
-
-        DatePickerSkin datePickerSkin = new DatePickerSkin(datePicker);
-        Node popupContent = datePickerSkin.getPopupContent();
-
-
-        dateBills.getChildren().add(popupContent);
+        dateBills.getChildren().add(cal.getCalendarNode());
     }
 
     /**
@@ -123,24 +106,19 @@ public class Home implements Initializable {
     }
 
 
-
-
-
-
-    // TODO: possible move these with the chart
     /**
-     * Get the selection of the chart
+     * Get the selection of the incomeChart
      *
-     * @param event when click chart piece
+     * @param event when click incomeChart piece
      */
     @FXML
     private void getChartSelection(MouseEvent event ) {
+        //TODO move incomeChart selection to incomeChart class
         for (final PieChart.Data data : chart.getData()) {
             data.getNode().addEventHandler(MouseEvent.MOUSE_PRESSED,
                 e -> chartSelected(data));
         }
     }
-
     private void chartSelected(PieChart.Data data) {
         chartLabel.setText(String.valueOf(data.getPieValue()) + "%");
         MainApp.setAppMessage(String.valueOf(data.getPieValue()) + "% spend on "+data.getName());

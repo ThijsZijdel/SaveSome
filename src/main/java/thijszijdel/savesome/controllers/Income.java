@@ -1,17 +1,13 @@
 package thijszijdel.savesome.controllers;
 
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.*;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
-import thijszijdel.savesome.MainApp;
 import thijszijdel.savesome.ui.charts.IncomeChart;
 
 import java.net.URL;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.*;
 
 public class Income implements Initializable {
@@ -24,7 +20,7 @@ public class Income implements Initializable {
     @FXML
     Label income, spent;
 
-    IncomeChart chart = new IncomeChart(xAxis, yAxis, this);
+    IncomeChart incomeChart = new IncomeChart(xAxis, yAxis, this);
 
 
      /**
@@ -42,7 +38,7 @@ public class Income implements Initializable {
 
 
         // keep this
-        pane.getChildren().setAll(chart.getChart());
+        pane.getChildren().setAll(incomeChart.getChart());
 
 
 

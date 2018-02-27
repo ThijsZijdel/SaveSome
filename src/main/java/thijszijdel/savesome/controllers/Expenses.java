@@ -31,6 +31,11 @@ public class Expenses implements Initializable {
     @FXML Label spend, spend_budget, description;
     @FXML JFXListView expensesList;
     @FXML JFXProgressBar indicatorBar;
+
+    private ExpenseConnection expenses = MainApp.getExpenseConnection();
+
+    private int monthFk = 1;
+
     /**
      * Getter for the instance of this class
      *
@@ -77,36 +82,45 @@ public class Expenses implements Initializable {
 
         MainApp.getInstance().openView("/FXML/Input.fxml",  MainApp.getInputStage() );
 
-        initializeExpensesList();
+        setupExpensesDisplays();
         initializeBudget();
     }
 
-    ExpenseConnection expenses = MainApp.getExpenseConnection();
     /**
      * Setup for expenses list
      */
-    private void initializeExpensesList() {
-        int monthFk = 1;
+    private void setupExpensesDisplays() {
 
-        expensesList.getItems().addAll(expenses.getExpenseDisplays(1));
+        setExpensesData();
 
         expensesList.getSelectionModel().selectedItemProperty().addListener(
                 (ChangeListener<HBox>) (ov, old_val, new_val) -> {
-                    label.setText(new_val.toString());
-                    MainApp.setAppMessage("Expense selected, value: "+new_val.toString());
+                    if (new_val.toString().trim().length()>0)
+                        label.setText(new_val.toString());
+                        MainApp.setAppMessage("Expense selected, value: "+new_val.toString());
                 });
 
         expensesList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         expensesList.setExpanded(Boolean.TRUE);
 
-        expensesList.getStyleClass().add("noBlueBorders");
+       // expensesList.getStyleClass().add("noBlueBorders");
         HBox.setHgrow(expensesList, Priority.ALWAYS);
+    }
+
+    private void setExpensesData() {
+        expensesList.getItems().clear();
+
+        expensesList.getItems().addAll(expenses.getExpenseDisplays(monthFk));
     }
 
 
     public void prevMonth(ActionEvent actionEvent) {
+        monthFk--;
+        setExpensesData();
     }
 
     public void nextMonth(ActionEvent actionEvent) {
+        monthFk++;
+        setExpensesData();
     }
 }
