@@ -1,5 +1,8 @@
 package thijszijdel.savesome.connections.Expense;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.chart.PieChart;
 import javafx.scene.layout.HBox;
 
 import javafx.scene.paint.Color;
@@ -104,8 +107,14 @@ public class ExpenseConnection implements IConnection {
         return circle;
     }
 
+    /**
+     * Getter for a expense based on the id
+     *
+     * @param key for the wanted expense
+     * @return Expense
+     */
     @Override
-    public Object get(int key) {
+    public Expense get(int key) {
         for (Expense expense : this.expensesList)
             if (expense.getExpenseId() == key)
                 return expense;
@@ -113,10 +122,17 @@ public class ExpenseConnection implements IConnection {
         return null;
     }
 
+    /**
+     * Get the expenses displays of a specific month
+     *
+     * @param monthKey
+     * @return array of expense displays
+     */
     public ArrayList<HBox> getExpenseDisplays(int monthKey) {
         ArrayList<HBox> boxes = new ArrayList<>();
 
         try {
+            //loop trough all the expenses for the given month
             for (Expense expense : convertToExpenses(data.getExpensesResultSet(monthKey)) ) {
 
                 //Get the almost completed expense display
@@ -132,7 +148,7 @@ public class ExpenseConnection implements IConnection {
     //                else
     //                    indicator.setStyle("-fx-fill:"+Settings.getSuccesColor());
     //            });
-    //
+
     //            box.setOnMouseExited(t -> {
     //                indicator.setStyle("-fx-fill:"+expense.getSubCategory().getColor());
     //            });
@@ -180,4 +196,42 @@ public class ExpenseConnection implements IConnection {
 //        }
 //        return boxes;
 //    }
+
+
+    /**
+     *
+     * @param month
+     * @return
+     */
+    public ObservableList<PieChart.Data> getExpensesSumMonth(int month) {
+        ObservableList<PieChart.Data> datalist = FXCollections.observableArrayList();
+        int index = 1;
+        try {
+
+            ResultSet results = data.getResultSetMonth(month);
+
+
+            //wheter monthFk = month;
+
+            while (results.next()){
+
+                double amount = results.getDouble("amount");
+                String name = results.getString("SubCategory.name");
+                String color = results.getString("SubCategory.color");
+
+                if (amount < 0)
+                    amount = amount * -1;
+
+                datalist.add(new PieChart.Data(name, amount));
+//                chart.setStyle("CHART_COLOR_"+index+" : "+color+";");
+//
+//                System.out.println("-fx-CHART_COLOR_"+index+" : "+color+";");
+
+                index++;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return datalist;
+    }
 }

@@ -13,7 +13,7 @@ public class IncomeData implements IData {
     /**
      * Constructor for the database connection for incomes
      */
-    public IncomeData(){
+    protected IncomeData(){
         try {
             this.incomesResultSet = getIncomesData();
         } catch (SQLException e) {
@@ -31,10 +31,14 @@ public class IncomeData implements IData {
         return connection.executeResultSetQuery("SELECT * FROM Income;");
     }
 
-    public ResultSet getIncomesResultSet() {
+    protected ResultSet getIncomesResultSet() {
         return incomesResultSet;
     }
 
+
+    /**
+     * Refreshing the income data
+     */
     @Override
     public void refreshData() {
         try {

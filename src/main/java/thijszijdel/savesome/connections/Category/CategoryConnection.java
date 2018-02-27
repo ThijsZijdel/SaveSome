@@ -30,6 +30,8 @@ public class CategoryConnection implements IConnection {
         }
     }
 
+    //TODO comment this shit
+
     private ArrayList<SubCategory> convertToSubCatList() throws SQLException{
         ArrayList<SubCategory> list = new ArrayList<>();
 
@@ -49,6 +51,13 @@ public class CategoryConnection implements IConnection {
         return list;
     }
 
+
+    /**
+     * Convert the main category resultSet to a usable cat list.
+     *
+     * @return arrayList of all the categories
+     * @throws SQLException looping trough a resultSet
+     */
     private ArrayList<Category> convertToMainCatList() throws SQLException{
         ArrayList<Category> list = new ArrayList<>();
 
@@ -67,13 +76,26 @@ public class CategoryConnection implements IConnection {
     }
 
 
+    /**
+     * Getter for the main category list
+     * @return list of categories objects
+     */
     public ArrayList<Category> getMainCategoryList() {
         return this.mainCategoryList;
     }
 
+    /**
+     * Getter for the sub category list
+     * @return list of sub categories objects
+     */
     public ArrayList<SubCategory> getSubCategoryList() {
         return this.subCategoryList;
     }
+
+
+
+
+
 
     public ArrayList<String> getSubCategoryNameList() {
         ArrayList<String> subCatNameList = new ArrayList<>();
@@ -92,7 +114,14 @@ public class CategoryConnection implements IConnection {
         }
         return mainCatNameList;
     }
-    public ArrayList<String> setSubCategoryNameList(String mainCategoryName){
+
+
+    /**
+     * Get the sub categories based on the selected main category
+     * @param mainCategoryName where the subcategories will be based on.
+     * @return the sub category name list
+     */
+    public ArrayList<String> getSubCatNameList(String mainCategoryName){
         ArrayList<String> subCategoryNameList = new ArrayList<>();
         int id = getMainCategoryId(mainCategoryName);
         if (id != 0){

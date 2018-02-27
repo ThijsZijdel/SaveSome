@@ -47,17 +47,20 @@ public class CategoryData implements IData {
     /**
      * @return initialized main category resultSet
      */
-    public ResultSet getMainCategoryResultSet() {
+    protected ResultSet getMainCategoryResultSet() {
         return this.mainCategoryResultSet;
     }
 
     /**
      * @return initialized sub category resultSet
      */
-    public ResultSet getSubCategoryResultSet() {
+    protected ResultSet getSubCategoryResultSet() {
         return this.subCategoryResultSet;
     }
 
+    /**
+     * Refreshing the catergory data
+     */
     @Override
     public void refreshData() {
         try {

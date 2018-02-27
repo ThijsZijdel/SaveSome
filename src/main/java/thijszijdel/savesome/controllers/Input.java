@@ -79,7 +79,7 @@ public class Input implements Initializable, State {
             System.out.println("valBefore: "+valBefore);
             System.out.println("valAfter: "+valAfter);
             subCategory.getItems().clear();
-            subCategory.getItems().addAll(MainApp.getCategoryConnection().setSubCategoryNameList(mainCategory.getValue().toString()));
+            subCategory.getItems().addAll(MainApp.getCategoryConnection().getSubCatNameList(mainCategory.getValue().toString()));
         });
     }
 

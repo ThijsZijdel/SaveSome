@@ -31,7 +31,7 @@ public class BudgetData implements IData {
         return connection.executeResultSetQuery("SELECT * FROM Budget;");
     }
 
-    public ResultSet getBudgetResultSet() {
+    protected ResultSet getBudgetResultSet() {
         return budgetResultSet;
     }
 

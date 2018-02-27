@@ -1,5 +1,8 @@
 package thijszijdel.savesome.connections.Expense;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.chart.PieChart;
 import thijszijdel.savesome.MainApp;
 import thijszijdel.savesome.interfaces.IData;
 
@@ -35,8 +38,15 @@ public class ExpensesData implements IData {
         return expensesResultSet;
     }
 
+    /**
+     * Get expenses for a specifc month
+     *
+     * @param monthKey for the correct month
+     * @return the resultSet
+     */
     public ResultSet getExpensesResultSet(int monthKey) {
         try {
+            //TODO impliment where statement
             return connection.executeResultSetQuery("SELECT * FROM Expense ORDER BY date DESC ;");
         } catch (SQLException e) {
             MainApp.log(e);
@@ -44,6 +54,9 @@ public class ExpensesData implements IData {
         }
     }
 
+    /**
+     * Refreshing the data connection
+     */
     @Override
     public void refreshData() {
         try {
@@ -51,5 +64,32 @@ public class ExpensesData implements IData {
         } catch (SQLException e) {
             MainApp.log(e);
         }
+    }
+
+
+    /**
+     * Get the resultSet for a specific month
+     *
+     * @param month key
+     * @return resultSet for a specific month
+     */
+    protected ResultSet getResultSetMonth(int month) {
+
+        try {
+            //TODO add where monthfk = month!!
+            return  connection.executeResultSetQuery("" +
+                    "SELECT sum(amount) AS amount, " +
+                    "SubCategory.name, SubCategory.color " +
+                    "FROM Expense " +
+                    "LEFT JOIN SubCategory " +
+                    "ON Expense.subCategoryFk = SubCategory.idSubCategory "+
+                    "GROUP BY SubCategory.name, SubCategory.color;");
+
+
+        } catch (SQLException e) {
+            MainApp.log(e);
+            return null;
+        }
+
     }
 }

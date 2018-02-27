@@ -31,7 +31,7 @@ public class BalanceData implements IData {
         return connection.executeResultSetQuery("SELECT * FROM Balance;");
     }
 
-    public ResultSet getBalanceResultSet() {
+    protected ResultSet getBalanceResultSet() {
         return balanceResultSet;
     }
 

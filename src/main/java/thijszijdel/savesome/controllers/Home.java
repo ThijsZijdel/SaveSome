@@ -17,6 +17,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import thijszijdel.savesome.MainApp;
+import thijszijdel.savesome.connections.Expense.ExpenseConnection;
 import thijszijdel.savesome.interfaces.IData;
 import thijszijdel.savesome.connections.Expense.ExpensesData;
 
@@ -47,49 +48,8 @@ public class Home implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
 
-        // TODO:      Move overview cat chart for expenses
-        //**     WILL BE MOVED      **/
-        ObservableList<PieChart.Data> datalist = FXCollections.observableArrayList();
 
-        IData data = new ExpensesData();
-        int index = 1;
-        try {
-            ResultSet results = data.connection.executeResultSetQuery("" +
-                    "SELECT sum(amount) AS amount, " +
-                    "SubCategory.name, SubCategory.color " +
-                        "FROM Expense " +
-                            "LEFT JOIN SubCategory " +
-                            "ON Expense.subCategoryFk = SubCategory.idSubCategory "+
-                        "GROUP BY SubCategory.name, SubCategory.color;");
-
-            while (results.next()){
-
-                double amount = results.getDouble("amount");
-                String name = results.getString("SubCategory.name");
-                String color = results.getString("SubCategory.color");
-
-                if (amount < 0)
-                    amount = amount * -1;
-
-                datalist.add(new PieChart.Data(name, amount));
-//                chart.setStyle("CHART_COLOR_"+index+" : "+color+";");
-//
-//                System.out.println("-fx-CHART_COLOR_"+index+" : "+color+";");
-
-                index++;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        chart.getData().clear();
-
-        chart.setData( datalist);
-        chart.setAnimated(true);
-        chart.setTitle("Categories");
-
-        chart.setLabelLineLength(10);
-        chart.setLegendSide(Side.RIGHT);
+        setupCategoryChart();
 
 
 
@@ -102,6 +62,25 @@ public class Home implements Initializable {
 
         setView("/FXML/Expenses.fxml", topLeft);
         setView("/FXML/Income.fxml", topRight);
+    }
+
+    private void setupCategoryChart() {
+        //**     WILL BE MOVED      **/
+        ObservableList<PieChart.Data> datalist = FXCollections.observableArrayList();
+
+        ExpenseConnection data = MainApp.getExpenseConnection();
+
+
+        datalist.addAll(data.getExpensesSumMonth(1));
+
+        chart.getData().clear();
+
+        chart.setData( datalist);
+        chart.setAnimated(true);
+        chart.setTitle("Categories");
+
+        chart.setLabelLineLength(10);
+        chart.setLegendSide(Side.RIGHT);
     }
 
     private void setUpBillsCalendar() {
