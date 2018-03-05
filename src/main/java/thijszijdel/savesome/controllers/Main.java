@@ -5,6 +5,7 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.fxml.LoadException;
 import javafx.scene.Parent;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToolBar;
@@ -167,10 +168,12 @@ public class Main implements Initializable, IRefresh {
      * @throws IOException handling fxml files
      */
     public void setMainScene(String view) throws IOException {
-        Parent fxmlView = FXMLLoader.load(Main.class.getResource(view));
-        mainView.setCenter(fxmlView);
-
-        //TODO: test load Exception catch
+        try {
+            Parent fxmlView = FXMLLoader.load(Main.class.getResource(view));
+            mainView.setCenter(fxmlView);
+        } catch (LoadException e){
+            MainApp.log(e);
+        }
 //            URL url = getClass().getResource(viewLink);
 //            FXMLLoader loader = new FXMLLoader(url);
 //            if (loader == null) {

@@ -20,6 +20,9 @@ public class Settings implements Initializable, IRefresh {
 
     @FXML Pane mainCatPane,subCatPane;
 
+    //FXML config for category section
+    @FXML JFXTextField search;
+    @FXML Label hitsMain, hitsSub;
 
     /**
      * Initialize method for the home controller class
@@ -29,34 +32,32 @@ public class Settings implements Initializable, IRefresh {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        initializeMainCategory();
+        //Initialize all the different sections
+        initializeCategorySection();
     }
 
 
-    //TODO :: Comment + Move + Split this way to big method
-    public void initializeMainCategory(){
-
-
+    /**
+     * Initialize the category settings section
+     * This is for main category and sub category
+     */
+    private void initializeCategorySection(){
         SubCategoryTreeTable subCatTable = new SubCategoryTreeTable(search, hitsSub);
-
         MainCategoryTreeTable mainCatTable = new MainCategoryTreeTable(search, hitsMain);
 
         mainCatTable.setRelatedSubCatTable(subCatTable);
+
+        //clear the previous set up for refresh
+        mainCatPane.getChildren().clear();
+        subCatPane.getChildren().clear();
+
         mainCatPane.getChildren().add(mainCatTable.getTable());
         subCatPane.getChildren().add(subCatTable.getTable());
-//        mainCatTable.setupHits(hits);
-//        mainCatTable.setupSearch(search);
-
     }
 
-//    public void setMainCatPane()
-
-
-    @FXML JFXTextField search;
-    @FXML Label hitsMain, hitsSub;
 
     @Override
     public void refresh() {
-
+        initializeCategorySection();
     }
 }

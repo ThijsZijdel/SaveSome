@@ -31,6 +31,8 @@ public class Input implements Initializable, State {
 
     @FXML JFXDatePicker date;
 
+    String mainCategoryValue;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         setStyling();
@@ -40,6 +42,9 @@ public class Input implements Initializable, State {
         setShowing(true);
     }
 
+    /**
+     * Setup the balances
+     */
     private void setBalances() {
         balance.getItems().addAll(MainApp.balanceConnection().getBalanceComboBoxList());
 
@@ -51,10 +56,29 @@ public class Input implements Initializable, State {
 
     }
 
+    /**
+     * Setup the main category combo box
+     */
     private void setCategories() {
         mainCategory.getItems().addAll(MainApp.getCategoryConnection().getMainCategoryNameList());
 
         setCategoryListener();
+    }
+
+
+    /**
+     * Setup the category change listners
+     */
+    private void setCategoryListener() {
+        mainCategory.valueProperty().addListener((ChangeListener<String>) (object, valBefore, valAfter) -> {
+//            System.out.println("object: "+object);
+//            System.out.println("valBefore: "+valBefore);
+//            System.out.println("valAfter: "+valAfter);
+            mainCategoryValue = mainCategory.getValue().toString();
+
+            subCategory.getItems().clear();
+            subCategory.getItems().addAll(MainApp.getCategoryConnection().getSubCatNameList(mainCategoryValue));
+        });
     }
 
     private void setStyling() {
@@ -62,17 +86,6 @@ public class Input implements Initializable, State {
 
         mainCategory.setStyle("-fx-text-fill : #e4e4e4");
         mainCategory.setStyle("-fx-fill: #e4e4e4");
-    }
-
-
-    private void setCategoryListener() {
-        mainCategory.valueProperty().addListener((ChangeListener<String>) (object, valBefore, valAfter) -> {
-//            System.out.println("object: "+object);
-//            System.out.println("valBefore: "+valBefore);
-//            System.out.println("valAfter: "+valAfter);
-            subCategory.getItems().clear();
-            subCategory.getItems().addAll(MainApp.getCategoryConnection().getSubCatNameList(mainCategory.getValue().toString()));
-        });
     }
 
     /**
