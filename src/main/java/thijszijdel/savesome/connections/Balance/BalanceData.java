@@ -45,7 +45,13 @@ public class BalanceData implements IData {
     }
 
     @Override
-    public void update(int key) {
-
+    public void update(int key, String col, String val) {
+        try {
+            connection.executeUpdateQuery("UPDATE "+col+" = '"+val+"' WHERE idk = '"+key+"'");
+            MainApp.setAppMessage("Balance "+key+" is updated.");
+        } catch (Exception e){
+            MainApp.log(e);
+            MainApp.setAppMessage("Balance "+key+" failed to update.");
+        }
     }
 }

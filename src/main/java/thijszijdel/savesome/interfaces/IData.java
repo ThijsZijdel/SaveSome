@@ -19,5 +19,5 @@ public interface IData {
     /**
      * @param key
      */
-    void update(int key);
+    void update(int key, String col, String val);
 }

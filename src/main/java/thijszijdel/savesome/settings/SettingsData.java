@@ -76,4 +76,14 @@ public class SettingsData implements IData {
             settings = convertToSettingsMap();
 
     }
+    @Override
+    public void update(int key, String col, String val) {
+        try {
+            connection.executeUpdateQuery("UPDATE "+col+" = '"+val+"' WHERE idBudget = '"+key+"'");
+            MainApp.setAppMessage("Setting "+key+" is updated.");
+        } catch (Exception e){
+            MainApp.log(e);
+            MainApp.setAppMessage("Setting "+key+" failed to update.");
+        }
+    }
 }

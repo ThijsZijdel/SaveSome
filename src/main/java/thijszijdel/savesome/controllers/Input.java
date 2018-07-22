@@ -67,7 +67,7 @@ public class Input implements Initializable, State {
 
 
     /**
-     * Setup the category change listners
+     * Setup the category change listeners
      */
     private void setCategoryListener() {
         mainCategory.valueProperty().addListener((ChangeListener<String>) (object, valBefore, valAfter) -> {

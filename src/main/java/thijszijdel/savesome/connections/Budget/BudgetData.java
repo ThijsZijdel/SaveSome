@@ -43,5 +43,15 @@ public class BudgetData implements IData {
             MainApp.log(e);
         }
     }
+    @Override
+    public void update(int key, String col, String val) {
+        try {
+            connection.executeUpdateQuery("UPDATE "+col+" = '"+val+"' WHERE id = '"+key+"'");
+            MainApp.setAppMessage("Budget "+key+" is updated.");
+        } catch (Exception e){
+            MainApp.log(e);
+            MainApp.setAppMessage("Budget "+key+" failed to update.");
+        }
+    }
 }
 

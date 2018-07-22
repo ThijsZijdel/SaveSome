@@ -1,6 +1,7 @@
 package thijszijdel.savesome.connections.Category;
 
 import thijszijdel.savesome.MainApp;
+import thijszijdel.savesome.connections.Expense.Expense;
 import thijszijdel.savesome.interfaces.IData;
 
 import java.sql.ResultSet;
@@ -70,4 +71,17 @@ public class CategoryData implements IData {
             MainApp.log(e);
         }
     }
+
+    @Override
+    public void update(int key, String col, String val) {
+        try {
+            connection.executeUpdateQuery("UPDATE "+col+" = '"+val+"' WHERE idBudget = '"+key+"'");
+            MainApp.setAppMessage("Category "+key+" is updated.");
+        } catch (Exception e){
+            MainApp.log(e);
+            MainApp.setAppMessage("Category "+key+" failed to update.");
+        }
+    }
+
+
 }

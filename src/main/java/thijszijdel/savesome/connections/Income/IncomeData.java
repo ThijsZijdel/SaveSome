@@ -49,7 +49,13 @@ public class IncomeData implements IData {
     }
 
     @Override
-    public void update(int key) {
-
+    public void update(int key, String col, String val) {
+        try {
+            connection.executeUpdateQuery("UPDATE "+col+" = '"+val+"' WHERE idBudget = '"+key+"'");
+            MainApp.setAppMessage("Income "+key+" is updated.");
+        } catch (Exception e){
+            MainApp.log(e);
+            MainApp.setAppMessage("Income "+key+" failed to update.");
+        }
     }
 }

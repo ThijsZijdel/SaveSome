@@ -67,8 +67,14 @@ public class ExpensesData implements IData {
     }
 
     @Override
-    public void update(int key) {
-
+    public void update(int key, String col, String val) {
+        try {
+            connection.executeUpdateQuery("UPDATE "+col+" = '"+val+"' WHERE expense = '"+key+"'");
+            MainApp.setAppMessage("Expense "+key+" is updated.");
+        } catch (Exception e){
+            MainApp.log(e);
+            MainApp.setAppMessage("Expense "+key+" failed to update.");
+        }
     }
 
 
